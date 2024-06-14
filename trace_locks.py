@@ -44,7 +44,10 @@ int trace_mutex_unlock(struct pt_regs *ctx, struct mutex *lock) {
 
 bpf_text = bpf_text.replace("TARGET_PID", str(target_pid))
 
+print(bpf_text)
+
 b = BPF(text=bpf_text)
+
 
 
 b.attach_kprobe(event="mutex_lock", fn_name="trace_mutex_lock")
