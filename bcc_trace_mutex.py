@@ -2,6 +2,135 @@ from bcc import BPF
 import errno
 import datetime
 import argparse
+import numpy as np
+locks = [
+    # {
+    #      'lock_name': 'mutex',
+    #      'title': 'Mutex',
+    #      'lock_type': 'struct mutex',
+    #      'key_type': 'key_mutex_t',
+    #      'lock_func': 'mutex'
+    #  },
+    #  {
+    #      'lock_name': 'spin',
+    #      'title': 'Spin Lock',
+    #      'lock_type': 'raw_spinlock_t',
+    #      'key_type': 'key_spin_t',
+    #      'lock_func': '_raw_spin'
+    #  },
+     {
+         'lock_name': 'write_lock',
+         'title': 'Write Lock',
+         'lock_type': 'rwlock_t',
+         'key_type': 'key_rw_t',
+         'lock_func': '_raw_write'
+     },
+     {
+         'lock_name': 'read_lock',
+         'title': 'Read Lock',
+         'lock_type': 'rwlock_t',
+         'key_type': 'key_rw_t',
+         'lock_func': '_raw_read'
+     }
+
+    # {
+    #    'name': 'write_lock_sema',
+    #    'title': 'Read/Write Semaphore',
+    #    'lock_func': 'up_write'
+    # },
+    # {
+    #    'name': 'read_lock_s',
+    #    'title': 'Read/Write Semaphore',
+    #    'lock_func': 'up_read'
+    # },
+
+]
+
+prog_header = """
+#include <linux/sched.h>
+#include <linux/mutex.h>
+#include <uapi/linux/ptrace.h>
+struct key_mutex_t {
+    u64 pid;
+    struct mutex *lock;
+};
+
+struct key_spin_t {
+    u64 pid;
+    raw_spinlock_t *lock;
+};
+
+struct key_rw_t {
+    u64 pid;
+    rwlock_t *lock;
+};
+
+struct data_t {
+    u32 pid;
+    u32 tid;
+    u64 ts;
+    char comm[TASK_COMM_LEN];
+    u64 lock;
+    u64 lock_time;
+    u64 present_time;
+    u64 diff;
+    u64 stack_id;
+    u32 lock_count;
+};
+
+BPF_STACK_TRACE(stack_traces, 102400);
+
+"""
+
+lock_func = """
+BPF_PERF_OUTPUT(LOCK_NAME);
+BPF_HASH(map_LOCK_NAME, struct KEY_TYPE, struct data_t, 102400);
+
+int lock_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
+    u32 current_pid = bpf_get_current_pid_tgid()>> 32;
+    if (current_pid == target_PID) {
+        bpf_trace_printk("Locking mutex: PID=%u, lock=0x%llx\\n", current_pid, (u64)lock); // Debugging
+        struct data_t data = {};
+        struct KEY_TYPE key = {current_pid, lock};
+        struct data_t *data_ptr;
+        data_ptr = map_LOCK_NAME.lookup(&key);
+        if (data_ptr) {
+            data_ptr->ts = bpf_ktime_get_ns();
+            data_ptr->lock_count += 1;
+            data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
+        } else {
+            data.pid = bpf_get_current_pid_tgid();
+            data.tid = bpf_get_current_pid_tgid() >> 32;
+            bpf_get_current_comm(&data.comm, sizeof(data.comm));        
+            data.lock = (u64)lock;
+            data.ts = bpf_ktime_get_ns();
+            data.lock_count = 1;
+            data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
+            map_LOCK_NAME.insert(&key, &data);
+        }
+    }
+    return 0;
+}
+
+int release_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
+    u64 present = bpf_ktime_get_ns();
+    u32 current_pid = bpf_get_current_pid_tgid()>> 32;
+    if (current_pid == target_PID) {
+        bpf_trace_printk("Releasing mutex: PID=%u, lock=0x%llx\\n", current_pid, (u64)lock); // Debugging
+        struct data_t *data;
+        struct KEY_TYPE key = {current_pid, lock};
+        data = map_LOCK_NAME.lookup(&key);
+        if (data) {
+            data->lock_time += (present - data->ts);
+            data->present_time = present;
+            data->diff = present - data->ts;
+            LOCK_NAME.perf_submit(ctx, data, sizeof(struct data_t));
+        }
+    }
+    return 0;
+}
+"""
+
 
 def stack_id_err(stack_id):
     return (stack_id < 0) and (stack_id != -errno.EFAULT)
@@ -18,15 +147,16 @@ def get_stack(stack_id):
 
 def print_event(cpu, data, size):
     global start
-    event = b["spin"].event(data)
+    event = b[lock['lock_name']].event(data)
     # event = b["mutex"].event(data)
+    print("Received event: ", event)
     if start == 0:
         start = event.ts
     time_s = (float(event.ts - start)) / 1000000000
-    # print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
-    #     time_s, event.comm, event.pid, event.tid, event.lock,
-    #     (float(event.present_time - start)) / 1000000000,
-    #     event.lock_time, event.diff))
+    print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
+        time_s, event.comm, event.pid, event.tid, event.lock,
+        (float(event.present_time - start)) / 1000000000,
+        event.lock_time, event.diff))
     
     trace = get_stack(event.stack_id)
     if event.lock in events:
@@ -39,11 +169,6 @@ def print_event(cpu, data, size):
         events[key]['pid'].add(event.pid)
         events[key]['comm'] = event.comm
         events[key]['lock_count'] += 1
-        # events[key]['type'] = event.type
-        # if events[key]['type'] == 2:
-        #     events[key]['type'] = 1
-        # if events[key]['type'] == 4:
-        #     events[key]['type'] = 3
         if trace in events[key]['stack_traces']:
             events[key]['stack_traces'][trace]['count'] += 1
             events[key]['stack_traces'][trace]['time'] += event.diff
@@ -76,24 +201,31 @@ parser.add_argument("--pid", help="PID of the process to trace", type=int)
 args = parser.parse_args()
 current_pid = args.pid
 
-with open('trace_mutexlock.c', 'r') as f:
-    bpf_text = f.read()
 
-bpf_text = bpf_text.replace("target_PID", str(current_pid))
+prog = prog_header
+for lock in locks:
+    prog += lock_func.replace("LOCK_NAME", str(lock['lock_name'])).replace("KEY_TYPE", lock['key_type']).replace("LOCK_TYPE", lock['lock_type'])
+prog = prog.replace("target_PID", str(current_pid))
 
-print(current_pid)
+# print(prog)
+
 
 try:
-    b = BPF(text=bpf_text)
+    b = BPF(text=prog)
 except Exception as e:
     print(f"Failed to compile BPF program: {e}")
     exit(1)
 
+for lock in locks:
+    b.attach_kprobe(event="%s_lock" % lock['lock_func'], fn_name="lock_%s" % lock['lock_name'])
+    b.attach_kprobe(event="%s_unlock" % lock['lock_func'], fn_name="release_%s" % lock['lock_name']) # unlock is better
+    print(f"Attached kprobe to %s_lock and kretprobe to %s_unlock" % (lock['lock_func'], lock['lock_func']))
+
 # b.attach_kprobe(event="mutex_lock", fn_name="lock_mutex")
 # b.attach_kprobe(event="mutex_unlock", fn_name="release_mutex")
 
-b.attach_kprobe(event="_raw_spin_lock", fn_name="lock_raw_spin")
-b.attach_kprobe(event="_raw_spin_unlock", fn_name="release_raw_spin")
+# b.attach_kprobe(event="_raw_spin_lock", fn_name="lock_spin")
+# b.attach_kprobe(event="_raw_spin_unlock", fn_name="release_spin")
 
 # b.attach_kprobe(event="_raw_read_lock", fn_name="lock_raw_read")
 # b.attach_kprobe(event="_raw_read_unlock", fn_name="release_raw_read")
@@ -108,22 +240,22 @@ print("Tracing locks for %d seconds" % args.time)
 start = 0
 events = {}
 
-# b["mutex"].open_perf_buffer(print_event, page_cnt=4096)
-b["spin"].open_perf_buffer(print_event, page_cnt=65536)
+for lock in locks:
+    b[lock['lock_name']].open_perf_buffer(print_event, page_cnt=65536)
+
 start_time = datetime.datetime.now()
 try:
     while True:
-        
         # b.trace_print()
         time_elapsed = datetime.datetime.now() - start_time
         if time_elapsed.seconds > args.time:
             break
+        # b.trace_print()
         b.perf_buffer_poll()
 except KeyboardInterrupt:
     pass
 finally:
-    # min_lock_time = min(event['diff'] for event in events.values())
-    # print("\nMinimum lock time is : %d\n" % min_lock_time)
+    print(events.values())
     total_lock_time = 0.0
     total_lock_count = 0
     print("Events collected during tracing:")
