@@ -3,6 +3,7 @@ import errno
 import datetime
 import argparse
 import numpy as np
+# import matplotlib.pyplot as plt
 
 locks = [
     {
@@ -33,18 +34,6 @@ locks = [
          'key_type': 'key_rw_t',
          'lock_func': '_raw_read'
      }
-
-    # {
-    #    'name': 'write_lock_sema',
-    #    'title': 'Read/Write Semaphore',
-    #    'lock_func': 'up_write'
-    # },
-    # {
-    #    'name': 'read_lock_s',
-    #    'title': 'Read/Write Semaphore',
-    #    'lock_func': 'up_read'
-    # },
-
 ]
 
 prog_header = """
@@ -132,6 +121,66 @@ int release_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
 }
 """
 
+def generate_report(event_list):
+    # for event in event_list:
+    #     for lock in locks:
+    #         if event['type'] == lock['id']:
+    #             event['type_name'] = lock['title']
+    #             break
+
+    # report_data = {}
+    # report_data['all_chart'] = event_list[:10]
+    # lock_times = {'write_lock': 100}
+    # report_data['lock_times'] = lock_times
+    # report_data['all_table'] = event_list[:20]
+
+    # locks_report = []
+    # for lock in locks:
+    #     if lock['id'] == 2:
+    #         continue
+    #     if lock['id'] == 4:
+    #         continue
+    #     lock_report = dict(lock)
+    #     lock_report['events'] = []
+    #     lock_report['time'] = 0
+    #     for event in event_list:
+    #         if event['type'] == lock['id']:
+    #             event['stack_list'] = [[trace, details['count'], details['time'], round(float(details['time'])/event['lock_time']*100, 2)] 
+    #                                     for trace, details in event['stack_traces'].items()]
+    #             event['stack_list'] = sorted(event['stack_list'], key=lambda kv: kv[2], reverse=True)
+    #             lock_report['events'].append(event)
+    #             lock_report['time'] += event['lock_time']
+    #         # print(event['stack_traces'])
+    #     lock_report['events'] = lock_report['events'][:20]
+    #     locks_report.append(lock_report)
+    # report_data['locks_report'] = locks_report
+
+    # Generating box plot
+    box_data = {}
+    lock_times = {}
+    for lock in locks:
+        lock_times[lock['lock_name']] = []
+    for event in event_list:
+        lock_times[event[1]['lock_name']].append(event[1]['lock_time'])
+    for lock in locks:
+        lock_times_list = np.array(lock_times[lock['lock_name']])
+        box_data[lock['lock_name']] = [np.min(lock_times_list),
+                                  np.percentile(lock_times_list, 25),
+                                  np.percentile(lock_times_list, 50),
+                                  np.percentile(lock_times_list, 75),
+                                  np.percentile(lock_times_list, 90),
+                                  ]
+    print(box_data)
+    # plot_boxgra(box_data)
+
+def plot_boxgra(lock_data):
+    plt.figure(figsize=(8, 6))
+    plt.boxplot(lock_data.values(), labels=lock_data.keys())
+    plt.title('Boxplot of Lock Types')
+    plt.xlabel('Lock Types')
+    plt.ylabel('Lock Time')
+    plt.grid(True)
+    plt.show()
 
 def stack_id_err(stack_id):
     return (stack_id < 0) and (stack_id != -errno.EFAULT)
@@ -146,19 +195,32 @@ def get_stack(stack_id):
         stack_str += str(func_name) + "<br>"
     return stack_str
 
+def print_lock_info(events):
+    print("Events collected during tracing:")
+    for lock, event_data in events:
+        print(f"Lock Address: {lock}")
+        print(f"  Lock Name: {event_data['lock_name']}")
+        print(f"  Total Lock Time: {event_data['lock_time']} ns")
+        print(f"  Lock Count: {event_data['lock_count']}")
+        print(f"  PIDs: {event_data['pid']}")
+        print(f"  TIDs: {event_data['tid']}")        
+        print("  Stack Traces:")
+        for trace, trace_info in event_data['stack_traces'].items():
+            print(f"    Trace: {trace}")
+            print(f"      Count: {trace_info['count']}")
+            print(f"      Time: {trace_info['time']} ns")
 
 def create_print_event(lock_name):
     def print_event(cpu, data, size):
         global start
         event = b[lock_name].event(data)
-        print("Lock name:", lock_name, "\n")
         if start == 0:
             start = event.ts
         time_s = (float(event.ts - start)) / 1000000000
-        print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
-            time_s, event.comm, event.pid, event.tid, event.lock,
-            (float(event.present_time - start)) / 1000000000,
-            event.lock_time, event.diff))
+        # print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
+        #     time_s, event.comm, event.pid, event.tid, event.lock,
+        #     (float(event.present_time - start)) / 1000000000,
+        #     event.lock_time, event.diff))
         
         trace = get_stack(event.stack_id)
         if event.lock in events:
@@ -190,7 +252,7 @@ def create_print_event(lock_name):
                 'pid': {event.pid},
                 'comm': event.comm,
                 'lock_count': 1,
-                'name': lock_name,
+                'lock_name': lock_name,
                 'stack_traces': {trace: {'count': 1, 'time': event.diff}}
             }
             events[event_dict['lock']] = event_dict
@@ -198,7 +260,7 @@ def create_print_event(lock_name):
 
 parser = argparse.ArgumentParser(description='Monitor locking activities in the kernel')
 parser.add_argument("--time", help="Time in seconds to monitor locks in kernel. Default value is 180 seconds",
-                    type=int, default=60)
+                    type=int, default=120)
 parser.add_argument("--pid", help="PID of the process to trace", type=int)
 args = parser.parse_args()
 current_pid = args.pid
@@ -239,7 +301,7 @@ for lock in locks:
         'total_lock_count': 0,
         'total_lock_time': 0.0
     }
-    b[lock['lock_name']].open_perf_buffer(create_print_event(lock['lock_name']), page_cnt=65536)
+    b[lock['lock_name']].open_perf_buffer(create_print_event(lock['lock_name']), page_cnt=8192)
 
 start_time = datetime.datetime.now()
 try:
@@ -252,28 +314,13 @@ try:
 except KeyboardInterrupt:
     pass
 finally:
-    # print(events.values())
     total_lock_time = 0.0
     total_lock_count = 0
-
-
-    # print("Events collected during tracing:")
     for lock, event_data in events.items():
-        # print(f"Lock Address: {lock}")
-        # print(f"  Total Lock Time: {event_data['lock_time']} ns")
-        # print(f"  Lock Count: {event_data['lock_count']}")
-        # print(f"  PIDs: {event_data['pid']}")
-        # print(f"  TIDs: {event_data['tid']}")
-        # print("  Stack Traces:")
-        key=event_data['name']
+        key=event_data['lock_name']
         lock_statistics[key]['total_lock_count'] +=event_data['lock_count']
         lock_statistics[key]['total_lock_time'] +=event_data['lock_time']
         total_lock_time+=event_data['lock_time']
-        # for trace, trace_info in event_data['stack_traces'].items():
-        #     print(f"    Trace: {trace}")
-        #     print(f"      Count: {trace_info['count']}")
-        #     print(f"      Time: {trace_info['time']} ns")
-        
     
     print("\n Print the lock statistics: ")
     print("%-18s %-16s %s" % ("LOCK_NAME", "TOTAL_LOCKTIME(s)", "TOTAL_LOCKCOUNT"))
@@ -281,5 +328,12 @@ finally:
         print("%-18s %-16f %s" % (lock_name, lock_stat['total_lock_time'] / 1000000000, lock_stat['total_lock_count']))
     print("The total time of acquiring locks is:",total_lock_time / 1000000000.0,"s")  
     
+    event_list = sorted(events.items(), key=lambda kv: kv[1]['lock_time'], reverse=False)
+    
+    print_lock_info(event_list)
+    # print(event_list)
+    generate_report(event_list)
+
+
 
     
