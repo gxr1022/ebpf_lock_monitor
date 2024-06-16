@@ -3,21 +3,22 @@ import errno
 import datetime
 import argparse
 import numpy as np
+
 locks = [
-    # {
-    #      'lock_name': 'mutex',
-    #      'title': 'Mutex',
-    #      'lock_type': 'struct mutex',
-    #      'key_type': 'key_mutex_t',
-    #      'lock_func': 'mutex'
-    #  },
-    #  {
-    #      'lock_name': 'spin',
-    #      'title': 'Spin Lock',
-    #      'lock_type': 'raw_spinlock_t',
-    #      'key_type': 'key_spin_t',
-    #      'lock_func': '_raw_spin'
-    #  },
+    {
+         'lock_name': 'mutex',
+         'title': 'Mutex',
+         'lock_type': 'struct mutex',
+         'key_type': 'key_mutex_t',
+         'lock_func': 'mutex'
+     },
+     {
+         'lock_name': 'spin',
+         'title': 'Spin Lock',
+         'lock_type': 'raw_spinlock_t',
+         'key_type': 'key_spin_t',
+         'lock_func': '_raw_spin'
+     },
      {
          'lock_name': 'write_lock',
          'title': 'Write Lock',
@@ -145,54 +146,55 @@ def get_stack(stack_id):
         stack_str += str(func_name) + "<br>"
     return stack_str
 
-def print_event(cpu, data, size):
-    global start
-    event = b[lock['lock_name']].event(data)
-    # event = b["mutex"].event(data)
-    print("Received event: ", event)
-    if start == 0:
-        start = event.ts
-    time_s = (float(event.ts - start)) / 1000000000
-    print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
-        time_s, event.comm, event.pid, event.tid, event.lock,
-        (float(event.present_time - start)) / 1000000000,
-        event.lock_time, event.diff))
-    
-    trace = get_stack(event.stack_id)
-    if event.lock in events:
-        key = event.lock
-        events[key]['ts'] = event.ts
-        events[key]['lock'] = event.lock
-        events[key]['present_time'] = event.present_time
-        events[key]['lock_time'] += event.diff
-        events[key]['tid'].add(event.tid)
-        events[key]['pid'].add(event.pid)
-        events[key]['comm'] = event.comm
-        events[key]['lock_count'] += 1
-        if trace in events[key]['stack_traces']:
-            events[key]['stack_traces'][trace]['count'] += 1
-            events[key]['stack_traces'][trace]['time'] += event.diff
-        else:
-            events[key]['stack_traces'][trace] = {
-                'count': 1,
-                'time': event.diff
-            }
-    else:
-        event_dict = {
-            'ts': event.ts,
-            'lock': event.lock,
-            'present_time': event.present_time,
-            'lock_time': event.diff,
-            'diff': event.diff,
-            'tid': {event.tid},
-            'pid': {event.pid},
-            'comm': event.comm,
-            'lock_count': 1,
-            # 'type': event.type,
-            'stack_traces': {trace: {'count': 1, 'time': event.diff}}
-        }
-        events[event_dict['lock']] = event_dict
 
+def create_print_event(lock_name):
+    def print_event(cpu, data, size):
+        global start
+        event = b[lock_name].event(data)
+        print("Lock name:", lock_name, "\n")
+        if start == 0:
+            start = event.ts
+        time_s = (float(event.ts - start)) / 1000000000
+        print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
+            time_s, event.comm, event.pid, event.tid, event.lock,
+            (float(event.present_time - start)) / 1000000000,
+            event.lock_time, event.diff))
+        
+        trace = get_stack(event.stack_id)
+        if event.lock in events:
+            key = event.lock
+            events[key]['ts'] = event.ts
+            events[key]['lock'] = event.lock
+            events[key]['present_time'] = event.present_time
+            events[key]['lock_time'] += event.diff
+            events[key]['tid'].add(event.tid)
+            events[key]['pid'].add(event.pid)
+            events[key]['comm'] = event.comm
+            events[key]['lock_count'] += 1
+            if trace in events[key]['stack_traces']:
+                events[key]['stack_traces'][trace]['count'] += 1
+                events[key]['stack_traces'][trace]['time'] += event.diff
+            else:
+                events[key]['stack_traces'][trace] = {
+                    'count': 1,
+                    'time': event.diff
+                }
+        else:
+            event_dict = {
+                'ts': event.ts,
+                'lock': event.lock,
+                'present_time': event.present_time,
+                'lock_time': event.diff,
+                'diff': event.diff,
+                'tid': {event.tid},
+                'pid': {event.pid},
+                'comm': event.comm,
+                'lock_count': 1,
+                'name': lock_name,
+                'stack_traces': {trace: {'count': 1, 'time': event.diff}}
+            }
+            events[event_dict['lock']] = event_dict
+    return print_event
 
 parser = argparse.ArgumentParser(description='Monitor locking activities in the kernel')
 parser.add_argument("--time", help="Time in seconds to monitor locks in kernel. Default value is 180 seconds",
@@ -207,7 +209,6 @@ for lock in locks:
     prog += lock_func.replace("LOCK_NAME", str(lock['lock_name'])).replace("KEY_TYPE", lock['key_type']).replace("LOCK_TYPE", lock['lock_type'])
 prog = prog.replace("target_PID", str(current_pid))
 
-# print(prog)
 
 
 try:
@@ -221,32 +222,28 @@ for lock in locks:
     b.attach_kprobe(event="%s_unlock" % lock['lock_func'], fn_name="release_%s" % lock['lock_name']) # unlock is better
     print(f"Attached kprobe to %s_lock and kretprobe to %s_unlock" % (lock['lock_func'], lock['lock_func']))
 
-# b.attach_kprobe(event="mutex_lock", fn_name="lock_mutex")
-# b.attach_kprobe(event="mutex_unlock", fn_name="release_mutex")
 
-# b.attach_kprobe(event="_raw_spin_lock", fn_name="lock_spin")
-# b.attach_kprobe(event="_raw_spin_unlock", fn_name="release_spin")
-
-# b.attach_kprobe(event="_raw_read_lock", fn_name="lock_raw_read")
-# b.attach_kprobe(event="_raw_read_unlock", fn_name="release_raw_read")
-
-# b.attach_kprobe(event="_raw_write_lock", fn_name="lock_raw_write")
-# b.attach_kprobe(event="_raw_write_unlock", fn_name="release_raw_write")
 
 events = {}
-print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "LOCKTIME"))
+lock_statistics={}
 print("Tracing locks for %d seconds" % args.time)
+print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "LOCKTIME"))
+
 
 start = 0
 events = {}
+lock_statistics={}
 
 for lock in locks:
-    b[lock['lock_name']].open_perf_buffer(print_event, page_cnt=65536)
+    lock_statistics[lock['lock_name']] = {
+        'total_lock_count': 0,
+        'total_lock_time': 0.0
+    }
+    b[lock['lock_name']].open_perf_buffer(create_print_event(lock['lock_name']), page_cnt=65536)
 
 start_time = datetime.datetime.now()
 try:
     while True:
-        # b.trace_print()
         time_elapsed = datetime.datetime.now() - start_time
         if time_elapsed.seconds > args.time:
             break
@@ -255,24 +252,34 @@ try:
 except KeyboardInterrupt:
     pass
 finally:
-    print(events.values())
+    # print(events.values())
     total_lock_time = 0.0
     total_lock_count = 0
-    print("Events collected during tracing:")
+
+
+    # print("Events collected during tracing:")
     for lock, event_data in events.items():
-        print(f"Lock Address: {lock}")
-        print(f"  Total Lock Time: {event_data['lock_time']} ns")
-        print(f"  Lock Count: {event_data['lock_count']}")
-        print(f"  PIDs: {event_data['pid']}")
-        print(f"  TIDs: {event_data['tid']}")
-        print("  Stack Traces:")
+        # print(f"Lock Address: {lock}")
+        # print(f"  Total Lock Time: {event_data['lock_time']} ns")
+        # print(f"  Lock Count: {event_data['lock_count']}")
+        # print(f"  PIDs: {event_data['pid']}")
+        # print(f"  TIDs: {event_data['tid']}")
+        # print("  Stack Traces:")
+        key=event_data['name']
+        lock_statistics[key]['total_lock_count'] +=event_data['lock_count']
+        lock_statistics[key]['total_lock_time'] +=event_data['lock_time']
         total_lock_time+=event_data['lock_time']
-        total_lock_count+=event_data['lock_count']
-        for trace, trace_info in event_data['stack_traces'].items():
-            print(f"    Trace: {trace}")
-            print(f"      Count: {trace_info['count']}")
-            print(f"      Time: {trace_info['time']} ns")
-        print()
-    total_lock_time_seconds = total_lock_time / 1000000000
-    print("The total count of acquiring spin lock is: ",total_lock_count)
-    print("The total time of acquiring spin lock is: ",total_lock_time_seconds, "s")
+        # for trace, trace_info in event_data['stack_traces'].items():
+        #     print(f"    Trace: {trace}")
+        #     print(f"      Count: {trace_info['count']}")
+        #     print(f"      Time: {trace_info['time']} ns")
+        
+    
+    print("\n Print the lock statistics: ")
+    print("%-18s %-16s %s" % ("LOCK_NAME", "TOTAL_LOCKTIME(s)", "TOTAL_LOCKCOUNT"))
+    for lock_name, lock_stat in lock_statistics.items():
+        print("%-18s %-16f %s" % (lock_name, lock_stat['total_lock_time'] / 1000000000, lock_stat['total_lock_count']))
+    print("The total time of acquiring locks is:",total_lock_time / 1000000000.0,"s")  
+    
+
+    
