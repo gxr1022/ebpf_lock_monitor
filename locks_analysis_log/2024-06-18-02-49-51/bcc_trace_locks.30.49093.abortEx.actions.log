@@ -1,0 +1,198 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to rt_mutex_lock and kretprobe to rt_mutex_unlock
+Attached kprobe to ww_mutex_lock and kretprobe to ww_mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+rt_mutex           0.000000         0
+ww_mutex           0.000000         0
+spin               29.999569        66
+write_lock         0.000050         20
+read_lock          0.000000         0
+The total time of acquiring locks is: 29.999618693 s
+Events collected during tracing:
+Lock Address: 18421356614437626088
+  Lock Name: spin
+  Total Lock Time: 2651 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 2651 ns
+Lock Address: 18383721993995128384
+  Lock Name: spin
+  Total Lock Time: 3405 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_set_pte'<br>b'filemap_map_pages'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 3405 ns
+Lock Address: 18383721993983888404
+  Lock Name: spin
+  Total Lock Time: 4599 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__find_get_block'<br>b'__getblk_gfp'<br>b'__read_extent_tree_block'<br>b'ext4_find_extent'<br>b'ext4_ext_map_blocks'<br>b'ext4_map_blocks'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 4599 ns
+Lock Address: 18421356614439254376
+  Lock Name: spin
+  Total Lock Time: 5883 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'filemap_map_pages'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 5883 ns
+Lock Address: 18421356614597014952
+  Lock Name: spin
+  Total Lock Time: 6034 ns
+  Lock Count: 2
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 6034 ns
+Lock Address: 18421356614433532136
+  Lock Name: spin
+  Total Lock Time: 6433 ns
+  Lock Count: 3
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 3
+      Time: 6433 ns
+Lock Address: 18383856013778528900
+  Lock Name: spin
+  Total Lock Time: 7984 ns
+  Lock Count: 2
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 6432 ns
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 1552 ns
+Lock Address: 18383856013778067716
+  Lock Name: spin
+  Total Lock Time: 20068 ns
+  Lock Count: 7
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 5
+      Time: 13284 ns
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 6784 ns
+Lock Address: 18383721993994719908
+  Lock Name: spin
+  Total Lock Time: 21385 ns
+  Lock Count: 8
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'submit_bio_noacct_nocheck'<br>b'submit_bio_noacct'<br>b'submit_bio'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 5387 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'submit_bio_noacct_nocheck'<br>b'submit_bio_noacct'<br>b'submit_bio'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 2468 ns
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'ext4_es_can_be_merged.isra.0'<br>b'ext4_es_insert_extent'<br>b'ext4_map_blocks'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 2022 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'ext4_es_can_be_merged.isra.0'<br>b'ext4_es_insert_extent'<br>b'ext4_map_blocks'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 2548 ns
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'_raw_spin_unlock'<br>b'blk_mq_sched_bio_merge'<br>b'blk_mq_attempt_bio_merge'<br>b'blk_mq_submit_bio'<br>b'__submit_bio'<br>b'submit_bio_noacct_nocheck'<br>b'submit_bio_noacct'<br>b'submit_bio'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 2522 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'_raw_spin_unlock'<br>b'blk_mq_sched_bio_merge'<br>b'blk_mq_attempt_bio_merge'<br>b'blk_mq_submit_bio'<br>b'__submit_bio'<br>b'submit_bio_noacct_nocheck'<br>b'submit_bio_noacct'<br>b'submit_bio'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 2368 ns
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'percpu_counter_add_batch'<br>b'do_set_pte'<br>b'filemap_map_pages'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 2189 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'percpu_counter_add_batch'<br>b'do_set_pte'<br>b'filemap_map_pages'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 1881 ns
+Lock Address: 18383856013777877572
+  Lock Name: spin
+  Total Lock Time: 23877 ns
+  Lock Count: 4
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 22350 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 1527 ns
+Lock Address: 18421356614900469096
+  Lock Name: spin
+  Total Lock Time: 32430 ns
+  Lock Count: 4
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'filemap_map_pages'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 4
+      Time: 32430 ns
+Lock Address: 18383721995333835528
+  Lock Name: write_lock
+  Total Lock Time: 49993 ns
+  Lock Count: 20
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_write_lock'<br>b'ext4_map_blocks'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 10
+      Time: 31408 ns
+    Trace: b'_raw_read_lock'<br>b'ext4_map_blocks'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 10
+      Time: 18585 ns
+Lock Address: 18383721993970789704
+  Lock Name: spin
+  Total Lock Time: 52492 ns
+  Lock Count: 30
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'blk_mq_sched_bio_merge'<br>b'blk_mq_attempt_bio_merge'<br>b'blk_mq_submit_bio'<br>b'__submit_bio'<br>b'submit_bio_noacct_nocheck'<br>b'submit_bio_noacct'<br>b'submit_bio'<br>b'ext4_mpage_readpages'<br>b'ext4_readahead'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 10
+      Time: 24800 ns
+    Trace: b'_raw_spin_lock'<br>b'blk_mq_dispatch_plug_list'<br>b'blk_mq_flush_plug_list.part.0'<br>b'blk_mq_flush_plug_list'<br>b'__blk_flush_plug'<br>b'blk_finish_plug'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 10
+      Time: 13560 ns
+    Trace: b'_raw_spin_lock'<br>b'__blk_mq_do_dispatch_sched'<br>b'__blk_mq_sched_dispatch_requests'<br>b'blk_mq_sched_dispatch_requests'<br>b'blk_mq_run_hw_queue'<br>b'blk_mq_dispatch_plug_list'<br>b'blk_mq_flush_plug_list.part.0'<br>b'blk_mq_flush_plug_list'<br>b'__blk_flush_plug'<br>b'blk_finish_plug'<br>b'read_pages'<br>b'page_cache_ra_unbounded'<br>b'page_cache_ra_order'<br>b'do_sync_mmap_readahead'<br>b'filemap_fault'<br>b'__do_fault'<br>b'do_read_fault'<br>b'do_fault'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 10
+      Time: 14132 ns
+Lock Address: 18383722025171759296
+  Lock Name: spin
+  Total Lock Time: 29999381459 ns
+  Lock Count: 2
+  PIDs: {49062}
+  TIDs: {49093}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 29999381459 ns

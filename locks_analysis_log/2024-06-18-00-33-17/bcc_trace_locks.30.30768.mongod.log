@@ -1,0 +1,44 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+spin               37.001987        113
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 37.001986619 s
+Events collected during tracing:
+Lock Address: 18383856013778199812
+  Lock Name: spin
+  Total Lock Time: 385284 ns
+  Lock Count: 74
+  PIDs: {30768}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 37
+      Time: 203018 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 37
+      Time: 182266 ns
+Lock Address: 18383722025173332160
+  Lock Name: spin
+  Total Lock Time: 37001601335 ns
+  Lock Count: 39
+  PIDs: {30768}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 37
+      Time: 36001596480 ns
+    Trace: b'_raw_spin_lock'<br>b'_raw_spin_rq_lock_irqsave'<br>b'update_blocked_averages'<br>b'newidle_balance'<br>b'pick_next_task_fair'<br>b'pick_next_task'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 9165 ns
+    Trace: b'_raw_spin_lock'<br>b'newidle_balance'<br>b'pick_next_task_fair'<br>b'pick_next_task'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 999995690 ns

@@ -1,0 +1,68 @@
+/virtual/main.c:84:1: error: field has incomplete type 'struct key_rt_mutex_t'
+BPF_HASH(map_rt_mutex, struct key_rt_mutex_t, struct data_t, 102400);
+^
+/virtual/include/bcc/helpers.h:280:26: note: expanded from macro 'BPF_HASH'
+  BPF_HASHX(__VA_ARGS__, BPF_HASH4, BPF_HASH3, BPF_HASH2, BPF_HASH1)(__VA_ARGS__)
+                         ^
+/virtual/main.c:84:31: note: forward declaration of 'struct key_rt_mutex_t'
+BPF_HASH(map_rt_mutex, struct key_rt_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:84:1: error: field has incomplete type 'struct key_rt_mutex_t'
+BPF_HASH(map_rt_mutex, struct key_rt_mutex_t, struct data_t, 102400);
+^
+/virtual/include/bcc/helpers.h:280:26: note: expanded from macro 'BPF_HASH'
+  BPF_HASHX(__VA_ARGS__, BPF_HASH4, BPF_HASH3, BPF_HASH2, BPF_HASH1)(__VA_ARGS__)
+                         ^
+/virtual/main.c:84:31: note: forward declaration of 'struct key_rt_mutex_t'
+BPF_HASH(map_rt_mutex, struct key_rt_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:91:31: error: variable has incomplete type 'struct key_rt_mutex_t'
+        struct key_rt_mutex_t key = {current_pid, lock};
+                              ^
+/virtual/main.c:84:31: note: forward declaration of 'struct key_rt_mutex_t'
+BPF_HASH(map_rt_mutex, struct key_rt_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:118:31: error: variable has incomplete type 'struct key_rt_mutex_t'
+        struct key_rt_mutex_t key = {current_pid, lock};
+                              ^
+/virtual/main.c:84:31: note: forward declaration of 'struct key_rt_mutex_t'
+BPF_HASH(map_rt_mutex, struct key_rt_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:131:1: error: field has incomplete type 'struct key_ww_mutex_t'
+BPF_HASH(map_ww_mutex, struct key_ww_mutex_t, struct data_t, 102400);
+^
+/virtual/include/bcc/helpers.h:280:26: note: expanded from macro 'BPF_HASH'
+  BPF_HASHX(__VA_ARGS__, BPF_HASH4, BPF_HASH3, BPF_HASH2, BPF_HASH1)(__VA_ARGS__)
+                         ^
+/virtual/main.c:131:31: note: forward declaration of 'struct key_ww_mutex_t'
+BPF_HASH(map_ww_mutex, struct key_ww_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:131:1: error: field has incomplete type 'struct key_ww_mutex_t'
+BPF_HASH(map_ww_mutex, struct key_ww_mutex_t, struct data_t, 102400);
+^
+/virtual/include/bcc/helpers.h:280:26: note: expanded from macro 'BPF_HASH'
+  BPF_HASHX(__VA_ARGS__, BPF_HASH4, BPF_HASH3, BPF_HASH2, BPF_HASH1)(__VA_ARGS__)
+                         ^
+/virtual/main.c:131:31: note: forward declaration of 'struct key_ww_mutex_t'
+BPF_HASH(map_ww_mutex, struct key_ww_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:138:31: error: variable has incomplete type 'struct key_ww_mutex_t'
+        struct key_ww_mutex_t key = {current_pid, lock};
+                              ^
+/virtual/main.c:131:31: note: forward declaration of 'struct key_ww_mutex_t'
+BPF_HASH(map_ww_mutex, struct key_ww_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:165:31: error: variable has incomplete type 'struct key_ww_mutex_t'
+        struct key_ww_mutex_t key = {current_pid, lock};
+                              ^
+/virtual/main.c:131:31: note: forward declaration of 'struct key_ww_mutex_t'
+BPF_HASH(map_ww_mutex, struct key_ww_mutex_t, struct data_t, 102400);
+                              ^
+/virtual/main.c:84:24: error: unknown type
+BPF_HASH(map_rt_mutex, struct key_rt_mutex_t, struct data_t, 102400);
+                       ^
+/virtual/main.c:131:24: error: unknown type
+BPF_HASH(map_ww_mutex, struct key_ww_mutex_t, struct data_t, 102400);
+                       ^
+10 errors generated.
+Failed to compile BPF program: Failed to compile BPF module <text>

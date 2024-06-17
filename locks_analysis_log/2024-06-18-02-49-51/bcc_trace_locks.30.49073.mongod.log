@@ -1,0 +1,13 @@
+/virtual/main.c:101:51: warning: incompatible pointer types initializing 'raw_spinlock_t *' (aka 'struct raw_spinlock *') with an expression of type 'spinlock_t *' (aka 'struct spinlock *') [-Wincompatible-pointer-types]
+        struct key_rt_mutex_t key = {current_pid, lock};
+                                                  ^~~~
+/virtual/main.c:128:51: warning: incompatible pointer types initializing 'raw_spinlock_t *' (aka 'struct raw_spinlock *') with an expression of type 'spinlock_t *' (aka 'struct spinlock *') [-Wincompatible-pointer-types]
+        struct key_rt_mutex_t key = {current_pid, lock};
+                                                  ^~~~
+/virtual/main.c:148:51: warning: incompatible pointer types initializing 'raw_spinlock_t *' (aka 'struct raw_spinlock *') with an expression of type 'spinlock_t *' (aka 'struct spinlock *') [-Wincompatible-pointer-types]
+        struct key_ww_mutex_t key = {current_pid, lock};
+                                                  ^~~~
+/virtual/main.c:175:51: warning: incompatible pointer types initializing 'raw_spinlock_t *' (aka 'struct raw_spinlock *') with an expression of type 'spinlock_t *' (aka 'struct spinlock *') [-Wincompatible-pointer-types]
+        struct key_ww_mutex_t key = {current_pid, lock};
+                                                  ^~~~
+4 warnings generated.

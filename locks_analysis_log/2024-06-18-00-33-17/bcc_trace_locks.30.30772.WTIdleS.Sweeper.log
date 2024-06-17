@@ -1,0 +1,61 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+spin               30.000187        15
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 30.00018653 s
+Events collected during tracing:
+Lock Address: 18383856013778108228
+  Lock Name: spin
+  Total Lock Time: 6075 ns
+  Lock Count: 2
+  PIDs: {30772}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 6075 ns
+Lock Address: 18383721993994792612
+  Lock Name: spin
+  Total Lock Time: 10473 ns
+  Lock Count: 2
+  PIDs: {30772}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 6905 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 3568 ns
+Lock Address: 18383856013778527812
+  Lock Name: spin
+  Total Lock Time: 31056 ns
+  Lock Count: 8
+  PIDs: {30772}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 4
+      Time: 18927 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 4
+      Time: 12129 ns
+Lock Address: 18383722025167827136
+  Lock Name: spin
+  Total Lock Time: 30000138926 ns
+  Lock Count: 3
+  PIDs: {30772}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 3
+      Time: 30000138926 ns

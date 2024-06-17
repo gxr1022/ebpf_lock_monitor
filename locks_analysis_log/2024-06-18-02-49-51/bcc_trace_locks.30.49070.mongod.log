@@ -1,0 +1,78 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to rt_mutex_lock and kretprobe to rt_mutex_unlock
+Attached kprobe to ww_mutex_lock and kretprobe to ww_mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+rt_mutex           0.000000         0
+ww_mutex           0.000000         0
+spin               62.413151        8
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 62.413151226 s
+Events collected during tracing:
+Lock Address: 18383856013778336516
+  Lock Name: spin
+  Total Lock Time: 2701 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49070}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 2701 ns
+Lock Address: 18383856013778375492
+  Lock Name: spin
+  Total Lock Time: 12254 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49070}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 12254 ns
+Lock Address: 18383721993879844248
+  Lock Name: spin
+  Total Lock Time: 16710 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49070}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'ip_protocol_deliver_rcu'<br>b'ip_local_deliver_finish'<br>b'ip_local_deliver'<br>b'ip_rcv'<br>b'__netif_receive_skb_core.constprop.0'<br>b'__netif_receive_skb_list_core'<br>b'netif_receive_skb_list_internal'<br>b'napi_complete_done'<br>b'igb_poll'<br>b'__napi_poll'<br>b'net_rx_action'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 16710 ns
+Lock Address: 18383721993994790052
+  Lock Name: spin
+  Total Lock Time: 18170 ns
+  Lock Count: 4
+  PIDs: {49062}
+  TIDs: {49070}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 12522 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 2241 ns
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 1740 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 1667 ns
+Lock Address: 18383722025172807872
+  Lock Name: spin
+  Total Lock Time: 62413101391 ns
+  Lock Count: 1
+  PIDs: {49062}
+  TIDs: {49070}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 62413101391 ns

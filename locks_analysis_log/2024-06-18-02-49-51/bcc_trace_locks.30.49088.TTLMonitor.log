@@ -1,0 +1,22 @@
+mmap: Cannot allocate memory
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to rt_mutex_lock and kretprobe to rt_mutex_unlock
+Attached kprobe to ww_mutex_lock and kretprobe to ww_mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+Traceback (most recent call last):
+  File "/home/gxr/mongodb-run/ebpf_monitor/bcc_trace_locks.py", line 295, in <module>
+    b[lock['lock_name']].open_perf_buffer(create_print_event(lock['lock_name']), page_cnt=32768)
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/table.py", line 987, in open_perf_buffer
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/table.py", line 1014, in _open_perf_buffer
+Exception: Could not open perf buffer
+Exception ignored in: <function PerfEventArray.__del__ at 0x736643cd2d40>
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/table.py", line 943, in __del__
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/table.py", line 949, in __delitem__
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/table.py", line 852, in __delitem__
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/table.py", line 387, in __delitem__
+KeyError: 

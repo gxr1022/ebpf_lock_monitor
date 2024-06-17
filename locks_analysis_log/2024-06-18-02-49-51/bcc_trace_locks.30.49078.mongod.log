@@ -1,0 +1,52 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to rt_mutex_lock and kretprobe to rt_mutex_unlock
+Attached kprobe to ww_mutex_lock and kretprobe to ww_mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+rt_mutex           0.000000         0
+ww_mutex           0.000000         0
+spin               40.000254        14
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 40.00025422 s
+Events collected during tracing:
+Lock Address: 18383856013777728708
+  Lock Name: spin
+  Total Lock Time: 52548 ns
+  Lock Count: 10
+  PIDs: {49062}
+  TIDs: {49078}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 5
+      Time: 44353 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 5
+      Time: 8195 ns
+Lock Address: 18383722025172545728
+  Lock Name: spin
+  Total Lock Time: 20000096801 ns
+  Lock Count: 2
+  PIDs: {49062}
+  TIDs: {49078}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 20000096801 ns
+Lock Address: 18383722025173070016
+  Lock Name: spin
+  Total Lock Time: 20000104871 ns
+  Lock Count: 2
+  PIDs: {49062}
+  TIDs: {49078}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 20000104871 ns

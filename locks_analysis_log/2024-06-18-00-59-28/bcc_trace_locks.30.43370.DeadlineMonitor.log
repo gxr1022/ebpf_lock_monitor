@@ -1,0 +1,116 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+spin               59.004715        118
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 59.004714763 s
+Events collected during tracing:
+Lock Address: 18383722025173075264
+  Lock Name: spin
+  Total Lock Time: 5409 ns
+  Lock Count: 1
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 5409 ns
+Lock Address: 18383722009763874496
+  Lock Name: spin
+  Total Lock Time: 9190 ns
+  Lock Count: 2
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'dequeue_entity'<br>b'dequeue_task_fair'<br>b'dequeue_task'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 9190 ns
+Lock Address: 18383721995137999768
+  Lock Name: spin
+  Total Lock Time: 13900 ns
+  Lock Count: 1
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'ip_protocol_deliver_rcu'<br>b'ip_local_deliver_finish'<br>b'ip_local_deliver'<br>b'ip_rcv'<br>b'__netif_receive_skb_core.constprop.0'<br>b'__netif_receive_skb_list_core'<br>b'netif_receive_skb_list_internal'<br>b'napi_complete_done'<br>b'igb_poll'<br>b'__napi_poll'<br>b'net_rx_action'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 13900 ns
+Lock Address: 18383721993994796708
+  Lock Name: spin
+  Total Lock Time: 15823 ns
+  Lock Count: 2
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 13340 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 2483 ns
+Lock Address: 18383721993994780836
+  Lock Name: spin
+  Total Lock Time: 23748 ns
+  Lock Count: 6
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 2
+      Time: 7859 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 2
+      Time: 5760 ns
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 4885 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 5244 ns
+Lock Address: 18383856013778220356
+  Lock Name: spin
+  Total Lock Time: 433654 ns
+  Lock Count: 70
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 35
+      Time: 319510 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 35
+      Time: 114144 ns
+Lock Address: 18383722025173070016
+  Lock Name: spin
+  Total Lock Time: 26002596269 ns
+  Lock Count: 3
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 3
+      Time: 26002596269 ns
+Lock Address: 18383722025173332160
+  Lock Name: spin
+  Total Lock Time: 33001616770 ns
+  Lock Count: 33
+  PIDs: {43349}
+  TIDs: {43370}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 31
+      Time: 33001598186 ns
+    Trace: b'_raw_spin_lock'<br>b'scheduler_tick'<br>b'update_process_times'<br>b'tick_sched_handle'<br>b'tick_sched_timer'<br>b'__hrtimer_run_queues'<br>b'hrtimer_interrupt'<br>b'__sysvec_apic_timer_interrupt'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 13564 ns
+    Trace: b'_raw_spin_lock'<br>b'_raw_spin_rq_lock_irqsave'<br>b'update_blocked_averages'<br>b'run_rebalance_domains'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'finish_task_switch.isra.0'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 5020 ns

@@ -1,0 +1,256 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+spin               60.000496        313
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 60.000496062 s
+Events collected during tracing:
+Lock Address: 18383856013778108228
+  Lock Name: spin
+  Total Lock Time: 4261 ns
+  Lock Count: 1
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 4261 ns
+Lock Address: 18383856013778633540
+  Lock Name: spin
+  Total Lock Time: 4651 ns
+  Lock Count: 1
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 4651 ns
+Lock Address: 18421356615075563816
+  Lock Name: spin
+  Total Lock Time: 4658 ns
+  Lock Count: 1
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 4658 ns
+Lock Address: 18383856013778198916
+  Lock Name: spin
+  Total Lock Time: 5461 ns
+  Lock Count: 1
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 5461 ns
+Lock Address: 18421356614440832744
+  Lock Name: spin
+  Total Lock Time: 6370 ns
+  Lock Count: 2
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 6370 ns
+Lock Address: 18421356614435487144
+  Lock Name: spin
+  Total Lock Time: 6609 ns
+  Lock Count: 1
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 6609 ns
+Lock Address: 18421356614659338408
+  Lock Name: spin
+  Total Lock Time: 7014 ns
+  Lock Count: 2
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 7014 ns
+Lock Address: 18421356614730485608
+  Lock Name: spin
+  Total Lock Time: 7241 ns
+  Lock Count: 2
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 7241 ns
+Lock Address: 18421356614554068264
+  Lock Name: spin
+  Total Lock Time: 7726 ns
+  Lock Count: 2
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 7726 ns
+Lock Address: 18421356614620944424
+  Lock Name: spin
+  Total Lock Time: 7869 ns
+  Lock Count: 3
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 3
+      Time: 7869 ns
+Lock Address: 18421356614439902440
+  Lock Name: spin
+  Total Lock Time: 8270 ns
+  Lock Count: 2
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 8270 ns
+Lock Address: 18383856013778510404
+  Lock Name: spin
+  Total Lock Time: 8771 ns
+  Lock Count: 3
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 5787 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 2984 ns
+Lock Address: 18421356615104746728
+  Lock Name: spin
+  Total Lock Time: 9945 ns
+  Lock Count: 2
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 9945 ns
+Lock Address: 18421356614438042280
+  Lock Name: spin
+  Total Lock Time: 11723 ns
+  Lock Count: 3
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 4933 ns
+    Trace: b'_raw_spin_lock'<br>b'do_numa_page'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 3479 ns
+    Trace: b'_raw_spin_lock'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 3311 ns
+Lock Address: 18383856013778723268
+  Lock Name: spin
+  Total Lock Time: 14570 ns
+  Lock Count: 2
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 14570 ns
+Lock Address: 18421356614437312680
+  Lock Name: spin
+  Total Lock Time: 15107 ns
+  Lock Count: 5
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 7064 ns
+    Trace: b'_raw_spin_lock'<br>b'do_numa_page'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 2
+      Time: 4576 ns
+    Trace: b'_raw_spin_lock'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 1
+      Time: 3467 ns
+Lock Address: 18421356614436291688
+  Lock Name: spin
+  Total Lock Time: 16164 ns
+  Lock Count: 5
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 5
+      Time: 16164 ns
+Lock Address: 18421356614439321960
+  Lock Name: spin
+  Total Lock Time: 24610 ns
+  Lock Count: 11
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 11
+      Time: 24610 ns
+Lock Address: 18421356614435057896
+  Lock Name: spin
+  Total Lock Time: 31476 ns
+  Lock Count: 12
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'handle_pte_fault'<br>b'__handle_mm_fault'<br>b'handle_mm_fault'<br>b'do_user_addr_fault'<br>b'exc_page_fault'<br>b'asm_exc_page_fault'<br>
+      Count: 12
+      Time: 31476 ns
+Lock Address: 18383856013778002372
+  Lock Name: spin
+  Total Lock Time: 98045 ns
+  Lock Count: 12
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 6
+      Time: 56193 ns
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 6
+      Time: 41852 ns
+Lock Address: 18383856013778703748
+  Lock Name: spin
+  Total Lock Time: 350293 ns
+  Lock Count: 160
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 80
+      Time: 177969 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 80
+      Time: 172324 ns
+Lock Address: 18383722025172807872
+  Lock Name: spin
+  Total Lock Time: 59999845228 ns
+  Lock Count: 80
+  PIDs: {30781}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 80
+      Time: 59999845228 ns

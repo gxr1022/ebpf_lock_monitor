@@ -1,0 +1,158 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.002690         152
+spin               37.788279        290
+write_lock         0.000000         0
+read_lock          0.000432         70
+The total time of acquiring locks is: 37.791401412 s
+Events collected during tracing:
+Lock Address: 18383721993983888404
+  Lock Name: spin
+  Total Lock Time: 11490 ns
+  Lock Count: 1
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__find_get_block'<br>b'__getblk_gfp'<br>b'ext4_getblk'<br>b'ext4_bread'<br>b'__ext4_read_dirblock'<br>b'htree_dirblock_to_tree'<br>b'ext4_htree_fill_tree'<br>b'ext4_dx_readdir'<br>b'ext4_readdir'<br>b'iterate_dir'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 11490 ns
+Lock Address: 18383721993711011168
+  Lock Name: spin
+  Total Lock Time: 12264 ns
+  Lock Count: 1
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'ext4_es_lookup_extent'<br>b'ext4_map_blocks'<br>b'ext4_getblk'<br>b'ext4_bread'<br>b'__ext4_read_dirblock'<br>b'htree_dirblock_to_tree'<br>b'ext4_htree_fill_tree'<br>b'ext4_dx_readdir'<br>b'ext4_readdir'<br>b'iterate_dir'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 12264 ns
+Lock Address: 18446744072152957632
+  Lock Name: spin
+  Total Lock Time: 14120 ns
+  Lock Count: 1
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'rcu_accelerate_cbs'<br>b'__note_gp_changes'<br>b'note_gp_changes'<br>b'rcu_core'<br>b'rcu_core_si'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'lockref_put_return'<br>b'__fsnotify_parent'<br>b'__fput'<br>b'____fput'<br>b'task_work_run'<br>b'exit_to_user_mode_loop'<br>b'exit_to_user_mode_prepare'<br>b'syscall_exit_to_user_mode'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 14120 ns
+Lock Address: 18383856013778012676
+  Lock Name: spin
+  Total Lock Time: 68344 ns
+  Lock Count: 13
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 7
+      Time: 37523 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 6
+      Time: 30821 ns
+Lock Address: 18383856013778183684
+  Lock Name: spin
+  Total Lock Time: 394299 ns
+  Lock Count: 70
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 35
+      Time: 210365 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 35
+      Time: 183934 ns
+Lock Address: 18383722026307116064
+  Lock Name: mutex
+  Total Lock Time: 401066 ns
+  Lock Count: 20
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'mutex_lock'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 20
+      Time: 401066 ns
+Lock Address: 18383722008731618600
+  Lock Name: read_lock
+  Total Lock Time: 432222 ns
+  Lock Count: 70
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_read_lock'<br>b'ext4_map_blocks'<br>b'ext4_getblk'<br>b'ext4_bread'<br>b'__ext4_read_dirblock'<br>b'htree_dirblock_to_tree'<br>b'ext4_htree_fill_tree'<br>b'ext4_dx_readdir'<br>b'ext4_readdir'<br>b'iterate_dir'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 70
+      Time: 432222 ns
+Lock Address: 18383721993957008960
+  Lock Name: spin
+  Total Lock Time: 665519 ns
+  Lock Count: 152
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'get_unused_fd_flags'<br>b'do_sys_openat2'<br>b'__x64_sys_openat'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 76
+      Time: 355996 ns
+    Trace: b'_raw_spin_lock'<br>b'__x64_sys_close'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 76
+      Time: 309523 ns
+Lock Address: 18383722026307109152
+  Lock Name: mutex
+  Total Lock Time: 1087200 ns
+  Lock Count: 64
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'mutex_lock'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 64
+      Time: 1087200 ns
+Lock Address: 18383722026307112992
+  Lock Name: mutex
+  Total Lock Time: 1201458 ns
+  Lock Count: 68
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'mutex_lock'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 68
+      Time: 1201458 ns
+Lock Address: 18383722025168089280
+  Lock Name: spin
+  Total Lock Time: 37787113430 ns
+  Lock Count: 52
+  PIDs: {30766}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 42
+      Time: 36452005681 ns
+    Trace: b'_raw_spin_lock'<br>b'scheduler_tick'<br>b'update_process_times'<br>b'tick_sched_handle'<br>b'tick_sched_timer'<br>b'__hrtimer_run_queues'<br>b'hrtimer_interrupt'<br>b'__sysvec_apic_timer_interrupt'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'page_counter_try_charge'<br>b'try_charge_memcg'<br>b'obj_cgroup_charge'<br>b'kmem_cache_alloc'<br>b'alloc_empty_file'<br>b'path_openat'<br>b'do_filp_open'<br>b'do_sys_openat2'<br>b'__x64_sys_openat'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 15596 ns
+    Trace: b'_raw_spin_lock'<br>b'_raw_spin_rq_lock_irqsave'<br>b'update_blocked_averages'<br>b'run_rebalance_domains'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'page_counter_try_charge'<br>b'try_charge_memcg'<br>b'obj_cgroup_charge'<br>b'kmem_cache_alloc'<br>b'alloc_empty_file'<br>b'path_openat'<br>b'do_filp_open'<br>b'do_sys_openat2'<br>b'__x64_sys_openat'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 11880 ns
+    Trace: b'_raw_spin_lock'<br>b'_raw_spin_rq_lock_irqsave'<br>b'update_blocked_averages'<br>b'newidle_balance'<br>b'pick_next_task_fair'<br>b'pick_next_task'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 15946 ns
+    Trace: b'_raw_spin_lock'<br>b'newidle_balance'<br>b'pick_next_task_fair'<br>b'pick_next_task'<br>b'__schedule'<br>b'schedule'<br>b'futex_wait_queue'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 2
+      Time: 1335016257 ns
+    Trace: b'_raw_spin_lock'<br>b'scheduler_tick'<br>b'update_process_times'<br>b'tick_sched_handle'<br>b'tick_sched_timer'<br>b'__hrtimer_run_queues'<br>b'hrtimer_interrupt'<br>b'__sysvec_apic_timer_interrupt'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'__kmem_cache_alloc_node'<br>b'__kmalloc'<br>b'ext4_htree_store_dirent'<br>b'htree_dirblock_to_tree'<br>b'ext4_htree_fill_tree'<br>b'ext4_dx_readdir'<br>b'ext4_readdir'<br>b'iterate_dir'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 11935 ns
+    Trace: b'_raw_spin_lock'<br>b'_raw_spin_rq_lock_irqsave'<br>b'update_blocked_averages'<br>b'run_rebalance_domains'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'__kmem_cache_alloc_node'<br>b'__kmalloc'<br>b'ext4_htree_store_dirent'<br>b'htree_dirblock_to_tree'<br>b'ext4_htree_fill_tree'<br>b'ext4_dx_readdir'<br>b'ext4_readdir'<br>b'iterate_dir'<br>b'__x64_sys_getdents64'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 12374 ns
+    Trace: b'_raw_spin_lock'<br>b'scheduler_tick'<br>b'update_process_times'<br>b'tick_sched_handle'<br>b'tick_sched_timer'<br>b'__hrtimer_run_queues'<br>b'hrtimer_interrupt'<br>b'__sysvec_apic_timer_interrupt'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'lockref_put_return'<br>b'__fsnotify_parent'<br>b'__fput'<br>b'____fput'<br>b'task_work_run'<br>b'exit_to_user_mode_loop'<br>b'exit_to_user_mode_prepare'<br>b'syscall_exit_to_user_mode'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 12456 ns
+    Trace: b'_raw_spin_lock'<br>b'_raw_spin_rq_lock_irqsave'<br>b'update_blocked_averages'<br>b'run_rebalance_domains'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'sysvec_apic_timer_interrupt'<br>b'asm_sysvec_apic_timer_interrupt'<br>b'lockref_put_return'<br>b'__fsnotify_parent'<br>b'__fput'<br>b'____fput'<br>b'task_work_run'<br>b'exit_to_user_mode_loop'<br>b'exit_to_user_mode_prepare'<br>b'syscall_exit_to_user_mode'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 11305 ns

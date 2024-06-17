@@ -1,0 +1,150 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+spin               36.000850        37
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 36.000850309 s
+Events collected during tracing:
+Lock Address: 18383722008744615616
+  Lock Name: spin
+  Total Lock Time: 5686 ns
+  Lock Count: 1
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'dequeue_entity'<br>b'dequeue_task_fair'<br>b'dequeue_task'<br>b'__schedule'<br>b'schedule'<br>b'do_nanosleep'<br>b'hrtimer_nanosleep'<br>b'common_nsleep'<br>b'__x64_sys_clock_nanosleep'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 5686 ns
+Lock Address: 18383722008744617152
+  Lock Name: spin
+  Total Lock Time: 6016 ns
+  Lock Count: 1
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'dequeue_entity'<br>b'dequeue_task_fair'<br>b'dequeue_task'<br>b'__schedule'<br>b'schedule'<br>b'do_nanosleep'<br>b'hrtimer_nanosleep'<br>b'common_nsleep'<br>b'__x64_sys_clock_nanosleep'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 6016 ns
+Lock Address: 18383722025173337408
+  Lock Name: spin
+  Total Lock Time: 6229 ns
+  Lock Count: 1
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 6229 ns
+Lock Address: 18383721993994780836
+  Lock Name: spin
+  Total Lock Time: 8332 ns
+  Lock Count: 2
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 5906 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 2426 ns
+Lock Address: 18383722025173075264
+  Lock Name: spin
+  Total Lock Time: 9236 ns
+  Lock Count: 1
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__do_softirq'<br>b'__irq_exit_rcu'<br>b'irq_exit_rcu'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 9236 ns
+Lock Address: 18383856013778198916
+  Lock Name: spin
+  Total Lock Time: 16304 ns
+  Lock Count: 4
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 3
+      Time: 14254 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 2050 ns
+Lock Address: 18383721993994796708
+  Lock Name: spin
+  Total Lock Time: 16800 ns
+  Lock Count: 2
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 10580 ns
+    Trace: b'_raw_spin_lock'<br>b'handle_edge_irq'<br>b'__common_interrupt'<br>b'common_interrupt'<br>b'asm_common_interrupt'<br>
+      Count: 1
+      Time: 6220 ns
+Lock Address: 18383856013778510404
+  Lock Name: spin
+  Total Lock Time: 51351 ns
+  Lock Count: 9
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 6
+      Time: 37167 ns
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 3
+      Time: 14184 ns
+Lock Address: 18383856013778723268
+  Lock Name: spin
+  Total Lock Time: 76453 ns
+  Lock Count: 9
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 5
+      Time: 43669 ns
+    Trace: b'_raw_spin_lock'<br>b'futex_wait_setup'<br>b'futex_wait'<br>b'do_futex'<br>b'__x64_sys_futex'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 4
+      Time: 32784 ns
+Lock Address: 18383722025168875712
+  Lock Name: spin
+  Total Lock Time: 4000057873 ns
+  Lock Count: 1
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'do_nanosleep'<br>b'hrtimer_nanosleep'<br>b'common_nsleep'<br>b'__x64_sys_clock_nanosleep'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 1
+      Time: 4000057873 ns
+Lock Address: 18383722025173332160
+  Lock Name: spin
+  Total Lock Time: 12000165036 ns
+  Lock Count: 3
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'do_nanosleep'<br>b'hrtimer_nanosleep'<br>b'common_nsleep'<br>b'__x64_sys_clock_nanosleep'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 3
+      Time: 12000165036 ns
+Lock Address: 18383722025173070016
+  Lock Name: spin
+  Total Lock Time: 20000430993 ns
+  Lock Count: 3
+  PIDs: {30783}
+  TIDs: {30755}
+  Stack Traces:
+    Trace: b'_raw_spin_lock'<br>b'__schedule'<br>b'schedule'<br>b'do_nanosleep'<br>b'hrtimer_nanosleep'<br>b'common_nsleep'<br>b'__x64_sys_clock_nanosleep'<br>b'x64_sys_call'<br>b'do_syscall_64'<br>b'entry_SYSCALL_64_after_hwframe'<br>
+      Count: 3
+      Time: 20000430993 ns
