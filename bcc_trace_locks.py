@@ -13,13 +13,27 @@ locks = [
          'key_type': 'key_mutex_t',
          'lock_func': 'mutex'
      },
-    #  {
-    #      'lock_name': 'spin',
-    #      'title': 'Spin Lock',
-    #      'lock_type': 'raw_spinlock_t',
-    #      'key_type': 'key_spin_t',
-    #      'lock_func': '_raw_spin'
-    #  },
+     {
+         'lock_name': 'rt_mutex',
+         'title': 'RT_Mutex',
+         'lock_type': 'raw_spinlock_t',
+         'key_type': 'key_rt_mutex_t',
+         'lock_func': 'rt_mutex'
+     },
+     {
+         'lock_name': 'ww_mutex',
+         'title': 'WW_Mutex',
+         'lock_type': 'raw_spinlock_t',
+         'key_type': 'key_ww_mutex_t',
+         'lock_func': 'ww_mutex'
+     },
+     {
+         'lock_name': 'spin',
+         'title': 'Spin Lock',
+         'lock_type': 'raw_spinlock_t',
+         'key_type': 'key_spin_t',
+         'lock_func': '_raw_spin'
+     },
      {
          'lock_name': 'write_lock',
          'title': 'Write Lock',
@@ -43,6 +57,16 @@ prog_header = """
 struct key_mutex_t {
     u64 pid;
     struct mutex *lock;
+};
+
+struct key_ww_mutex_t {
+    u64 pid;
+    raw_spinlock_t *lock;
+};
+
+struct key_rt_mutex_t {
+    u64 pid;
+    raw_spinlock_t *lock;
 };
 
 struct key_spin_t {
@@ -77,7 +101,7 @@ BPF_PERF_OUTPUT(LOCK_NAME);
 BPF_HASH(map_LOCK_NAME, struct KEY_TYPE, struct data_t, 102400);
 
 int lock_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
-    u32 current_pid = bpf_get_current_pid_tgid()>> 32;
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
     if (current_pid == target_PID) {
         bpf_trace_printk("Locking mutex: PID=%u, lock=0x%llx\\n", current_pid, (u64)lock); // Debugging
         struct data_t data = {};
@@ -87,15 +111,15 @@ int lock_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
         if (data_ptr) {
             data_ptr->ts = bpf_ktime_get_ns();
             data_ptr->lock_count += 1;
-            data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
+            //data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
         } else {
-            data.pid = bpf_get_current_pid_tgid();
-            data.tid = bpf_get_current_pid_tgid() >> 32;
+            data.tid = bpf_get_current_pid_tgid();
+            data.pid = bpf_get_current_pid_tgid() >> 32;
             bpf_get_current_comm(&data.comm, sizeof(data.comm));        
             data.lock = (u64)lock;
             data.ts = bpf_ktime_get_ns();
             data.lock_count = 1;
-            data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
+            //data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
             map_LOCK_NAME.insert(&key, &data);
         }
     }
@@ -104,14 +128,14 @@ int lock_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
 
 int release_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
     u64 present = bpf_ktime_get_ns();
-    u32 current_pid = bpf_get_current_pid_tgid()>> 32;
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
     if (current_pid == target_PID) {
         bpf_trace_printk("Releasing mutex: PID=%u, lock=0x%llx\\n", current_pid, (u64)lock); // Debugging
         struct data_t *data;
         struct KEY_TYPE key = {current_pid, lock};
         data = map_LOCK_NAME.lookup(&key);
         if (data) {
-            data->lock_time += (u64)(present - data->ts);
+            data->lock_time += (present - data->ts);
             data->present_time = present;
             data->diff = present - data->ts;
             LOCK_NAME.perf_submit(ctx, data, sizeof(struct data_t));
@@ -171,11 +195,11 @@ def print_lock_info(events):
         print(f"  Lock Count: {event_data['lock_count']}")
         print(f"  PIDs: {event_data['pid']}")
         print(f"  TIDs: {event_data['tid']}")        
-        print("  Stack Traces:")
-        for trace, trace_info in event_data['stack_traces'].items():
-            print(f"    Trace: {trace}")
-            print(f"      Count: {trace_info['count']}")
-            print(f"      Time: {trace_info['time']} ns")
+        # print("  Stack Traces:")
+        # for trace, trace_info in event_data['stack_traces'].items():
+        #     print(f"    Trace: {trace}")
+        #     print(f"      Count: {trace_info['count']}")
+        #     print(f"      Time: {trace_info['time']} ns")
 
 def create_print_event(lock_name):
     def print_event(cpu, data, size):
@@ -189,25 +213,25 @@ def create_print_event(lock_name):
             (float(event.present_time - start)) / 1000000000,
             event.lock_time, event.diff))
         print(lock_name,"\n")
-        trace = get_stack(event.stack_id)
+        # trace = get_stack(event.stack_id)
         if event.lock in events:
             key = event.lock
             events[key]['ts'] = event.ts
             events[key]['lock'] = event.lock
             events[key]['present_time'] = event.present_time
-            events[key]['lock_time'] += event.diff
+            events[key]['lock_time'] += (event.diff)
             events[key]['tid'].add(event.tid)
             events[key]['pid'].add(event.pid)
             events[key]['comm'] = event.comm
             events[key]['lock_count'] += 1
-            if trace in events[key]['stack_traces']:
-                events[key]['stack_traces'][trace]['count'] += 1
-                events[key]['stack_traces'][trace]['time'] += event.diff
-            else:
-                events[key]['stack_traces'][trace] = {
-                    'count': 1,
-                    'time': event.diff
-                }
+            # if trace in events[key]['stack_traces']:
+            #     events[key]['stack_traces'][trace]['count'] += 1
+            #     events[key]['stack_traces'][trace]['time'] += event.diff
+            # else:
+            #     events[key]['stack_traces'][trace] = {
+            #         'count': 1,
+            #         'time': event.diff
+            #     }
         else:
             event_dict = {
                 'ts': event.ts,
@@ -220,14 +244,14 @@ def create_print_event(lock_name):
                 'comm': event.comm,
                 'lock_count': 1,
                 'lock_name': lock_name,
-                'stack_traces': {trace: {'count': 1, 'time': event.diff}}
+                # 'stack_traces': {trace: {'count': 1, 'time': event.diff}}
             }
             events[event_dict['lock']] = event_dict
     return print_event
 
 parser = argparse.ArgumentParser(description='Monitor locking activities in the kernel')
 parser.add_argument("--time", help="Time in seconds to monitor locks in kernel. Default value is 180 seconds",
-                    type=int, default=120)
+                    type=int, default=30)
 parser.add_argument("--pid", help="PID of the process to trace", type=int)
 args = parser.parse_args()
 current_pid = args.pid
@@ -293,13 +317,14 @@ finally:
     print("%-18s %-16s %s" % ("LOCK_NAME", "TOTAL_LOCKTIME(s)", "TOTAL_LOCKCOUNT"))
     for lock_name, lock_stat in lock_statistics.items():
         print("%-18s %-16f %s" % (lock_name, lock_stat['total_lock_time'] / 1000000000, lock_stat['total_lock_count']))
+        # print("%-18s %-16f %s" % (lock_name, lock_stat['total_lock_time'], lock_stat['total_lock_count']))
     print("The total time of acquiring locks is:",total_lock_time / 1000000000.0,"s")  
     
     event_list = sorted(events.items(), key=lambda kv: kv[1]['lock_time'], reverse=False)
     
     print_lock_info(event_list)
     # print(event_list)
-    generate_report(event_list)
+    # generate_report(event_list)
 
 
 
