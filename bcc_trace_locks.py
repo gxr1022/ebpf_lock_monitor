@@ -12,42 +12,42 @@ locks = [
          'lock_type': 'struct mutex',
          'key_type': 'key_mutex_t',
          'lock_func': 'mutex'
-     },
-     {
-         'lock_name': 'rt_mutex',
-         'title': 'RT_Mutex',
-         'lock_type': 'raw_spinlock_t',
-         'key_type': 'key_rt_mutex_t',
-         'lock_func': 'rt_mutex'
-     },
-     {
-         'lock_name': 'ww_mutex',
-         'title': 'WW_Mutex',
-         'lock_type': 'raw_spinlock_t',
-         'key_type': 'key_ww_mutex_t',
-         'lock_func': 'ww_mutex'
-     },
-     {
-         'lock_name': 'spin',
-         'title': 'Spin Lock',
-         'lock_type': 'raw_spinlock_t',
-         'key_type': 'key_spin_t',
-         'lock_func': '_raw_spin'
-     },
-     {
-         'lock_name': 'write_lock',
-         'title': 'Write Lock',
-         'lock_type': 'rwlock_t',
-         'key_type': 'key_rw_t',
-         'lock_func': '_raw_write'
-     },
-     {
-         'lock_name': 'read_lock',
-         'title': 'Read Lock',
-         'lock_type': 'rwlock_t',
-         'key_type': 'key_rw_t',
-         'lock_func': '_raw_read'
      }
+    #  {
+    #      'lock_name': 'rt_mutex',
+    #      'title': 'RT_Mutex',
+    #      'lock_type': 'raw_spinlock_t',
+    #      'key_type': 'key_rt_mutex_t',
+    #      'lock_func': 'rt_mutex'
+    #  },
+    #  {
+    #      'lock_name': 'ww_mutex',
+    #      'title': 'WW_Mutex',
+    #      'lock_type': 'raw_spinlock_t',
+    #      'key_type': 'key_ww_mutex_t',
+    #      'lock_func': 'ww_mutex'
+    #  },
+    #  {
+    #      'lock_name': 'spin',
+    #      'title': 'Spin Lock',
+    #      'lock_type': 'raw_spinlock_t',
+    #      'key_type': 'key_spin_t',
+    #      'lock_func': '_raw_spin'
+    #  },
+    #  {
+    #      'lock_name': 'write_lock',
+    #      'title': 'Write Lock',
+    #      'lock_type': 'rwlock_t',
+    #      'key_type': 'key_rw_t',
+    #      'lock_func': '_raw_write'
+    #  },
+    #  {
+    #      'lock_name': 'read_lock',
+    #      'title': 'Read Lock',
+    #      'lock_type': 'rwlock_t',
+    #      'key_type': 'key_rw_t',
+    #      'lock_func': '_raw_read'
+    #  }
 ]
 
 prog_header = """
@@ -102,16 +102,17 @@ BPF_HASH(map_LOCK_NAME, struct KEY_TYPE, struct data_t, 102400);
 
 int lock_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
     u32 current_pid = bpf_get_current_pid_tgid() >> 32;
+    u32 current_tid = bpf_get_current_pid_tgid();
     if (current_pid == target_PID) {
         bpf_trace_printk("Locking mutex: PID=%u, lock=0x%llx\\n", current_pid, (u64)lock); // Debugging
         struct data_t data = {};
-        struct KEY_TYPE key = {current_pid, lock};
+        struct KEY_TYPE key = {current_tid, lock};
         struct data_t *data_ptr;
         data_ptr = map_LOCK_NAME.lookup(&key);
         if (data_ptr) {
             data_ptr->ts = bpf_ktime_get_ns();
             data_ptr->lock_count += 1;
-            //data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
+            data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_USER_STACK);
         } else {
             data.tid = bpf_get_current_pid_tgid();
             data.pid = bpf_get_current_pid_tgid() >> 32;
@@ -119,7 +120,7 @@ int lock_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
             data.lock = (u64)lock;
             data.ts = bpf_ktime_get_ns();
             data.lock_count = 1;
-            //data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
+            data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);
             map_LOCK_NAME.insert(&key, &data);
         }
     }
@@ -129,15 +130,18 @@ int lock_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
 int release_LOCK_NAME(struct pt_regs *ctx, LOCK_TYPE *lock) {
     u64 present = bpf_ktime_get_ns();
     u32 current_pid = bpf_get_current_pid_tgid() >> 32;
+    u32 current_tid = bpf_get_current_pid_tgid();
     if (current_pid == target_PID) {
         bpf_trace_printk("Releasing mutex: PID=%u, lock=0x%llx\\n", current_pid, (u64)lock); // Debugging
         struct data_t *data;
-        struct KEY_TYPE key = {current_pid, lock};
+        struct KEY_TYPE key = {current_tid, lock};
         data = map_LOCK_NAME.lookup(&key);
         if (data) {
-            data->lock_time += (present - data->ts);
             data->present_time = present;
+            if(present <= data->ts)
+                return 0;
             data->diff = present - data->ts;
+            data->lock_time += (present - data->ts);
             LOCK_NAME.perf_submit(ctx, data, sizeof(struct data_t));
         }
     }
@@ -182,7 +186,7 @@ def get_stack(stack_id):
     stack = list(b.get_table("stack_traces").walk(stack_id))
     stack_str = ""
     for addr in stack:
-        func_name = b.sym(addr, -1, show_module=False, show_offset=False) #Translate a kernel memory address into a kernel function name
+        func_name = b.sym(addr, -1, show_module=True, show_offset=True) #Translate a kernel memory address into a kernel function name
         stack_str += str(func_name) + "<br>"
     return stack_str
 
@@ -195,11 +199,11 @@ def print_lock_info(events):
         print(f"  Lock Count: {event_data['lock_count']}")
         print(f"  PIDs: {event_data['pid']}")
         print(f"  TIDs: {event_data['tid']}")        
-        # print("  Stack Traces:")
-        # for trace, trace_info in event_data['stack_traces'].items():
-        #     print(f"    Trace: {trace}")
-        #     print(f"      Count: {trace_info['count']}")
-        #     print(f"      Time: {trace_info['time']} ns")
+        print("  Stack Traces:")
+        for trace, trace_info in event_data['stack_traces'].items():
+            print(f"    Trace: {trace}")
+            print(f"      Count: {trace_info['count']}")
+            print(f"      Time: {trace_info['time']} ns")
 
 def create_print_event(lock_name):
     def print_event(cpu, data, size):
@@ -207,31 +211,31 @@ def create_print_event(lock_name):
         event = b[lock_name].event(data)
         if start == 0:
             start = event.ts
-        time_s = (float(event.ts - start)) / 1000000000
-        print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
-            time_s, event.comm, event.pid, event.tid, event.lock,
-            (float(event.present_time - start)) / 1000000000,
-            event.lock_time, event.diff))
-        print(lock_name,"\n")
-        # trace = get_stack(event.stack_id)
+        time_s = (float(event.ts - start)) / 1000000000.0
+        # print("%-18.9f %-16s %-6d %-6d %-6d %-6f     %-15f %-6d" % (
+        #     time_s, event.comm, event.pid, event.tid, event.lock,
+        #     (float(event.present_time - start)) / 1000000000,
+        #     event.lock_time, event.diff))
+        # print(lock_name,"\n")
+        trace = get_stack(event.stack_id)
         if event.lock in events:
             key = event.lock
             events[key]['ts'] = event.ts
             events[key]['lock'] = event.lock
             events[key]['present_time'] = event.present_time
-            events[key]['lock_time'] += (event.diff)
+            events[key]['lock_time'] += event.diff
             events[key]['tid'].add(event.tid)
             events[key]['pid'].add(event.pid)
             events[key]['comm'] = event.comm
             events[key]['lock_count'] += 1
-            # if trace in events[key]['stack_traces']:
-            #     events[key]['stack_traces'][trace]['count'] += 1
-            #     events[key]['stack_traces'][trace]['time'] += event.diff
-            # else:
-            #     events[key]['stack_traces'][trace] = {
-            #         'count': 1,
-            #         'time': event.diff
-            #     }
+            if trace in events[key]['stack_traces']:
+                events[key]['stack_traces'][trace]['count'] += 1
+                events[key]['stack_traces'][trace]['time'] += event.diff
+            else:
+                events[key]['stack_traces'][trace] = {
+                    'count': 1,
+                    'time': event.diff
+            }
         else:
             event_dict = {
                 'ts': event.ts,
@@ -244,7 +248,7 @@ def create_print_event(lock_name):
                 'comm': event.comm,
                 'lock_count': 1,
                 'lock_name': lock_name,
-                # 'stack_traces': {trace: {'count': 1, 'time': event.diff}}
+                'stack_traces': {trace: {'count': 1, 'time': event.diff}}
             }
             events[event_dict['lock']] = event_dict
     return print_event
@@ -271,11 +275,9 @@ except Exception as e:
     exit(1)
 
 for lock in locks:
-    b.attach_kprobe(event="%s_lock" % lock['lock_func'], fn_name="lock_%s" % lock['lock_name'])
-    b.attach_kprobe(event="%s_unlock" % lock['lock_func'], fn_name="release_%s" % lock['lock_name']) # unlock is better
+    b.attach_uprobe(event="%s_lock" % lock['lock_func'], fn_name="lock_%s" % lock['lock_name'])
+    b.attach_uprobe(event="%s_unlock" % lock['lock_func'], fn_name="release_%s" % lock['lock_name']) # unlock is better
     print(f"Attached kprobe to %s_lock and kretprobe to %s_unlock" % (lock['lock_func'], lock['lock_func']))
-
-
 
 events = {}
 lock_statistics={}

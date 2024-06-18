@@ -1,0 +1,3421 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to rt_mutex_lock and kretprobe to rt_mutex_unlock
+Attached kprobe to ww_mutex_lock and kretprobe to ww_mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000107         6
+rt_mutex           0.000000         0
+ww_mutex           0.000000         0
+spin               60.377101        29300
+write_lock         0.000354         1422
+read_lock          0.000005         3
+The total time of acquiring locks is: 60.377566393 s
+Events collected during tracing:
+Lock Address: 18383722032880248632
+  Lock Name: spin
+  Total Lock Time: 302 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880249752
+  Lock Name: spin
+  Total Lock Time: 317 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615168618984
+  Lock Name: spin
+  Total Lock Time: 366 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993601123656
+  Lock Name: write_lock
+  Total Lock Time: 391 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880248296
+  Lock Name: spin
+  Total Lock Time: 394 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028657421768
+  Lock Name: spin
+  Total Lock Time: 413 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025812581832
+  Lock Name: spin
+  Total Lock Time: 415 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993610914208
+  Lock Name: spin
+  Total Lock Time: 422 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868360232
+  Lock Name: spin
+  Total Lock Time: 425 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651631576
+  Lock Name: spin
+  Total Lock Time: 432 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029454754768
+  Lock Name: write_lock
+  Total Lock Time: 433 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726056208
+  Lock Name: write_lock
+  Total Lock Time: 434 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651629112
+  Lock Name: spin
+  Total Lock Time: 438 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025859562504
+  Lock Name: spin
+  Total Lock Time: 452 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026510314952
+  Lock Name: spin
+  Total Lock Time: 454 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651629224
+  Lock Name: spin
+  Total Lock Time: 458 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028657420872
+  Lock Name: spin
+  Total Lock Time: 463 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993601123664
+  Lock Name: write_lock
+  Total Lock Time: 480 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880249640
+  Lock Name: spin
+  Total Lock Time: 484 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110850512
+  Lock Name: write_lock
+  Total Lock Time: 486 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880247176
+  Lock Name: spin
+  Total Lock Time: 498 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861032004
+  Lock Name: spin
+  Total Lock Time: 498 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868360344
+  Lock Name: spin
+  Total Lock Time: 500 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026399811896
+  Lock Name: spin
+  Total Lock Time: 500 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868361912
+  Lock Name: spin
+  Total Lock Time: 503 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026399812192
+  Lock Name: spin
+  Total Lock Time: 506 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721995333627300
+  Lock Name: spin
+  Total Lock Time: 507 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025859559480
+  Lock Name: spin
+  Total Lock Time: 510 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651630344
+  Lock Name: spin
+  Total Lock Time: 512 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040751581584
+  Lock Name: write_lock
+  Total Lock Time: 512 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651630568
+  Lock Name: spin
+  Total Lock Time: 513 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651631128
+  Lock Name: spin
+  Total Lock Time: 517 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880247400
+  Lock Name: spin
+  Total Lock Time: 520 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025886577368
+  Lock Name: spin
+  Total Lock Time: 521 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993601125840
+  Lock Name: write_lock
+  Total Lock Time: 521 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868359560
+  Lock Name: spin
+  Total Lock Time: 523 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861041476
+  Lock Name: spin
+  Total Lock Time: 526 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028657421880
+  Lock Name: spin
+  Total Lock Time: 528 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032370996464
+  Lock Name: spin
+  Total Lock Time: 532 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028657419752
+  Lock Name: spin
+  Total Lock Time: 532 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027234984912
+  Lock Name: write_lock
+  Total Lock Time: 536 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659441232
+  Lock Name: write_lock
+  Total Lock Time: 538 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026399811800
+  Lock Name: spin
+  Total Lock Time: 543 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880248184
+  Lock Name: spin
+  Total Lock Time: 543 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028657418744
+  Lock Name: spin
+  Total Lock Time: 545 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651631240
+  Lock Name: spin
+  Total Lock Time: 547 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880249192
+  Lock Name: spin
+  Total Lock Time: 549 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651630680
+  Lock Name: spin
+  Total Lock Time: 559 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028657418856
+  Lock Name: spin
+  Total Lock Time: 563 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368473872
+  Lock Name: write_lock
+  Total Lock Time: 566 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726062088
+  Lock Name: spin
+  Total Lock Time: 567 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915823248
+  Lock Name: write_lock
+  Total Lock Time: 577 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651629336
+  Lock Name: spin
+  Total Lock Time: 583 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763052464
+  Lock Name: write_lock
+  Total Lock Time: 583 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868360008
+  Lock Name: spin
+  Total Lock Time: 589 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993587500992
+  Lock Name: spin
+  Total Lock Time: 592 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993711011392
+  Lock Name: spin
+  Total Lock Time: 596 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687016720
+  Lock Name: write_lock
+  Total Lock Time: 604 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880249080
+  Lock Name: spin
+  Total Lock Time: 605 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861041616
+  Lock Name: write_lock
+  Total Lock Time: 605 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861032300
+  Lock Name: spin
+  Total Lock Time: 606 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993601125856
+  Lock Name: write_lock
+  Total Lock Time: 607 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026241379048
+  Lock Name: spin
+  Total Lock Time: 609 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059741508
+  Lock Name: spin
+  Total Lock Time: 609 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880250200
+  Lock Name: spin
+  Total Lock Time: 617 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868362696
+  Lock Name: spin
+  Total Lock Time: 618 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993601123680
+  Lock Name: write_lock
+  Total Lock Time: 618 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18397929762485473296
+  Lock Name: spin
+  Total Lock Time: 619 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880250760
+  Lock Name: spin
+  Total Lock Time: 620 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028657419416
+  Lock Name: spin
+  Total Lock Time: 620 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880247512
+  Lock Name: spin
+  Total Lock Time: 625 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868363032
+  Lock Name: spin
+  Total Lock Time: 626 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614458502184
+  Lock Name: spin
+  Total Lock Time: 633 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025859561944
+  Lock Name: spin
+  Total Lock Time: 644 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687014992
+  Lock Name: spin
+  Total Lock Time: 649 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110832752
+  Lock Name: write_lock
+  Total Lock Time: 651 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026868361464
+  Lock Name: spin
+  Total Lock Time: 656 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687015496
+  Lock Name: spin
+  Total Lock Time: 659 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719837352
+  Lock Name: spin
+  Total Lock Time: 665 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993601123688
+  Lock Name: write_lock
+  Total Lock Time: 666 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614437336552
+  Lock Name: spin
+  Total Lock Time: 675 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615172794344
+  Lock Name: spin
+  Total Lock Time: 682 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615283752744
+  Lock Name: spin
+  Total Lock Time: 687 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615138781096
+  Lock Name: spin
+  Total Lock Time: 687 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685816104
+  Lock Name: spin
+  Total Lock Time: 687 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032370996968
+  Lock Name: spin
+  Total Lock Time: 690 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615207836840
+  Lock Name: spin
+  Total Lock Time: 695 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659425840
+  Lock Name: write_lock
+  Total Lock Time: 701 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027150093740
+  Lock Name: spin
+  Total Lock Time: 704 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719814896
+  Lock Name: write_lock
+  Total Lock Time: 710 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615159014312
+  Lock Name: spin
+  Total Lock Time: 716 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880247848
+  Lock Name: spin
+  Total Lock Time: 716 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615448277160
+  Lock Name: spin
+  Total Lock Time: 717 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614808147624
+  Lock Name: spin
+  Total Lock Time: 719 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615272652520
+  Lock Name: spin
+  Total Lock Time: 720 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614457413608
+  Lock Name: spin
+  Total Lock Time: 721 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615302797032
+  Lock Name: spin
+  Total Lock Time: 724 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614646236840
+  Lock Name: spin
+  Total Lock Time: 732 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614936672040
+  Lock Name: spin
+  Total Lock Time: 738 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614888336680
+  Lock Name: spin
+  Total Lock Time: 738 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615305959784
+  Lock Name: spin
+  Total Lock Time: 740 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721995333627596
+  Lock Name: spin
+  Total Lock Time: 740 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880249304
+  Lock Name: spin
+  Total Lock Time: 740 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614624676520
+  Lock Name: spin
+  Total Lock Time: 756 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615272632424
+  Lock Name: spin
+  Total Lock Time: 756 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614643302120
+  Lock Name: spin
+  Total Lock Time: 760 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614706527656
+  Lock Name: spin
+  Total Lock Time: 768 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614813749928
+  Lock Name: spin
+  Total Lock Time: 768 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941008368
+  Lock Name: write_lock
+  Total Lock Time: 774 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614983517352
+  Lock Name: spin
+  Total Lock Time: 775 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027651631352
+  Lock Name: spin
+  Total Lock Time: 777 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614876981864
+  Lock Name: spin
+  Total Lock Time: 789 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614937506664
+  Lock Name: spin
+  Total Lock Time: 795 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615291775720
+  Lock Name: spin
+  Total Lock Time: 796 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719836848
+  Lock Name: spin
+  Total Lock Time: 798 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615286617064
+  Lock Name: spin
+  Total Lock Time: 800 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059741804
+  Lock Name: spin
+  Total Lock Time: 800 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861032144
+  Lock Name: write_lock
+  Total Lock Time: 801 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614936353704
+  Lock Name: spin
+  Total Lock Time: 812 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614849334248
+  Lock Name: spin
+  Total Lock Time: 814 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027235005040
+  Lock Name: write_lock
+  Total Lock Time: 814 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614984104616
+  Lock Name: spin
+  Total Lock Time: 819 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614657640680
+  Lock Name: spin
+  Total Lock Time: 819 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615087005224
+  Lock Name: spin
+  Total Lock Time: 819 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614764620072
+  Lock Name: spin
+  Total Lock Time: 820 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880246840
+  Lock Name: spin
+  Total Lock Time: 822 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615035493864
+  Lock Name: spin
+  Total Lock Time: 823 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614945826152
+  Lock Name: spin
+  Total Lock Time: 823 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719835048
+  Lock Name: write_lock
+  Total Lock Time: 829 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614629974056
+  Lock Name: spin
+  Total Lock Time: 830 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726061584
+  Lock Name: spin
+  Total Lock Time: 831 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614481846056
+  Lock Name: spin
+  Total Lock Time: 834 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614936277800
+  Lock Name: spin
+  Total Lock Time: 841 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614702683688
+  Lock Name: spin
+  Total Lock Time: 843 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614497844264
+  Lock Name: spin
+  Total Lock Time: 844 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993933688128
+  Lock Name: spin
+  Total Lock Time: 852 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763047728
+  Lock Name: write_lock
+  Total Lock Time: 867 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614647661352
+  Lock Name: spin
+  Total Lock Time: 868 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040751581608
+  Lock Name: write_lock
+  Total Lock Time: 870 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614885534568
+  Lock Name: spin
+  Total Lock Time: 872 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368473328
+  Lock Name: spin
+  Total Lock Time: 877 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614439935400
+  Lock Name: spin
+  Total Lock Time: 878 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880250424
+  Lock Name: spin
+  Total Lock Time: 879 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614580678568
+  Lock Name: spin
+  Total Lock Time: 883 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615241500648
+  Lock Name: spin
+  Total Lock Time: 887 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614947240424
+  Lock Name: spin
+  Total Lock Time: 889 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614837176552
+  Lock Name: spin
+  Total Lock Time: 894 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880248744
+  Lock Name: spin
+  Total Lock Time: 898 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614573549864
+  Lock Name: spin
+  Total Lock Time: 899 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880247288
+  Lock Name: spin
+  Total Lock Time: 899 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614705262312
+  Lock Name: spin
+  Total Lock Time: 902 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726062152
+  Lock Name: write_lock
+  Total Lock Time: 903 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614620951208
+  Lock Name: spin
+  Total Lock Time: 909 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615272632360
+  Lock Name: spin
+  Total Lock Time: 913 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685815600
+  Lock Name: spin
+  Total Lock Time: 913 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614639987752
+  Lock Name: spin
+  Total Lock Time: 914 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614937510888
+  Lock Name: spin
+  Total Lock Time: 916 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614979298728
+  Lock Name: spin
+  Total Lock Time: 917 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614487370344
+  Lock Name: spin
+  Total Lock Time: 917 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614539127912
+  Lock Name: spin
+  Total Lock Time: 922 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685820840
+  Lock Name: spin
+  Total Lock Time: 924 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614948073064
+  Lock Name: spin
+  Total Lock Time: 928 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615305957480
+  Lock Name: spin
+  Total Lock Time: 929 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614481853544
+  Lock Name: spin
+  Total Lock Time: 937 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614551358696
+  Lock Name: spin
+  Total Lock Time: 940 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614568084840
+  Lock Name: spin
+  Total Lock Time: 943 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614544873000
+  Lock Name: spin
+  Total Lock Time: 947 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614859368424
+  Lock Name: spin
+  Total Lock Time: 947 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615240122344
+  Lock Name: spin
+  Total Lock Time: 949 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615057392168
+  Lock Name: spin
+  Total Lock Time: 963 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614772565288
+  Lock Name: spin
+  Total Lock Time: 970 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615252596200
+  Lock Name: spin
+  Total Lock Time: 971 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614882705896
+  Lock Name: spin
+  Total Lock Time: 972 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614642574248
+  Lock Name: spin
+  Total Lock Time: 976 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615316207016
+  Lock Name: spin
+  Total Lock Time: 980 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614943609512
+  Lock Name: spin
+  Total Lock Time: 980 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614544879976
+  Lock Name: spin
+  Total Lock Time: 990 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614813749992
+  Lock Name: spin
+  Total Lock Time: 991 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614882721640
+  Lock Name: spin
+  Total Lock Time: 991 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614976423208
+  Lock Name: spin
+  Total Lock Time: 995 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029691137688
+  Lock Name: spin
+  Total Lock Time: 997 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615175344168
+  Lock Name: spin
+  Total Lock Time: 1000 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941009512
+  Lock Name: spin
+  Total Lock Time: 1000 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614754821416
+  Lock Name: spin
+  Total Lock Time: 1002 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615233193832
+  Lock Name: spin
+  Total Lock Time: 1003 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614971207016
+  Lock Name: spin
+  Total Lock Time: 1005 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614668899624
+  Lock Name: spin
+  Total Lock Time: 1012 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941009008
+  Lock Name: spin
+  Total Lock Time: 1015 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614435527144
+  Lock Name: spin
+  Total Lock Time: 1016 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614972609192
+  Lock Name: spin
+  Total Lock Time: 1021 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615304603944
+  Lock Name: spin
+  Total Lock Time: 1028 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719834984
+  Lock Name: spin
+  Total Lock Time: 1029 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006113651984
+  Lock Name: write_lock
+  Total Lock Time: 1029 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614481860840
+  Lock Name: spin
+  Total Lock Time: 1031 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615042835816
+  Lock Name: spin
+  Total Lock Time: 1040 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615344253096
+  Lock Name: spin
+  Total Lock Time: 1042 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032371000560
+  Lock Name: write_lock
+  Total Lock Time: 1051 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614837960168
+  Lock Name: spin
+  Total Lock Time: 1054 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880247064
+  Lock Name: spin
+  Total Lock Time: 1063 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614800357224
+  Lock Name: spin
+  Total Lock Time: 1066 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687015560
+  Lock Name: write_lock
+  Total Lock Time: 1067 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059736368
+  Lock Name: spin
+  Total Lock Time: 1069 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614945080872
+  Lock Name: spin
+  Total Lock Time: 1071 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763051920
+  Lock Name: spin
+  Total Lock Time: 1071 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614888336744
+  Lock Name: spin
+  Total Lock Time: 1081 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614957649128
+  Lock Name: spin
+  Total Lock Time: 1085 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614457795368
+  Lock Name: spin
+  Total Lock Time: 1087 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013778022660
+  Lock Name: spin
+  Total Lock Time: 1094 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614959779304
+  Lock Name: spin
+  Total Lock Time: 1095 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614562712552
+  Lock Name: spin
+  Total Lock Time: 1097 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614580678632
+  Lock Name: spin
+  Total Lock Time: 1100 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615302798312
+  Lock Name: spin
+  Total Lock Time: 1102 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614483676008
+  Lock Name: spin
+  Total Lock Time: 1103 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027234984936
+  Lock Name: write_lock
+  Total Lock Time: 1103 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614545066024
+  Lock Name: spin
+  Total Lock Time: 1105 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615172805992
+  Lock Name: spin
+  Total Lock Time: 1105 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615360156840
+  Lock Name: spin
+  Total Lock Time: 1113 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615326775208
+  Lock Name: spin
+  Total Lock Time: 1115 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614545972264
+  Lock Name: spin
+  Total Lock Time: 1116 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027235004496
+  Lock Name: spin
+  Total Lock Time: 1116 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614936210152
+  Lock Name: spin
+  Total Lock Time: 1118 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615155463592
+  Lock Name: spin
+  Total Lock Time: 1124 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614586912808
+  Lock Name: spin
+  Total Lock Time: 1143 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797375568
+  Lock Name: write_lock
+  Total Lock Time: 1144 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659425864
+  Lock Name: write_lock
+  Total Lock Time: 1145 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368463176
+  Lock Name: spin
+  Total Lock Time: 1169 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941007824
+  Lock Name: spin
+  Total Lock Time: 1172 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614600800552
+  Lock Name: spin
+  Total Lock Time: 1175 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027235005000
+  Lock Name: spin
+  Total Lock Time: 1179 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719837416
+  Lock Name: write_lock
+  Total Lock Time: 1199 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110850536
+  Lock Name: write_lock
+  Total Lock Time: 1204 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032370997032
+  Lock Name: write_lock
+  Total Lock Time: 1208 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614944923304
+  Lock Name: spin
+  Total Lock Time: 1213 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110849968
+  Lock Name: spin
+  Total Lock Time: 1215 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615216328872
+  Lock Name: spin
+  Total Lock Time: 1255 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013778267588
+  Lock Name: spin
+  Total Lock Time: 1255 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614481692200
+  Lock Name: spin
+  Total Lock Time: 1258 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880250312
+  Lock Name: spin
+  Total Lock Time: 1258 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615117112232
+  Lock Name: spin
+  Total Lock Time: 1264 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614627174248
+  Lock Name: spin
+  Total Lock Time: 1266 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013777984452
+  Lock Name: spin
+  Total Lock Time: 1268 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614784621544
+  Lock Name: spin
+  Total Lock Time: 1274 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614715369320
+  Lock Name: spin
+  Total Lock Time: 1274 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614672837736
+  Lock Name: spin
+  Total Lock Time: 1275 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615302782696
+  Lock Name: spin
+  Total Lock Time: 1277 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614772565224
+  Lock Name: spin
+  Total Lock Time: 1277 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685816168
+  Lock Name: write_lock
+  Total Lock Time: 1279 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719834480
+  Lock Name: spin
+  Total Lock Time: 1283 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797388592
+  Lock Name: write_lock
+  Total Lock Time: 1284 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027235005064
+  Lock Name: write_lock
+  Total Lock Time: 1322 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614575089128
+  Lock Name: spin
+  Total Lock Time: 1328 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614582873512
+  Lock Name: spin
+  Total Lock Time: 1330 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615124438312
+  Lock Name: spin
+  Total Lock Time: 1332 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059736872
+  Lock Name: spin
+  Total Lock Time: 1338 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687016176
+  Lock Name: spin
+  Total Lock Time: 1343 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915834544
+  Lock Name: spin
+  Total Lock Time: 1347 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110850472
+  Lock Name: spin
+  Total Lock Time: 1353 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614963418664
+  Lock Name: spin
+  Total Lock Time: 1358 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615240121192
+  Lock Name: spin
+  Total Lock Time: 1367 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659440688
+  Lock Name: spin
+  Total Lock Time: 1369 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614811884584
+  Lock Name: spin
+  Total Lock Time: 1370 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013778043396
+  Lock Name: spin
+  Total Lock Time: 1376 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614438456424
+  Lock Name: spin
+  Total Lock Time: 1380 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614434377192
+  Lock Name: spin
+  Total Lock Time: 1399 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040751581544
+  Lock Name: spin
+  Total Lock Time: 1403 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013777958596
+  Lock Name: spin
+  Total Lock Time: 1409 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915835048
+  Lock Name: spin
+  Total Lock Time: 1415 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614942992168
+  Lock Name: spin
+  Total Lock Time: 1421 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614544851944
+  Lock Name: spin
+  Total Lock Time: 1424 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763052488
+  Lock Name: write_lock
+  Total Lock Time: 1427 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915822704
+  Lock Name: spin
+  Total Lock Time: 1431 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993601125848
+  Lock Name: write_lock
+  Total Lock Time: 1434 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013778389444
+  Lock Name: spin
+  Total Lock Time: 1435 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614652201896
+  Lock Name: spin
+  Total Lock Time: 1441 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614481868328
+  Lock Name: spin
+  Total Lock Time: 1447 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614893469352
+  Lock Name: spin
+  Total Lock Time: 1458 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993587500928
+  Lock Name: spin
+  Total Lock Time: 1465 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614554062312
+  Lock Name: spin
+  Total Lock Time: 1467 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615309171560
+  Lock Name: spin
+  Total Lock Time: 1475 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614580660648
+  Lock Name: spin
+  Total Lock Time: 1482 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687016744
+  Lock Name: write_lock
+  Total Lock Time: 1503 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032371000520
+  Lock Name: spin
+  Total Lock Time: 1504 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880247736
+  Lock Name: spin
+  Total Lock Time: 1509 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685820336
+  Lock Name: spin
+  Total Lock Time: 1514 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368473896
+  Lock Name: write_lock
+  Total Lock Time: 1537 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615216786408
+  Lock Name: spin
+  Total Lock Time: 1542 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614433258856
+  Lock Name: spin
+  Total Lock Time: 1570 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614544873256
+  Lock Name: spin
+  Total Lock Time: 1573 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797388048
+  Lock Name: spin
+  Total Lock Time: 1575 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013777775556
+  Lock Name: spin
+  Total Lock Time: 1599 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615035491944
+  Lock Name: spin
+  Total Lock Time: 1607 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685816300
+  Lock Name: spin
+  Total Lock Time: 1614 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687015692
+  Lock Name: spin
+  Total Lock Time: 1617 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614614567272
+  Lock Name: spin
+  Total Lock Time: 1634 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013778132676
+  Lock Name: spin
+  Total Lock Time: 1636 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915835112
+  Lock Name: write_lock
+  Total Lock Time: 1646 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013778575364
+  Lock Name: spin
+  Total Lock Time: 1649 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719835180
+  Lock Name: spin
+  Total Lock Time: 1653 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614677486312
+  Lock Name: spin
+  Total Lock Time: 1656 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941009576
+  Lock Name: write_lock
+  Total Lock Time: 1656 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614873513320
+  Lock Name: spin
+  Total Lock Time: 1661 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763047752
+  Lock Name: write_lock
+  Total Lock Time: 1671 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687035120
+  Lock Name: spin
+  Total Lock Time: 1683 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685820904
+  Lock Name: write_lock
+  Total Lock Time: 1687 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032371000016
+  Lock Name: spin
+  Total Lock Time: 1694 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614628397992
+  Lock Name: spin
+  Total Lock Time: 1697 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763052424
+  Lock Name: spin
+  Total Lock Time: 1698 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614937507112
+  Lock Name: spin
+  Total Lock Time: 1705 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614849454632
+  Lock Name: spin
+  Total Lock Time: 1708 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614481844072
+  Lock Name: spin
+  Total Lock Time: 1711 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006113651440
+  Lock Name: spin
+  Total Lock Time: 1719 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614438276200
+  Lock Name: spin
+  Total Lock Time: 1735 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614441011880
+  Lock Name: spin
+  Total Lock Time: 1747 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029454754224
+  Lock Name: spin
+  Total Lock Time: 1754 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040751581040
+  Lock Name: spin
+  Total Lock Time: 1758 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721995333627400
+  Lock Name: spin
+  Total Lock Time: 1762 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614944359016
+  Lock Name: spin
+  Total Lock Time: 1772 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615172871336
+  Lock Name: spin
+  Total Lock Time: 1781 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614473254632
+  Lock Name: spin
+  Total Lock Time: 1782 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614438649960
+  Lock Name: spin
+  Total Lock Time: 1792 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614436806440
+  Lock Name: spin
+  Total Lock Time: 1809 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659441256
+  Lock Name: write_lock
+  Total Lock Time: 1810 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614436285416
+  Lock Name: spin
+  Total Lock Time: 1813 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941009708
+  Lock Name: spin
+  Total Lock Time: 1817 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726062284
+  Lock Name: spin
+  Total Lock Time: 1827 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614480330088
+  Lock Name: spin
+  Total Lock Time: 1835 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615278206568
+  Lock Name: spin
+  Total Lock Time: 1841 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614436115688
+  Lock Name: spin
+  Total Lock Time: 1854 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614784614760
+  Lock Name: spin
+  Total Lock Time: 1863 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032370997164
+  Lock Name: spin
+  Total Lock Time: 1873 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032371000584
+  Lock Name: write_lock
+  Total Lock Time: 1893 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614873494888
+  Lock Name: spin
+  Total Lock Time: 1896 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721995333627464
+  Lock Name: write_lock
+  Total Lock Time: 1899 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029685821036
+  Lock Name: spin
+  Total Lock Time: 1900 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029691134040
+  Lock Name: spin
+  Total Lock Time: 1906 ns
+  Lock Count: 8
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110832712
+  Lock Name: spin
+  Total Lock Time: 1907 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614468625256
+  Lock Name: spin
+  Total Lock Time: 1937 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615435517032
+  Lock Name: spin
+  Total Lock Time: 1951 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614437970152
+  Lock Name: spin
+  Total Lock Time: 1956 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614580056360
+  Lock Name: spin
+  Total Lock Time: 1979 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615336450280
+  Lock Name: spin
+  Total Lock Time: 1981 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614801236584
+  Lock Name: spin
+  Total Lock Time: 1991 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615248274984
+  Lock Name: spin
+  Total Lock Time: 2028 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614961557416
+  Lock Name: spin
+  Total Lock Time: 2029 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719837548
+  Lock Name: spin
+  Total Lock Time: 2030 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614962468200
+  Lock Name: spin
+  Total Lock Time: 2042 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797375528
+  Lock Name: spin
+  Total Lock Time: 2043 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993814065096
+  Lock Name: spin
+  Total Lock Time: 2046 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615256561512
+  Lock Name: spin
+  Total Lock Time: 2057 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029454754728
+  Lock Name: spin
+  Total Lock Time: 2063 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368462672
+  Lock Name: spin
+  Total Lock Time: 2065 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614433219112
+  Lock Name: spin
+  Total Lock Time: 2071 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368463372
+  Lock Name: spin
+  Total Lock Time: 2101 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368463240
+  Lock Name: write_lock
+  Total Lock Time: 2114 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797388748
+  Lock Name: spin
+  Total Lock Time: 2120 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614942765480
+  Lock Name: spin
+  Total Lock Time: 2129 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614623606120
+  Lock Name: spin
+  Total Lock Time: 2156 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797375592
+  Lock Name: write_lock
+  Total Lock Time: 2158 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614645347560
+  Lock Name: spin
+  Total Lock Time: 2165 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614876972328
+  Lock Name: spin
+  Total Lock Time: 2178 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615218196008
+  Lock Name: spin
+  Total Lock Time: 2197 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614755250792
+  Lock Name: spin
+  Total Lock Time: 2214 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915835244
+  Lock Name: spin
+  Total Lock Time: 2227 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614860164840
+  Lock Name: spin
+  Total Lock Time: 2238 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614937945384
+  Lock Name: spin
+  Total Lock Time: 2265 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029454754792
+  Lock Name: write_lock
+  Total Lock Time: 2301 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013778264388
+  Lock Name: spin
+  Total Lock Time: 2303 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615141542440
+  Lock Name: spin
+  Total Lock Time: 2322 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006113651944
+  Lock Name: spin
+  Total Lock Time: 2333 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614826489256
+  Lock Name: spin
+  Total Lock Time: 2359 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915823208
+  Lock Name: spin
+  Total Lock Time: 2371 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614944365160
+  Lock Name: spin
+  Total Lock Time: 2396 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614435501096
+  Lock Name: spin
+  Total Lock Time: 2408 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687016680
+  Lock Name: spin
+  Total Lock Time: 2452 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941008328
+  Lock Name: spin
+  Total Lock Time: 2471 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797388552
+  Lock Name: spin
+  Total Lock Time: 2528 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110832208
+  Lock Name: spin
+  Total Lock Time: 2539 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615190540008
+  Lock Name: spin
+  Total Lock Time: 2614 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797388616
+  Lock Name: write_lock
+  Total Lock Time: 2731 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110832776
+  Lock Name: write_lock
+  Total Lock Time: 2760 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614481850344
+  Lock Name: spin
+  Total Lock Time: 2796 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915823272
+  Lock Name: write_lock
+  Total Lock Time: 2818 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687300816
+  Lock Name: spin
+  Total Lock Time: 2828 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032880250536
+  Lock Name: spin
+  Total Lock Time: 2833 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614944381800
+  Lock Name: spin
+  Total Lock Time: 2855 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687035624
+  Lock Name: spin
+  Total Lock Time: 2874 ns
+  Lock Count: 7
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687301320
+  Lock Name: spin
+  Total Lock Time: 2885 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013777804996
+  Lock Name: spin
+  Total Lock Time: 2888 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615060936296
+  Lock Name: spin
+  Total Lock Time: 2893 ns
+  Lock Count: 5
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861032104
+  Lock Name: spin
+  Total Lock Time: 2941 ns
+  Lock Count: 8
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687035688
+  Lock Name: write_lock
+  Total Lock Time: 3046 ns
+  Lock Count: 16
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797375024
+  Lock Name: spin
+  Total Lock Time: 3092 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721995333626896
+  Lock Name: spin
+  Total Lock Time: 3161 ns
+  Lock Count: 5
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993711010360
+  Lock Name: mutex
+  Total Lock Time: 3225 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006113652008
+  Lock Name: write_lock
+  Total Lock Time: 3226 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614813745512
+  Lock Name: spin
+  Total Lock Time: 3229 ns
+  Lock Count: 5
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059741648
+  Lock Name: write_lock
+  Total Lock Time: 3253 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763052620
+  Lock Name: spin
+  Total Lock Time: 3256 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861041640
+  Lock Name: write_lock
+  Total Lock Time: 3260 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614891239720
+  Lock Name: spin
+  Total Lock Time: 3313 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027235005196
+  Lock Name: spin
+  Total Lock Time: 3380 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013777951492
+  Lock Name: spin
+  Total Lock Time: 3419 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993797375724
+  Lock Name: spin
+  Total Lock Time: 3443 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614963673832
+  Lock Name: spin
+  Total Lock Time: 3450 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110832908
+  Lock Name: spin
+  Total Lock Time: 3561 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029454754924
+  Lock Name: spin
+  Total Lock Time: 3607 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615316207080
+  Lock Name: spin
+  Total Lock Time: 3624 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368474028
+  Lock Name: spin
+  Total Lock Time: 3641 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179648
+  Lock Name: spin
+  Total Lock Time: 3684 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040751581740
+  Lock Name: spin
+  Total Lock Time: 3695 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026344430848
+  Lock Name: spin
+  Total Lock Time: 3696 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006110850668
+  Lock Name: spin
+  Total Lock Time: 3698 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722001915823404
+  Lock Name: spin
+  Total Lock Time: 3705 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687035524
+  Lock Name: spin
+  Total Lock Time: 3713 ns
+  Lock Count: 28
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727703648
+  Lock Name: spin
+  Total Lock Time: 3727 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180848
+  Lock Name: spin
+  Total Lock Time: 3728 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225017800
+  Lock Name: spin
+  Total Lock Time: 3739 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615207046120
+  Lock Name: spin
+  Total Lock Time: 3775 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727704248
+  Lock Name: spin
+  Total Lock Time: 3783 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614435284008
+  Lock Name: spin
+  Total Lock Time: 3785 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180728
+  Lock Name: spin
+  Total Lock Time: 3788 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225019840
+  Lock Name: spin
+  Total Lock Time: 3795 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727706048
+  Lock Name: spin
+  Total Lock Time: 3797 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180968
+  Lock Name: spin
+  Total Lock Time: 3798 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179528
+  Lock Name: spin
+  Total Lock Time: 3800 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861041576
+  Lock Name: spin
+  Total Lock Time: 3811 ns
+  Lock Count: 11
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225020800
+  Lock Name: spin
+  Total Lock Time: 3817 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179168
+  Lock Name: spin
+  Total Lock Time: 3828 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181208
+  Lock Name: spin
+  Total Lock Time: 3830 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181568
+  Lock Name: spin
+  Total Lock Time: 3832 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180368
+  Lock Name: spin
+  Total Lock Time: 3835 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225020080
+  Lock Name: spin
+  Total Lock Time: 3849 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727707008
+  Lock Name: spin
+  Total Lock Time: 3850 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778182408
+  Lock Name: spin
+  Total Lock Time: 3861 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180608
+  Lock Name: spin
+  Total Lock Time: 3867 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180008
+  Lock Name: spin
+  Total Lock Time: 3869 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727703048
+  Lock Name: spin
+  Total Lock Time: 3890 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778178928
+  Lock Name: spin
+  Total Lock Time: 3899 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225019000
+  Lock Name: spin
+  Total Lock Time: 3901 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059741104
+  Lock Name: spin
+  Total Lock Time: 3906 ns
+  Lock Count: 9
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225018280
+  Lock Name: spin
+  Total Lock Time: 3908 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727703528
+  Lock Name: spin
+  Total Lock Time: 3912 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179288
+  Lock Name: spin
+  Total Lock Time: 3922 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179048
+  Lock Name: spin
+  Total Lock Time: 3928 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225016960
+  Lock Name: spin
+  Total Lock Time: 3933 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722014714157296
+  Lock Name: spin
+  Total Lock Time: 3937 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032371000716
+  Lock Name: spin
+  Total Lock Time: 3954 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727705088
+  Lock Name: spin
+  Total Lock Time: 3957 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181928
+  Lock Name: spin
+  Total Lock Time: 3960 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659441388
+  Lock Name: spin
+  Total Lock Time: 3969 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778178688
+  Lock Name: spin
+  Total Lock Time: 3972 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687016876
+  Lock Name: spin
+  Total Lock Time: 4002 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225019360
+  Lock Name: spin
+  Total Lock Time: 4006 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727704608
+  Lock Name: spin
+  Total Lock Time: 4008 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180128
+  Lock Name: spin
+  Total Lock Time: 4026 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727704848
+  Lock Name: spin
+  Total Lock Time: 4026 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225019960
+  Lock Name: spin
+  Total Lock Time: 4077 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941008392
+  Lock Name: write_lock
+  Total Lock Time: 4090 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722006113652140
+  Lock Name: spin
+  Total Lock Time: 4114 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778178568
+  Lock Name: spin
+  Total Lock Time: 4142 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861032168
+  Lock Name: write_lock
+  Total Lock Time: 4155 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18446744072151406144
+  Lock Name: spin
+  Total Lock Time: 4166 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180248
+  Lock Name: spin
+  Total Lock Time: 4170 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722038634846680
+  Lock Name: spin
+  Total Lock Time: 4235 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181808
+  Lock Name: spin
+  Total Lock Time: 4239 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722071150130000
+  Lock Name: spin
+  Total Lock Time: 4240 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778180488
+  Lock Name: spin
+  Total Lock Time: 4316 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722059525712096
+  Lock Name: spin
+  Total Lock Time: 4353 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181688
+  Lock Name: spin
+  Total Lock Time: 4390 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059741672
+  Lock Name: write_lock
+  Total Lock Time: 4471 ns
+  Lock Count: 10
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727705328
+  Lock Name: spin
+  Total Lock Time: 4495 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778182048
+  Lock Name: spin
+  Total Lock Time: 4510 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029687301384
+  Lock Name: read_lock
+  Total Lock Time: 4638 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181088
+  Lock Name: spin
+  Total Lock Time: 4821 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615336649768
+  Lock Name: spin
+  Total Lock Time: 4840 ns
+  Lock Count: 9
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993711010504
+  Lock Name: spin
+  Total Lock Time: 4970 ns
+  Lock Count: 34
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028059741608
+  Lock Name: spin
+  Total Lock Time: 4973 ns
+  Lock Count: 13
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356614944382056
+  Lock Name: spin
+  Total Lock Time: 5101 ns
+  Lock Count: 12
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993941008524
+  Lock Name: spin
+  Total Lock Time: 5183 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861031600
+  Lock Name: spin
+  Total Lock Time: 5245 ns
+  Lock Count: 11
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722032368473832
+  Lock Name: spin
+  Total Lock Time: 5660 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722059525728832
+  Lock Name: spin
+  Total Lock Time: 5714 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026399811672
+  Lock Name: spin
+  Total Lock Time: 5812 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722013374835224
+  Lock Name: spin
+  Total Lock Time: 5876 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778178808
+  Lock Name: spin
+  Total Lock Time: 6073 ns
+  Lock Count: 2
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18446744072151406084
+  Lock Name: spin
+  Total Lock Time: 6764 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179408
+  Lock Name: spin
+  Total Lock Time: 7352 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179888
+  Lock Name: spin
+  Total Lock Time: 7372 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028236234880
+  Lock Name: spin
+  Total Lock Time: 7426 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727706648
+  Lock Name: spin
+  Total Lock Time: 7463 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225017080
+  Lock Name: spin
+  Total Lock Time: 7513 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026224139080
+  Lock Name: spin
+  Total Lock Time: 7574 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778182528
+  Lock Name: spin
+  Total Lock Time: 7676 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727704968
+  Lock Name: spin
+  Total Lock Time: 7693 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727703168
+  Lock Name: spin
+  Total Lock Time: 7756 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18421356615311472552
+  Lock Name: spin
+  Total Lock Time: 7860 ns
+  Lock Count: 5
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037727704728
+  Lock Name: spin
+  Total Lock Time: 7897 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722071150129760
+  Lock Name: spin
+  Total Lock Time: 7936 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225019120
+  Lock Name: spin
+  Total Lock Time: 8152 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721997344943576
+  Lock Name: spin
+  Total Lock Time: 8161 ns
+  Lock Count: 5
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659441192
+  Lock Name: spin
+  Total Lock Time: 9150 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778182288
+  Lock Name: spin
+  Total Lock Time: 9287 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993711010016
+  Lock Name: spin
+  Total Lock Time: 9665 ns
+  Lock Count: 49
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993711011168
+  Lock Name: spin
+  Total Lock Time: 9671 ns
+  Lock Count: 42
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028943997168
+  Lock Name: spin
+  Total Lock Time: 9694 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778182168
+  Lock Name: spin
+  Total Lock Time: 10047 ns
+  Lock Count: 4
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722071150129280
+  Lock Name: spin
+  Total Lock Time: 10933 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225019600
+  Lock Name: spin
+  Total Lock Time: 11260 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778179768
+  Lock Name: spin
+  Total Lock Time: 11330 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181328
+  Lock Name: spin
+  Total Lock Time: 11346 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722037033155760
+  Lock Name: spin
+  Total Lock Time: 11695 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225018160
+  Lock Name: spin
+  Total Lock Time: 11907 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722040778181448
+  Lock Name: spin
+  Total Lock Time: 14591 ns
+  Lock Count: 6
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028236237280
+  Lock Name: spin
+  Total Lock Time: 15353 ns
+  Lock Count: 8
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225020320
+  Lock Name: spin
+  Total Lock Time: 15466 ns
+  Lock Count: 8
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383856013777907972
+  Lock Name: spin
+  Total Lock Time: 16273 ns
+  Lock Count: 7
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026399811760
+  Lock Name: spin
+  Total Lock Time: 16466 ns
+  Lock Count: 81
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993498564608
+  Lock Name: spin
+  Total Lock Time: 16466 ns
+  Lock Count: 11
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225017440
+  Lock Name: spin
+  Total Lock Time: 18583 ns
+  Lock Count: 8
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993505519320
+  Lock Name: spin
+  Total Lock Time: 20953 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993711010136
+  Lock Name: spin
+  Total Lock Time: 22189 ns
+  Lock Count: 88
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225017200
+  Lock Name: spin
+  Total Lock Time: 25507 ns
+  Lock Count: 14
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722059525729648
+  Lock Name: spin
+  Total Lock Time: 27003 ns
+  Lock Count: 10
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993983888404
+  Lock Name: spin
+  Total Lock Time: 27017 ns
+  Lock Count: 75
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028943996328
+  Lock Name: spin
+  Total Lock Time: 28201 ns
+  Lock Count: 16
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18397929762485473104
+  Lock Name: mutex
+  Total Lock Time: 35926 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026225020560
+  Lock Name: spin
+  Total Lock Time: 39951 ns
+  Lock Count: 22
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029555540336
+  Lock Name: spin
+  Total Lock Time: 47240 ns
+  Lock Count: 26
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722028943996208
+  Lock Name: spin
+  Total Lock Time: 50084 ns
+  Lock Count: 28
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722029540436696
+  Lock Name: spin
+  Total Lock Time: 53348 ns
+  Lock Count: 169
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993933713480
+  Lock Name: write_lock
+  Total Lock Time: 54297 ns
+  Lock Count: 68
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719814920
+  Lock Name: write_lock
+  Total Lock Time: 54471 ns
+  Lock Count: 308
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993933714512
+  Lock Name: spin
+  Total Lock Time: 57141 ns
+  Lock Count: 327
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026204728984
+  Lock Name: spin
+  Total Lock Time: 65264 ns
+  Lock Count: 195
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721994496652440
+  Lock Name: spin
+  Total Lock Time: 65325 ns
+  Lock Count: 195
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027234984772
+  Lock Name: spin
+  Total Lock Time: 67205 ns
+  Lock Count: 532
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025870092576
+  Lock Name: mutex
+  Total Lock Time: 68010 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763047184
+  Lock Name: spin
+  Total Lock Time: 72043 ns
+  Lock Count: 644
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719814352
+  Lock Name: spin
+  Total Lock Time: 75074 ns
+  Lock Count: 641
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027234985068
+  Lock Name: spin
+  Total Lock Time: 79393 ns
+  Lock Count: 534
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763047588
+  Lock Name: spin
+  Total Lock Time: 81298 ns
+  Lock Count: 641
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719814756
+  Lock Name: spin
+  Total Lock Time: 82711 ns
+  Lock Count: 638
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027234984368
+  Lock Name: spin
+  Total Lock Time: 88548 ns
+  Lock Count: 535
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722013374835800
+  Lock Name: spin
+  Total Lock Time: 92572 ns
+  Lock Count: 263
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763047884
+  Lock Name: spin
+  Total Lock Time: 98055 ns
+  Lock Count: 643
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719815052
+  Lock Name: spin
+  Total Lock Time: 98561 ns
+  Lock Count: 640
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726056068
+  Lock Name: spin
+  Total Lock Time: 113607 ns
+  Lock Count: 908
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026399811720
+  Lock Name: spin
+  Total Lock Time: 119014 ns
+  Lock Count: 999
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721996154415256
+  Lock Name: spin
+  Total Lock Time: 121256 ns
+  Lock Count: 301
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659425296
+  Lock Name: spin
+  Total Lock Time: 122894 ns
+  Lock Count: 1086
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722026399811680
+  Lock Name: spin
+  Total Lock Time: 129198 ns
+  Lock Count: 1080
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659425700
+  Lock Name: spin
+  Total Lock Time: 135284 ns
+  Lock Count: 1083
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726056364
+  Lock Name: spin
+  Total Lock Time: 141074 ns
+  Lock Count: 910
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726056232
+  Lock Name: write_lock
+  Total Lock Time: 155328 ns
+  Lock Count: 910
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659425996
+  Lock Name: spin
+  Total Lock Time: 161632 ns
+  Lock Count: 1085
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726055664
+  Lock Name: spin
+  Total Lock Time: 165948 ns
+  Lock Count: 911
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025711182500
+  Lock Name: spin
+  Total Lock Time: 171893 ns
+  Lock Count: 1102
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722027234984872
+  Lock Name: spin
+  Total Lock Time: 178748 ns
+  Lock Count: 553
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993719814856
+  Lock Name: spin
+  Total Lock Time: 222249 ns
+  Lock Count: 662
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993763047688
+  Lock Name: spin
+  Total Lock Time: 224384 ns
+  Lock Count: 666
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721989789203468
+  Lock Name: spin
+  Total Lock Time: 274925 ns
+  Lock Count: 1139
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993726056168
+  Lock Name: spin
+  Total Lock Time: 321513 ns
+  Lock Count: 939
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993970789704
+  Lock Name: spin
+  Total Lock Time: 327796 ns
+  Lock Count: 1713
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383721993659425800
+  Lock Name: spin
+  Total Lock Time: 376858 ns
+  Lock Count: 1120
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722025861041072
+  Lock Name: spin
+  Total Lock Time: 1488679 ns
+  Lock Count: 11
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722059525656960
+  Lock Name: spin
+  Total Lock Time: 277100212 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106175}
+Lock Address: 18383722059525730496
+  Lock Name: spin
+  Total Lock Time: 60092730791 ns
+  Lock Count: 4936
+  PIDs: {106153}
+  TIDs: {106175}

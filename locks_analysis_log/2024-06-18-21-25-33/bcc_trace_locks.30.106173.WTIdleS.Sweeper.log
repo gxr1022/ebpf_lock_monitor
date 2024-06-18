@@ -1,0 +1,37 @@
+Attached kprobe to mutex_lock and kretprobe to mutex_unlock
+Attached kprobe to rt_mutex_lock and kretprobe to rt_mutex_unlock
+Attached kprobe to ww_mutex_lock and kretprobe to ww_mutex_unlock
+Attached kprobe to _raw_spin_lock and kretprobe to _raw_spin_unlock
+Attached kprobe to _raw_write_lock and kretprobe to _raw_write_unlock
+Attached kprobe to _raw_read_lock and kretprobe to _raw_read_unlock
+Tracing  locks for 30 seconds
+TIME(s)            COMM             PID    LOCKTIME
+
+ Print the lock statistics: 
+LOCK_NAME          TOTAL_LOCKTIME(s) TOTAL_LOCKCOUNT
+mutex              0.000000         0
+rt_mutex           0.000000         0
+ww_mutex           0.000000         0
+spin               30.000171        14
+write_lock         0.000000         0
+read_lock          0.000000         0
+The total time of acquiring locks is: 30.00017125 s
+Events collected during tracing:
+Lock Address: 18383856013778012036
+  Lock Name: spin
+  Total Lock Time: 1302 ns
+  Lock Count: 1
+  PIDs: {106153}
+  TIDs: {106173}
+Lock Address: 18383856013778549572
+  Lock Name: spin
+  Total Lock Time: 6433 ns
+  Lock Count: 10
+  PIDs: {106153}
+  TIDs: {106173}
+Lock Address: 18383722059529924800
+  Lock Name: spin
+  Total Lock Time: 30000163515 ns
+  Lock Count: 3
+  PIDs: {106153}
+  TIDs: {106173}
