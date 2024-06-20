@@ -146,8 +146,8 @@ parser.add_argument("-l", "--lib",  help="Library name containing symbol to trac
 parser.add_argument("-e", "--sym_entry", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
 parser.add_argument("-r", "--sym_ret",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_unlock")
 
-# parser.add_argument('-ae', '--addr_entry', required=True, help='Address to trace, e.g. 00000000076aca40', type=str,default="")
-# parser.add_argument('-ar', '--addr_ret', required=True, help='Address to trace, e.g. 00000000076aca40', type=str)
+parser.add_argument('-ae', '--addr_entry',  help='Address to trace, e.g. 00000000076aca40', type=str,default="7d229b0")
+parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="7d229c0")
 args = parser.parse_args()
 
 try:
@@ -158,8 +158,8 @@ except Exception as e:
 
 events={}
 
-b.attach_uprobe(name=args.lib, addr=int("7d229b0", 16), fn_name="trace_start", pid=args.pid)
-b.attach_uretprobe(name=args.lib, addr=int("7d229c0", 16), fn_name="trace_end", pid=args.pid)
+b.attach_uprobe(name=args.lib, addr=int(args.addr_entry, 16), fn_name="trace_start", pid=args.pid)
+b.attach_uretprobe(name=args.lib, addr=int(args.addr_ret, 16), fn_name="trace_end", pid=args.pid)
 
 b["perf_output"].open_perf_buffer(print_event)
 
