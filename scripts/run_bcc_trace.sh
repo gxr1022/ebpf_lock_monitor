@@ -18,7 +18,6 @@ OUTPUT_PATH=${PREFIX_PATH}/locks_analysis_log/${current}
 
 mkdir -p $OUTPUT_PATH
 
-
 len=${#tid_array[@]}
 
 for ((i=8; i<len; i++)); do
