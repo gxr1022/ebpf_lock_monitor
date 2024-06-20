@@ -147,7 +147,7 @@ parser.add_argument("-e", "--sym_entry", help="Symbol to trace, e.g. pthread_mut
 parser.add_argument("-r", "--sym_ret",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_unlock")
 
 parser.add_argument('-ae', '--addr_entry',  help='Address to trace, e.g. 00000000076aca40', type=str,default="7d229b0")
-parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="7d229c0")
+parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="7184c80")
 args = parser.parse_args()
 
 try:
