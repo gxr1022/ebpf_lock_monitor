@@ -12,42 +12,42 @@ locks = [
          'lock_type': 'struct mutex',
          'key_type': 'key_mutex_t',
          'lock_func': 'mutex'
+     },
+     {
+         'lock_name': 'rt_mutex',
+         'title': 'RT_Mutex',
+         'lock_type': 'raw_spinlock_t',
+         'key_type': 'key_rt_mutex_t',
+         'lock_func': 'rt_mutex'
+     },
+     {
+         'lock_name': 'ww_mutex',
+         'title': 'WW_Mutex',
+         'lock_type': 'raw_spinlock_t',
+         'key_type': 'key_ww_mutex_t',
+         'lock_func': 'ww_mutex'
+     },
+     {
+         'lock_name': 'spin',
+         'title': 'Spin Lock',
+         'lock_type': 'raw_spinlock_t',
+         'key_type': 'key_spin_t',
+         'lock_func': '_raw_spin'
+     },
+     {
+         'lock_name': 'write_lock',
+         'title': 'Write Lock',
+         'lock_type': 'rwlock_t',
+         'key_type': 'key_rw_t',
+         'lock_func': '_raw_write'
+     },
+     {
+         'lock_name': 'read_lock',
+         'title': 'Read Lock',
+         'lock_type': 'rwlock_t',
+         'key_type': 'key_rw_t',
+         'lock_func': '_raw_read'
      }
-    #  {
-    #      'lock_name': 'rt_mutex',
-    #      'title': 'RT_Mutex',
-    #      'lock_type': 'raw_spinlock_t',
-    #      'key_type': 'key_rt_mutex_t',
-    #      'lock_func': 'rt_mutex'
-    #  },
-    #  {
-    #      'lock_name': 'ww_mutex',
-    #      'title': 'WW_Mutex',
-    #      'lock_type': 'raw_spinlock_t',
-    #      'key_type': 'key_ww_mutex_t',
-    #      'lock_func': 'ww_mutex'
-    #  },
-    #  {
-    #      'lock_name': 'spin',
-    #      'title': 'Spin Lock',
-    #      'lock_type': 'raw_spinlock_t',
-    #      'key_type': 'key_spin_t',
-    #      'lock_func': '_raw_spin'
-    #  },
-    #  {
-    #      'lock_name': 'write_lock',
-    #      'title': 'Write Lock',
-    #      'lock_type': 'rwlock_t',
-    #      'key_type': 'key_rw_t',
-    #      'lock_func': '_raw_write'
-    #  },
-    #  {
-    #      'lock_name': 'read_lock',
-    #      'title': 'Read Lock',
-    #      'lock_type': 'rwlock_t',
-    #      'key_type': 'key_rw_t',
-    #      'lock_func': '_raw_read'
-    #  }
 ]
 
 prog_header = """
@@ -276,7 +276,7 @@ except Exception as e:
 
 for lock in locks:
     b.attach_uprobe(event="%s_lock" % lock['lock_func'], fn_name="lock_%s" % lock['lock_name'])
-    b.attach_uprobe(event="%s_unlock" % lock['lock_func'], fn_name="release_%s" % lock['lock_name']) # unlock is better
+    b.attach_uretprobe(event="%s_unlock" % lock['lock_func'], fn_name="release_%s" % lock['lock_name']) # unlock is better
     print(f"Attached kprobe to %s_lock and kretprobe to %s_unlock" % (lock['lock_func'], lock['lock_func']))
 
 events = {}
