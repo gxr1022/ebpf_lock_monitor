@@ -27,7 +27,7 @@ BPF_HASH(lock_hash_table, u64, struct data_t, 102400);
 
 void trace_start(struct pt_regs *ctx)
 {
-    u64 func_addr = 0x7d229b0; 
+    u64 func_addr = _ADDR; 
     struct data_t data = {};
     struct data_t *data_ptr;
     data_ptr=lock_hash_table.lookup(&func_addr);
@@ -53,7 +53,7 @@ void trace_start(struct pt_regs *ctx)
 }
 
 void trace_end(struct pt_regs* ctx) {
-    u64 func_addr = 0x7d229b0; 
+    u64 func_addr = _ADDR; 
     u32 current_tid = bpf_get_current_pid_tgid();
     struct data_t *data;
     data = lock_hash_table.lookup(&func_addr);
@@ -146,15 +146,18 @@ parser.add_argument("-l", "--lib",  help="Library name containing symbol to trac
 parser.add_argument("-e", "--sym_entry", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
 parser.add_argument("-r", "--sym_ret",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_unlock")
 
-parser.add_argument('-ae', '--addr_entry',  help='Address to trace, e.g. 00000000076aca40', type=str,default="7d229b0")
-parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="7184c80")
+parser.add_argument('-ae', '--addr_entry',  help='Address to trace, e.g. 00000000076aca40', type=str,default="0x7184c80")
+parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="0x7184c80")
 args = parser.parse_args()
 
+bpf_prog = bpf_prog.replace("_ADDR", str(args.addr_ret))
 try:
     b = BPF(text=bpf_prog)
 except Exception as e:
     print(f"Failed to compile BPF program: {e}")
     exit(1)
+
+
 
 events={}
 
