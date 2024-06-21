@@ -76,7 +76,7 @@ def get_stack(stack_id):
     stack = list(b.get_table("stack_traces").walk(stack_id))
     stack_str = ""
     for addr in stack:
-        func_name = b.sym(addr, -1, show_module=True, show_offset=True) #Translate a kernel memory address into a kernel function name
+        func_name = b.sym(addr, -1, True) #Translate a memory address into a kernel function name
         stack_str += str(func_name) + "<br>"
     return stack_str
 
@@ -89,6 +89,11 @@ def print_event(cpu, data, size):
         event = b["perf_output"].event(data)
         # print("%-18.9d %-16s %-6d %-15d %-6d" % (event.func_addr, event.comm, event.tid,event.lock_accum_time, event.time_delta))
         
+        print("LOCK_ADDR: 0x{:x}".format(event.func_addr))
+        stack = b["stack_traces"].walk(event.stack_id)
+        for addr in stack:
+            print("    {}".format(b.sym(addr, -1, True)))
+
         trace = get_stack(event.stack_id)
         key = event.func_addr
         if key in events:
@@ -146,8 +151,8 @@ parser.add_argument("-l", "--lib",  help="Library name containing symbol to trac
 parser.add_argument("-e", "--sym_entry", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
 parser.add_argument("-r", "--sym_ret",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_unlock")
 
-parser.add_argument('-ae', '--addr_entry',  help='Address to trace, e.g. 00000000076aca40', type=str,default="0x7184c80")
-parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="0x7184c80")
+parser.add_argument('-ae', '--addr_entry',  help='Address to trace, e.g. 00000000076aca40', type=str,default="0x71851c0")
+parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="0x71851c0")
 args = parser.parse_args()
 
 bpf_prog = bpf_prog.replace("_ADDR", str(args.addr_ret))
