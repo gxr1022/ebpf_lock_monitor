@@ -148,14 +148,14 @@ parser.add_argument("-t","--time", help="Time in seconds to monitor locks in ker
                     type=int, default=30)
 parser.add_argument("-p", "--pid", type=int, help="PID of the target process",default=-1)
 parser.add_argument("-l", "--lib",  help="Library name containing symbol to trace, e.g. /usr/bin/mongod", type=str, default="/usr/bin/mongod")
-parser.add_argument("-e", "--sym_entry", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
-parser.add_argument("-r", "--sym_ret",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_unlock")
+parser.add_argument("-e", "--sym_e", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
+parser.add_argument("-r", "--sym_r",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_unlock")
 
-parser.add_argument('-ae', '--addr_entry',  help='Address to trace, e.g. 00000000076aca40', type=str,default="0x71851c0")
-parser.add_argument('-ar', '--addr_ret', help='Address to trace, e.g. 00000000076aca40', type=str,default="0x71851c0")
+parser.add_argument('-ae', '--addr_e',  help='Address to trace, e.g. 00000000076aca40', type=str,default="0xde405b0")
+parser.add_argument('-ar', '--addr_r', help='Address to trace, e.g. 00000000076aca40', type=str,default="0xde405c0")
 args = parser.parse_args()
 
-bpf_prog = bpf_prog.replace("_ADDR", str(args.addr_ret))
+bpf_prog = bpf_prog.replace("_ADDR", str(args.addr_r))
 try:
     b = BPF(text=bpf_prog)
 except Exception as e:
@@ -166,8 +166,11 @@ except Exception as e:
 
 events={}
 
-b.attach_uprobe(name=args.lib, addr=int(args.addr_entry, 16), fn_name="trace_start", pid=args.pid)
-b.attach_uretprobe(name=args.lib, addr=int(args.addr_ret, 16), fn_name="trace_end", pid=args.pid)
+# b.attach_uprobe(name=args.lib, sym=args.sym_e, fn_name="trace_start", pid=args.pid)
+# b.attach_uretprobe(name=args.lib, sym=args.sym_r, fn_name="trace_end", pid=args.pid)
+
+b.attach_uprobe(name=args.lib, addr=int(args.addr_e,16), fn_name="trace_start", pid=args.pid)
+b.attach_uretprobe(name=args.lib, addr=int(args.addr_r,16), fn_name="trace_end", pid=args.pid)
 
 b["perf_output"].open_perf_buffer(print_event)
 
