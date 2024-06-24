@@ -37,7 +37,7 @@ void trace_start(struct pt_regs *ctx)
     {
         data_ptr->time_s=bpf_ktime_get_ns();
         data_ptr->lock_count += 1;
-        data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_USER_STACK);
+        data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID|BPF_F_USER_STACK);
         bpf_trace_printk("Lock count: %d \\n", data_ptr->lock_count); // Debugging
     }
     else{
@@ -45,7 +45,7 @@ void trace_start(struct pt_regs *ctx)
         data.time_s=bpf_ktime_get_ns();
         bpf_get_current_comm(&data.comm, sizeof(data.comm));   
         data.func_addr=func_addr;
-        data.stack_id = stack_traces.get_stackid(ctx, BPF_F_USER_STACK);
+        data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID|BPF_F_USER_STACK);
         data.lock_count = 1;
         lock_hash_table.insert(&func_addr,&data);
     }
@@ -70,13 +70,17 @@ void trace_end(struct pt_regs* ctx) {
 
 """
 
+
 def get_stack(stack_id):
     if stack_id_err(stack_id):
         return "[Missed Stack]"
+    print(f"Stack ID: {stack_id}")
     stack = list(b.get_table("stack_traces").walk(stack_id))
+    # print("Stack addresses:", [hex(addr) for addr in stack])  
     stack_str = ""
     for addr in stack:
-        func_name = b.sym(addr, -1, True) #Translate a memory address into a kernel function name
+        func_name = b.sym(addr, args.pid, True) #Translate a memory address into a kernel function name
+        print(f"Address: {hex(addr)}, Function name: {func_name}")
         stack_str += str(func_name) + "<br>"
     return stack_str
 
@@ -92,7 +96,7 @@ def print_event(cpu, data, size):
         print("LOCK_ADDR: 0x{:x}".format(event.func_addr))
         stack = b["stack_traces"].walk(event.stack_id)
         for addr in stack:
-            print("    {}".format(b.sym(addr, -1, True)))
+            print("    {}".format(b.sym(addr, args.pid, True)))
 
         trace = get_stack(event.stack_id)
         key = event.func_addr
@@ -147,9 +151,9 @@ parser = argparse.ArgumentParser(description="Trace functions in MongoDB")
 parser.add_argument("-t","--time", help="Time in seconds to monitor locks in kernel. Default value is 180 seconds",
                     type=int, default=30)
 parser.add_argument("-p", "--pid", type=int, help="PID of the target process",default=-1)
-parser.add_argument("-l", "--lib",  help="Library name containing symbol to trace, e.g. /usr/bin/mongod", type=str, default="/usr/bin/mongod")
+parser.add_argument("-l", "--lib",  help="Library name containing symbol to trace, e.g. /usr/bin/mongod", type=str, default="/lib/x86_64-linux-gnu/libc.so.6")
 parser.add_argument("-e", "--sym_e", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
-parser.add_argument("-r", "--sym_r",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_unlock")
+parser.add_argument("-r", "--sym_r",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
 
 parser.add_argument('-ae', '--addr_e',  help='Address to trace, e.g. 00000000076aca40', type=str,default="0xde405b0")
 parser.add_argument('-ar', '--addr_r', help='Address to trace, e.g. 00000000076aca40', type=str,default="0xde405c0")
@@ -166,11 +170,11 @@ except Exception as e:
 
 events={}
 
-# b.attach_uprobe(name=args.lib, sym=args.sym_e, fn_name="trace_start", pid=args.pid)
-# b.attach_uretprobe(name=args.lib, sym=args.sym_r, fn_name="trace_end", pid=args.pid)
+b.attach_uprobe(name=args.lib, sym=args.sym_e, fn_name="trace_start", pid=args.pid)
+b.attach_uretprobe(name=args.lib, sym=args.sym_r, fn_name="trace_end", pid=args.pid)
 
-b.attach_uprobe(name=args.lib, addr=int(args.addr_e,16), fn_name="trace_start", pid=args.pid)
-b.attach_uretprobe(name=args.lib, addr=int(args.addr_r,16), fn_name="trace_end", pid=args.pid)
+# b.attach_uprobe(name=args.lib, addr=int(args.addr_e,16), fn_name="trace_start", pid=args.pid)
+# b.attach_uretprobe(name=args.lib, addr=int(args.addr_r,16), fn_name="trace_end", pid=args.pid)
 
 b["perf_output"].open_perf_buffer(print_event)
 
