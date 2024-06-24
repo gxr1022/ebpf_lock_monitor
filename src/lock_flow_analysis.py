@@ -62,7 +62,7 @@ def print_to_file(print_str, f):
     f.write(print_str)
 
 def print_frame(addr, f):
-    symbol = b.sym(addr, -1, True)
+    symbol = b.sym(addr, int(target_pid), True)
     print_to_file("\t\t%16s (%x)" % (symbol, addr), f)
 
 def print_stack(stacks, stack_id, f):
@@ -104,10 +104,11 @@ def print_init_data(signal, frame):
 	sys.exit(0)
 
 task_to_track = sys.argv[1]
+target_pid= sys.argv[2]
 # PID = sys.argv[1]
 output_to_stdout = 0
 
-if len(sys.argv) == 3:
+if len(sys.argv) == 4:
 	output_file = str(sys.argv[2]) + "."
 else:
 	output_to_stdout = 1

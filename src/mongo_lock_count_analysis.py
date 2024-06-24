@@ -1,11 +1,11 @@
 import sys
 import itertools
 from time import sleep
-from bcc import BPF, ProcessSymbols
+from bcc import BPF
 import signal
 import ctypes
 
-# define BPF program
+# Define BPF program
 prog = """
 #include <linux/ptrace.h>
 #include <linux/ktime.h>
@@ -53,7 +53,6 @@ BPF_HASH(start, u32, struct futex_lock); // pid -> futex call start timestamp
 
 // Mutex to the stack id which initialized that mutex
 BPF_HASH(init_stacks, u64, struct mutex_lock_init);
-//BPF_HASH(init_stacks, u64, int);
 // Main info database about mutex and thread pairs
 BPF_HASH(locks, struct thread_mutex_key_t, struct thread_mutex_val_t);
 // Pid to the mutex address and timestamp of when the wait started
@@ -166,7 +165,7 @@ int trace_futex(struct pt_regs *ctx, u32 __user *uaddr, int op, u32 val, ktime_t
     u32 tgid = tgid_pid >> 32;
 
     if ((op & ~(FUTEX_PRIVATE_FLAG|FUTEX_CLOCK_REALTIME)) != FUTEX_WAIT) 
-	return 0;
+        return 0;
 
     u64 ts = bpf_ktime_get_ns();
 
@@ -185,7 +184,7 @@ int trace_futex_return(struct pt_regs *ctx)
     struct futex_lock *val = start.lookup(&pid);
 
     if (!val) {
-	return 0;
+        return 0;
     }
 
     u64 delta = (bpf_ktime_get_ns() - val->timestamp)/1000/1000;
@@ -195,130 +194,124 @@ int trace_futex_return(struct pt_regs *ctx)
     struct contention *c = tracing.lookup(&f);
 
     if (!c) {
-	struct contention c1 = {};
-	c1.delta = delta;
-	c1.count = 1;
-	tracing.update(&f, &c1);
+        struct contention c1 = {};
+        c1.delta = delta;
+        c1.count = 1;
+        tracing.update(&f, &c1);
     }
     else {
-	struct contention c2 = {};
-	c2.delta = c->delta + delta;
-	c2.count = c->count + 1;
-	
-	tracing.delete(&f);
-	tracing.update(&f, &c2);
+        struct contention c2 = {};
+        c2.delta = c->delta + delta;
+        c2.count = c->count + 1;
+        
+        tracing.delete(&f);
+        tracing.update(&f, &c2);
     }
    
     start.delete(&pid);
     return 0;
 }
-
-
 """
+
 def attach(bpf):
-    bpf.attach_uprobe(name="pthread", sym="pthread_mutex_init", fn_name="probe_mutex_init")
-    bpf.attach_uprobe(name="pthread", sym="pthread_mutex_lock", fn_name="probe_mutex_lock")
-    bpf.attach_uretprobe(name="pthread", sym="pthread_mutex_lock", fn_name="probe_mutex_lock_return")
-    bpf.attach_uprobe(name="pthread", sym="pthread_mutex_unlock", fn_name="probe_mutex_unlock")
-    bpf.attach_kprobe("do_futex", "trace_futex")
-    bpf.attach_kretprobe("do_futex", "trace_futex_return")
+    bpf.attach_uprobe(name="/lib/x86_64-linux-gnu/libc.so.6", sym="pthread_mutex_init", fn_name="probe_mutex_init")
+    bpf.attach_uprobe(name="/lib/x86_64-linux-gnu/libc.so.6", sym="pthread_mutex_lock", fn_name="probe_mutex_lock")
+    bpf.attach_uretprobe(name="/lib/x86_64-linux-gnu/libc.so.6", sym="pthread_mutex_lock", fn_name="probe_mutex_lock_return")
+    bpf.attach_uprobe(name="/lib/x86_64-linux-gnu/libc.so.6", sym="pthread_mutex_unlock", fn_name="probe_mutex_unlock")
+    bpf.attach_kprobe(event="do_futex", fn_name="trace_futex")
+    bpf.attach_kretprobe(event="do_futex", fn_name="trace_futex_return")
 
+def print_frame(addr,pid):
+    print("\t\t%16s (%x)" % (BPF.sym(addr,pid, True)))
 
-def print_frame(syms, addr):
-    print("\t\t%16s (%x)" % (syms.decode_addr(addr), addr))
-
-def print_stack(syms, stacks, stack_id):
+def print_stack(stacks, stack_id, pid):
     for addr in stacks.walk(stack_id):
-        print_frame(syms, addr)
+        print_frame(addr,pid)
 
 def print_init_data(signal, frame):
-	pids = []
-	for items in lists:
-		if items[2] not in pids:
-			pids.append(items[2])
+    pids = []
+    for items in lists:
+        if items[2] not in pids:
+            pids.append(items[2])
 
-	mutex_ids = {}
-	next_mutex_id = 1
+    mutex_ids = {}
+    next_mutex_id = 1
 
-	print ("\n\n\nInit of all locks\n\n\n")
+    print("\n\n\nInit of all locks\n\n\n")
 
+    for k, v in init_stacks.items():
+        if v.pid in pids:
+            mutex_id = "#%d" % next_mutex_id
+            next_mutex_id += 1
+            mutex_ids[k.value] = mutex_id
+            print("init stack for mutex %x (%s)" % (k.value, mutex_id))
+            print_stack( stacks, v.stack_id ,v.pid)
+            print("")
 
-	for k, v in init_stacks.items():
-		if v.pid in pids:
-			syms = ProcessSymbols(pid=v.pid)
-			mutex_id = "#%d" % next_mutex_id
-			next_mutex_id += 1
-			mutex_ids[k.value] = mutex_id
-			print("init stack for mutex %x (%s)" % (k.value, mutex_id))
-			print_stack(syms, stacks, v.stack_id)
-			print("")
+    print("\n\n\nPer thread lock analysis\n\n\n")
 
-	#print mutex_ids
-
-	print ("\n\n\nPer thread lock analysis\n\n\n")
-
-        grouper = lambda (k, v): k.tid
-        sorted_by_thread = sorted(locks.items(), key=grouper)
-        sorted_by_thread = sorted(locks.items(), key=lambda item: item[0].tid)
-        grouped = groupby(data_sorted, key=lambda item: item[0].tid)
-
-
-        locks_by_thread = itertools.groupby(sorted_by_thread, grouper)
-
-        for tid, items in locks_by_thread:
-	    if tid in pids:
-		    print("thread %d" % tid)
-		    for k, v in sorted(items, key=lambda (k, v): -v.wait_time_ns):
-			if k.mtx in mutex_ids:
-				mutex_descr = mutex_ids[k.mtx]
-				print("\tFound in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
-				      (mutex_descr, k.mtx, v.wait_time_ns/1000.0, v.lock_time_ns/1000.0, v.enter_count))
-			else:
-				syms = ProcessSymbols(pid=tid)
-				mutex_descr = syms.decode_addr(k.mtx)
-				print("\tNot found in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
-				      (mutex_descr, k.mtx, v.wait_time_ns/1000.0, v.lock_time_ns/1000.0, v.enter_count))	
-			print_stack(syms, stacks, k.lock_stack_id)
-			print("")
-
-	mutex_wait_hist.print_log2_hist(val_type="wait time (us)")
-	mutex_lock_hist.print_log2_hist(val_type="hold time (us)")
-
-	print ("\n\n\nOverall per lock analysis\n\n\n")
-
-	mutex_analysis = {}
-    grouper = lambda (k, v): k.tid
+    grouper = lambda k_v: k_v[0].tid
     sorted_by_thread = sorted(locks.items(), key=grouper)
     locks_by_thread = itertools.groupby(sorted_by_thread, grouper)
-	for tid, items in locks_by_thread:
-		if tid in pids:
-			for k, v in sorted(items, key=lambda(k,v): -v.wait_time_ns):
-				if k.mtx in mutex_analysis:
-					mutex_analysis[k.mtx][0] = mutex_analysis[k.mtx][0] + v.wait_time_ns/1000.0
-					mutex_analysis[k.mtx][1] = mutex_analysis[k.mtx][1] + v.lock_time_ns/1000.0
-					mutex_analysis[k.mtx][2] = mutex_analysis[k.mtx][2] + v.enter_count
-				else:
-					mutex_analysis[k.mtx] = [v.wait_time_ns/1000.0, v.lock_time_ns/1000.0, v.enter_count] 
 
-	for k in mutex_analysis:
-		v = mutex_analysis[k]
-		mutex_descr = mutex_ids[k] if k in mutex_ids else 0
-		print("\tmutex %x (%s) ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
-		      (k, mutex_descr, v[0], v[1], v[2]))
+    for tid, items in locks_by_thread:
+        if tid in pids:
+            print("thread %d" % tid)
+            for k, v in sorted(items, key=lambda k_v: -k_v[1].wait_time_ns):
+                if k.mtx in mutex_ids:
+                    mutex_descr = mutex_ids[k.mtx]
+                    print("\tFound in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
+                          (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
+                else:
+                
+                    mutex_descr = syms.decode_addr(k.mtx)
+                    print("\tNot found in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
+                          (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
+                print_stack(stacks, k.lock_stack_id, tid)
+                print("")
 
-	print ("\n\n\nContention analysis\n\n\n")
+    mutex_wait_hist.print_log2_hist(val_type="wait time (us)")
+    mutex_lock_hist.print_log2_hist(val_type="hold time (us)")
 
-	for k in tracing:
-		mutex_descr = mutex_ids[k.value] if k.value in mutex_ids else 0
-		print("Mutex %x (%s) Count=%d \n" % (k.value, mutex_descr, tracing[k].count));
-	
-	sys.exit(0)
+    print("\n\n\nOverall per lock analysis\n\n\n")
+
+    mutex_analysis = {}
+    sorted_by_thread = sorted(locks.items(), key=grouper)
+    locks_by_thread = itertools.groupby(sorted_by_thread, grouper)
+    for tid, items in locks_by_thread:
+        if tid in pids:
+            for k, v in sorted(items, key=lambda k_v: -k_v[1].wait_time_ns):
+                if k.mtx in mutex_analysis:
+                    mutex_analysis[k.mtx][0] = mutex_analysis[k.mtx][0] + v.wait_time_ns / 1000.0
+                    mutex_analysis[k.mtx][1] = mutex_analysis[k.mtx][1] + v.lock_time_ns / 1000.0
+                    mutex_analysis[k.mtx][2] = mutex_analysis[k.mtx][2] + v.enter_count
+                else:
+                    mutex_analysis[k.mtx] = [v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count]
+
+    for k in mutex_analysis:
+        v = mutex_analysis[k]
+        mutex_descr = mutex_ids[k] if k in mutex_ids else 0
+        print("\tmutex %x (%s) ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
+              (k, mutex_descr, v[0], v[1], v[2]))
+
+    print("\n\n\nContention analysis\n\n\n")
+
+    for k in tracing:
+        mutex_descr = mutex_ids[k.value] if k.value in mutex_ids else 0
+        print("Mutex %x (%s) Count=%d \n" % (k.value, mutex_descr, tracing[k].count))
+    
+    sys.exit(0)
 
 task_to_track = sys.argv[1]
-print ("Task to be tracked is ", task_to_track)
+print("Task to be tracked is ", task_to_track)
 lists = []
-# load BPF program
-b = BPF(text=prog)
+
+try:
+    b = BPF(text=prog)
+except Exception as e:
+    print(f"Failed to compile BPF program: {e}")
+    exit(1)
+
 attach(b)
 
 init_stacks = b["init_stacks"]
@@ -328,14 +321,13 @@ mutex_lock_hist = b["mutex_lock_hist"]
 mutex_wait_hist = b["mutex_wait_hist"]
 tracing = b["tracing"]
 
-#signal.signal(signal.SIGTERM, print_init_data)
+# signal.signal(signal.SIGTERM, print_init_data)
 signal.signal(signal.SIGINT, print_init_data)
 
-while 1:
+while True:
     try:
         (task, pid, cpu, flags, ts, msg) = b.trace_fields()
     except ValueError:
         continue
-    if task_to_track in task:
-	    lists.append([ts, task, pid])
-
+    if task_to_track in task.decode('utf-8', 'replace'):
+        lists.append([ts, task, pid])
