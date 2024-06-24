@@ -222,7 +222,8 @@ def attach(bpf):
     bpf.attach_kretprobe(event="do_futex", fn_name="trace_futex_return")
 
 def print_frame(addr,pid):
-    print("\t\t%16s (%x)" % (BPF.sym(addr,pid, True)))
+    symbol = b.sym(addr,pid, True)
+    print("\t\t%s (%x)" % (symbol, addr))
 
 def print_stack(stacks, stack_id, pid):
     for addr in stacks.walk(stack_id):
@@ -233,7 +234,6 @@ def print_init_data(signal, frame):
     for items in lists:
         if items[2] not in pids:
             pids.append(items[2])
-
     mutex_ids = {}
     next_mutex_id = 1
 
@@ -264,12 +264,13 @@ def print_init_data(signal, frame):
                           (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
                 else:
                 
-                    mutex_descr = syms.decode_addr(k.mtx)
+                    mutex_descr = b.ksym(k.mtx)
                     print("\tNot found in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
                           (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
                 print_stack(stacks, k.lock_stack_id, tid)
                 print("")
 
+    # The historm includes all phthread_mutex_lock operations in linux, not only task_to_track
     mutex_wait_hist.print_log2_hist(val_type="wait time (us)")
     mutex_lock_hist.print_log2_hist(val_type="hold time (us)")
 
@@ -330,4 +331,5 @@ while True:
     except ValueError:
         continue
     if task_to_track in task.decode('utf-8', 'replace'):
+        print(task_to_track,pid,"\n")
         lists.append([ts, task, pid])
