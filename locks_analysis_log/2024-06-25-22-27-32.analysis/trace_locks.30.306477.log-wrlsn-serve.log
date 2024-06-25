@@ -1,0 +1,527 @@
+Task to be tracked is  log-wrlsn-serve
+
+
+
+Init of all locks
+
+
+
+
+
+
+Per thread lock analysis
+
+
+
+     wait time (us)      : count     distribution
+         0 -> 1          : 115018   |                                        |
+         2 -> 3          : 19255048 |****************************************|
+         4 -> 7          : 760238   |*                                       |
+         8 -> 15         : 162855   |                                        |
+        16 -> 31         : 133752   |                                        |
+        32 -> 63         : 38072    |                                        |
+        64 -> 127        : 15913    |                                        |
+       128 -> 255        : 4196     |                                        |
+       256 -> 511        : 489      |                                        |
+       512 -> 1023       : 216      |                                        |
+      1024 -> 2047       : 79       |                                        |
+      2048 -> 4095       : 27       |                                        |
+      4096 -> 8191       : 12       |                                        |
+      8192 -> 16383      : 20       |                                        |
+     16384 -> 32767      : 12       |                                        |
+     hold time (us)      : count     distribution
+         0 -> 1          : 369      |                                        |
+         2 -> 3          : 345438   |                                        |
+         4 -> 7          : 15268335 |****************************************|
+         8 -> 15         : 4969170  |*************                           |
+        16 -> 31         : 93219    |                                        |
+        32 -> 63         : 8014     |                                        |
+        64 -> 127        : 3173     |                                        |
+       128 -> 255        : 2375     |                                        |
+       256 -> 511        : 875      |                                        |
+       512 -> 1023       : 1675     |                                        |
+      1024 -> 2047       : 237      |                                        |
+      2048 -> 4095       : 155      |                                        |
+      4096 -> 8191       : 41       |                                        |
+      8192 -> 16383      : 3300     |                                        |
+     16384 -> 32767      : 39       |                                        |
+     32768 -> 65535      : 678      |                                        |
+     65536 -> 131071     : 995      |                                        |
+    131072 -> 262143     : 27       |                                        |
+    262144 -> 524287     : 28       |                                        |
+    524288 -> 1048575    : 921      |                                        |
+   1048576 -> 2097151    : 8        |                                        |
+   2097152 -> 4194303    : 15       |                                        |
+   4194304 -> 8388607    : 20       |                                        |
+   8388608 -> 16777215   : 7        |                                        |
+  16777216 -> 33554431   : 4        |                                        |
+
+
+
+Overall per lock analysis
+
+
+
+
+
+
+Contention analysis
+
+
+
+Mutex 796b9eab5fa8 (0) Count=1 
+
+Mutex 5165af95c348 (0) Count=1 
+
+Mutex 516569e96b98 (0) Count=1 
+
+Mutex 5164f8722d28 (0) Count=10 
+
+Mutex 54e8680 (0) Count=223 
+
+Mutex 592b5d0 (0) Count=13 
+
+Mutex 5abbd28 (0) Count=5 
+
+Mutex 7bd49828cf48 (0) Count=10 
+
+Mutex 55c4337163d0 (0) Count=369 
+
+Mutex 5164ffc3abf0 (0) Count=3 
+
+Mutex 516569e97b08 (0) Count=1 
+
+Mutex 625945e369f8 (0) Count=2 
+
+Mutex 5164ffc3b028 (0) Count=3 
+
+Mutex 7686140052f0 (0) Count=16 
+
+Mutex 5164f9794d28 (0) Count=13 
+
+Mutex 5e53361a46c0 (0) Count=12 
+
+Mutex 625945e34d18 (0) Count=2 
+
+Mutex 625945e34bb8 (0) Count=2 
+
+Mutex 5164ffc3b100 (0) Count=2 
+
+Mutex 6259461797d8 (0) Count=275 
+
+Mutex 56a45e8 (0) Count=15 
+
+Mutex 7bd498742948 (0) Count=8 
+
+Mutex 5164ffc3af50 (0) Count=7 
+
+Mutex 5164ffac3318 (0) Count=2 
+
+Mutex 77fc60f18210 (0) Count=89 
+
+Mutex 5164ffc25948 (0) Count=1963 
+
+Mutex 625945e36898 (0) Count=2 
+
+Mutex 5164ffc3b268 (0) Count=4 
+
+Mutex 625945e35558 (0) Count=2 
+
+Mutex 625945e365d8 (0) Count=2 
+
+Mutex 51656b715d68 (0) Count=296 
+
+Mutex 5164ffc3af98 (0) Count=5 
+
+Mutex 5165af95d518 (0) Count=1 
+
+Mutex 5164ffc3b148 (0) Count=4 
+
+Mutex 7bd498049e70 (0) Count=4 
+
+Mutex 7bd498050580 (0) Count=12 
+
+Mutex 7fff430b0114 (0) Count=31 
+
+Mutex 5164ff863688 (0) Count=9551 
+
+Mutex 7bd4980dfba8 (0) Count=9 
+
+Mutex 5164ff9130a0 (0) Count=1 
+
+Mutex 5164ffac4170 (0) Count=3 
+
+Mutex 76861400c320 (0) Count=1 
+
+Mutex 7bd498049e48 (0) Count=2038 
+
+Mutex 5164ffac40e0 (0) Count=3 
+
+Mutex 625945e34638 (0) Count=2 
+
+Mutex 5164ffb0fb80 (0) Count=9929 
+
+Mutex 625945e35ef8 (0) Count=1 
+
+Mutex 5164ffc3b190 (0) Count=1 
+
+Mutex 5164f9568428 (0) Count=7 
+
+Mutex 625945e36478 (0) Count=2 
+
+Mutex 5164f83cc428 (0) Count=8 
+
+Mutex 625945d58168 (0) Count=1 
+
+Mutex 625945e372a4 (0) Count=52 
+
+Mutex 7bd498049738 (0) Count=12 
+
+Mutex 62594833cb68 (0) Count=59 
+
+Mutex 7af26d33c020 (0) Count=1 
+
+Mutex 7bd4985bb328 (0) Count=4 
+
+Mutex 5164ffc3ab60 (0) Count=3 
+
+Mutex 5164f8739628 (0) Count=7 
+
+Mutex 58d0740 (0) Count=102 
+
+Mutex 5164ffac2550 (0) Count=61 
+
+Mutex 7bd4a0000030 (0) Count=63 
+
+Mutex 5164fbfa0110 (0) Count=1 
+
+Mutex 5164ffac3678 (0) Count=44 
+
+Mutex 5164f93fc428 (0) Count=12 
+
+Mutex 7bd4983b6b38 (0) Count=30 
+
+Mutex 5164ff913310 (0) Count=6 
+
+Mutex 76861400c0b0 (0) Count=1 
+
+Mutex 77fc5d1ba8f8 (0) Count=2 
+
+Mutex 7ffd2e301c84 (0) Count=29 
+
+Mutex 625945e34798 (0) Count=2 
+
+Mutex 72f9128c4904 (0) Count=1 
+
+Mutex 7af26c764914 (0) Count=1 
+
+Mutex 625945e35138 (0) Count=2 
+
+Mutex 5164ffbf8708 (0) Count=1023 
+
+Mutex 5164f86af628 (0) Count=19 
+
+Mutex 77fc5dfd88f8 (0) Count=1 
+
+Mutex 7f32840021a0 (0) Count=164 
+
+Mutex 7bd49804a2c0 (0) Count=3 
+
+Mutex 5165af95de98 (0) Count=646 
+
+Mutex 5c86d38 (0) Count=123 
+
+Mutex 625947e9d668 (0) Count=39 
+
+Mutex 7bd49835cd68 (0) Count=2 
+
+Mutex 5164ffc3ae30 (0) Count=6 
+
+Mutex 5164ff9138c0 (0) Count=2 
+
+Mutex 625945e34a58 (0) Count=2 
+
+Mutex 5164ff9133e0 (0) Count=2 
+
+Mutex 625945e348f8 (0) Count=1 
+
+Mutex 5164ffaaddf0 (0) Count=4603 
+
+Mutex 5a2f258 (0) Count=5 
+
+Mutex 7bd49804a410 (0) Count=5 
+
+Mutex 516537bb3518 (0) Count=1 
+
+Mutex 625945e35d98 (0) Count=1 
+
+Mutex 5165514bf3e8 (0) Count=1 
+
+Mutex 5164ff9134b0 (0) Count=1 
+
+Mutex 5164ffac4098 (0) Count=2 
+
+Mutex 5164ffc3ade8 (0) Count=3 
+
+Mutex 7bd4980d2d98 (0) Count=35 
+
+Mutex 5165af95d8a8 (0) Count=1801 
+
+Mutex 7bd4a4070778 (0) Count=8 
+
+Mutex 796b9ead9210 (0) Count=1 
+
+Mutex 5164ffc3b070 (0) Count=4 
+
+Mutex 7bd4986063d8 (0) Count=6 
+
+Mutex 7bd49804a190 (0) Count=3268 
+
+Mutex 768625ba1100 (0) Count=15 
+
+Mutex 7fff956a6ed0 (0) Count=1 
+
+Mutex 625945e36b58 (0) Count=2 
+
+Mutex 7bd498049900 (0) Count=147 
+
+Mutex 5164ff913990 (0) Count=2 
+
+Mutex 625945e35978 (0) Count=3 
+
+Mutex 7fff956a6f50 (0) Count=10 
+
+Mutex 5164ffc3ad10 (0) Count=5 
+
+Mutex 625945e370d8 (0) Count=1 
+
+Mutex 5164ffc3aa88 (0) Count=2 
+
+Mutex 5164ffc3aad0 (0) Count=1 
+
+Mutex 5164f9795628 (0) Count=11 
+
+Mutex 6c52408 (0) Count=1 
+
+Mutex 72b6d6e719b4 (0) Count=50 
+
+Mutex 5165a8ed0cc8 (0) Count=826 
+
+Mutex 56a45b8 (0) Count=8 
+
+Mutex 7bd4983c4f88 (0) Count=1 
+
+Mutex 625946169380 (0) Count=201 
+
+Mutex 7bd498066068 (0) Count=3 
+
+Mutex 5164ff913650 (0) Count=1 
+
+Mutex 5164f86adb28 (0) Count=15 
+
+Mutex 7ffc34509ac0 (0) Count=1 
+
+Mutex 625945e35c38 (0) Count=1 
+
+Mutex 54e87a8 (0) Count=26 
+
+Mutex 58d077c (0) Count=1 
+
+Mutex 5164f9566028 (0) Count=7 
+
+Mutex 5164ffc3b2b0 (0) Count=4 
+
+Mutex 7bd498654668 (0) Count=2 
+
+Mutex 5165af95dc38 (0) Count=2 
+
+Mutex 625945e361b8 (0) Count=1 
+
+Mutex 7bb286c559b4 (0) Count=52 
+
+Mutex 72f9125bb904 (0) Count=1 
+
+Mutex 7bd4983b6b40 (0) Count=2 
+
+Mutex 7af26cb71914 (0) Count=1 
+
+Mutex 7ffc6a82bbf4 (0) Count=29 
+
+Mutex 625945e36f78 (0) Count=2 
+
+Mutex 5164ffc3b220 (0) Count=4 
+
+Mutex 796b9a9688f8 (0) Count=1 
+
+Mutex 625945e36e18 (0) Count=1 
+
+Mutex 7bd49804a3d8 (0) Count=565 
+
+Mutex 7af26b713944 (0) Count=30 
+
+Mutex 7bd49c000030 (0) Count=5 
+
+Mutex 592ad88 (0) Count=1 
+
+Mutex 625945e34fd8 (0) Count=1 
+
+Mutex 5164ffc3aec0 (0) Count=4 
+
+Mutex 5164ffc3ada0 (0) Count=5 
+
+Mutex 5164ff913580 (0) Count=1 
+
+Mutex 7ffdc5933f44 (0) Count=29 
+
+Mutex 625945e36058 (0) Count=2 
+
+Mutex 7bd498000030 (0) Count=22 
+
+Mutex 5164ffc3ae78 (0) Count=3 
+
+Mutex 7af26bd46914 (0) Count=1 
+
+Mutex 5164f93fd628 (0) Count=6 
+
+Mutex 7bd4980499e0 (0) Count=1 
+
+Mutex 5164ffc3afe0 (0) Count=2 
+
+Mutex 5164ff912fd0 (0) Count=5 
+
+Mutex 5164f8736028 (0) Count=11 
+
+Mutex 72f911f7e934 (0) Count=19 
+
+Mutex 5164ffc3b0b8 (0) Count=3 
+
+Mutex 7bd4a4000030 (0) Count=63 
+
+Mutex 5164f9793b28 (0) Count=8 
+
+Mutex 5164ffc3ab18 (0) Count=2 
+
+Mutex 5164f9794428 (0) Count=4 
+
+Mutex 54ef448 (0) Count=1 
+
+Mutex 55c4337210b8 (0) Count=4 
+
+Mutex 5164ffb12178 (0) Count=16649 
+
+Mutex 7f329182b128 (0) Count=8 
+
+Mutex 5165af95dd68 (0) Count=753 
+
+Mutex 625945e34e78 (0) Count=2 
+
+Mutex 7af26c358914 (0) Count=1 
+
+Mutex 5164ff913720 (0) Count=3 
+
+Mutex 5164ffc3b1d8 (0) Count=3 
+
+Mutex 51654bf51b08 (0) Count=1679 
+
+Mutex 7af26b93a964 (0) Count=58 
+
+Mutex 7af26cf7d914 (0) Count=1 
+
+Mutex 5164f9567b28 (0) Count=7 
+
+Mutex 7bd498580128 (0) Count=3 
+
+Mutex 7bd4981a65a0 (0) Count=27 
+
+Mutex 5164ff913b30 (0) Count=2 
+
+Mutex 7bd494000030 (0) Count=104 
+
+Mutex 5164d754b648 (0) Count=1 
+
+Mutex 59253e0 (0) Count=26 
+
+Mutex 72f9137f2904 (0) Count=1 
+
+Mutex 5e53361a69e8 (0) Count=5 
+
+Mutex 5164ff89ae88 (0) Count=48 
+
+Mutex 75676f591210 (0) Count=35 
+
+Mutex 625946265aa0 (0) Count=1 
+
+Mutex 5164ffac3870 (0) Count=3 
+
+Mutex 5164ffc3ad58 (0) Count=1 
+
+Mutex 5164ffc3ac38 (0) Count=3 
+
+Mutex 625945e36738 (0) Count=2 
+
+Mutex 5164ffac2868 (0) Count=41 
+
+Mutex 57ebf48 (0) Count=317 
+
+Mutex 7bd49804a2f8 (0) Count=2 
+
+Mutex 5164ffac32d0 (0) Count=3 
+
+Mutex 5164ff89a208 (0) Count=1 
+
+Mutex 5164ff883888 (0) Count=6292 
+
+Mutex 7bd49804bc80 (0) Count=3 
+
+Mutex 5164e9c14f28 (0) Count=1031 
+
+Mutex 5164ffac3c60 (0) Count=2 
+
+Mutex 5164ffc3aba8 (0) Count=2 
+
+Mutex 5164ffc3acc8 (0) Count=4 
+
+Mutex 5abbcf8 (0) Count=4 
+
+Mutex 5164ffb12f28 (0) Count=1 
+
+Mutex 5164ffac2598 (0) Count=44 
+
+Mutex 6aea6a0 (0) Count=1 
+
+Mutex 5164d754acc8 (0) Count=687 
+
+Mutex 5164ff913240 (0) Count=2 
+
+Mutex 5164ff8f3d08 (0) Count=34 
+
+Mutex 79aa81bd29c4 (0) Count=54 
+
+Mutex 5164ffc3b2f8 (0) Count=8 
+
+Mutex 796b9d5fa8f8 (0) Count=1 
+
+Mutex 5164ffc3b340 (0) Count=3 
+
+Mutex 72f9121af954 (0) Count=42 
+
+Mutex 5164ffc3ac80 (0) Count=1 
+
+Mutex 7ebf273269b4 (0) Count=54 
+
+Mutex 7bd49804a4b8 (0) Count=1 
+
+Mutex 625945e35298 (0) Count=2 
+
+Mutex 5164ff912060 (0) Count=4 
+
+Mutex 5164f9569628 (0) Count=6 
+
+Mutex 5164ffc3af08 (0) Count=3 
+
+Mutex 72f9126be904 (0) Count=1 
+
+Mutex 5ccb0274f7f8 (0) Count=1 
+
+Mutex 625945e36cb8 (0) Count=2 
+
