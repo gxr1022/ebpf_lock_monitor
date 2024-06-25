@@ -1,6 +1,7 @@
 import sys
 import itertools
 from time import sleep
+import datetime
 from bcc import BPF
 import signal
 import ctypes
@@ -70,7 +71,7 @@ BPF_STACK_TRACE(stacks, 4096);
 int probe_mutex_lock(struct pt_regs *ctx)
 {
     u64 now = bpf_ktime_get_ns();
-    u32 pid = bpf_get_current_pid_tgid();
+    u32 pid = bpf_get_current_pid_tgid(); //tid?
     struct mutex_timestamp_t val = {};
     val.mtx = PT_REGS_PARM1(ctx);
     val.timestamp = now;
@@ -229,7 +230,7 @@ def print_stack(stacks, stack_id, pid):
     for addr in stacks.walk(stack_id):
         print_frame(addr,pid)
 
-def print_init_data(signal, frame):
+def print_init_data():
     pids = []
     for items in lists:
         if items[2] not in pids:
@@ -289,6 +290,7 @@ def print_init_data(signal, frame):
                 else:
                     mutex_analysis[k.mtx] = [v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count]
 
+    sorted_mutex_analysis = sorted(mutex_analysis.items(), key=lambda item: item[1][0], reverse=True)
     for k in mutex_analysis:
         v = mutex_analysis[k]
         mutex_descr = mutex_ids[k] if k in mutex_ids else 0
@@ -303,7 +305,9 @@ def print_init_data(signal, frame):
     
     sys.exit(0)
 
+
 task_to_track = sys.argv[1]
+perf_time = sys.argv[2]
 print("Task to be tracked is ", task_to_track)
 lists = []
 
@@ -323,8 +327,11 @@ mutex_wait_hist = b["mutex_wait_hist"]
 tracing = b["tracing"]
 
 # signal.signal(signal.SIGTERM, print_init_data)
-signal.signal(signal.SIGINT, print_init_data)
+# signal.signal(signal.SIGINT, print_init_data)
 
+
+
+start_time = datetime.datetime.now()
 while True:
     try:
         (task, pid, cpu, flags, ts, msg) = b.trace_fields()
@@ -333,3 +340,8 @@ while True:
     if task_to_track in task.decode('utf-8', 'replace'):
         print(task_to_track,pid,"\n")
         lists.append([ts, task, pid])
+    time_elapsed = datetime.datetime.now() - start_time
+    if time_elapsed.seconds > int(perf_time):
+        break
+
+print_init_data()

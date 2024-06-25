@@ -57,7 +57,7 @@ void trace_start(struct pt_regs *ctx)
 }
 
 void trace_end(struct pt_regs* ctx) {
-    u64 func_addr = PT_REGS_PARM1(ctx); 
+    u64 func_addr = PT_REGS_PARM1(ctx);  // get the first parameter of pthread function.
     u32 current_pid = bpf_get_current_pid_tgid() >> 32;
     u32 current_tid = bpf_get_current_pid_tgid();
     if (current_tid == target_TID) {
@@ -98,12 +98,7 @@ def stack_id_err(stack_id):
 def print_event(cpu, data, size):
         event = b["perf_output"].event(data)
         # print("%-18.9d %-16s %-6d %-15d %-6d" % (event.func_addr, event.comm, event.tid,event.lock_accum_time, event.time_delta))
-        
-        # print("LOCK_ADDR: 0x{:x}".format(event.func_addr))
         stack = b["stack_traces"].walk(event.stack_id)
-        # for addr in stack:
-        #     print("    {}".format(b.sym(addr, args.pid, True)))
-
         trace = get_stack(event.stack_id)
         key = event.func_addr
         if key in events:
@@ -141,7 +136,7 @@ def print_event(cpu, data, size):
 def print_func_info(events):
     print("Events collected during tracing:")
     for func, event_data in events:
-        print(f"Func Address: {func}")
+        print(f"Func Address: {func:#014x}")
         print(f"  Func Name: {event_data['func_name']}")
         print(f"  Total Lock Time: {event_data['lock_accum_time']} ns")
         print(f"  Lock Count: {event_data['lock_count']}")
@@ -153,7 +148,6 @@ def print_func_info(events):
             print(f"    Trace: {trace}")
             
 
-
 parser = argparse.ArgumentParser(description="Trace functions in MongoDB")
 parser.add_argument("-t","--time", help="Time in seconds to monitor locks in kernel. Default value is 180 seconds",
                     type=int, default=30)
@@ -163,11 +157,8 @@ parser.add_argument("-l", "--lib",  help="Library name containing symbol to trac
 parser.add_argument("-e", "--sym_e", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
 parser.add_argument("-r", "--sym_r",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
 
-parser.add_argument('-ae', '--addr_e',  help='Address to trace, e.g. 00000000076aca40', type=str,default="0xde405b0")
-parser.add_argument('-ar', '--addr_r', help='Address to trace, e.g. 00000000076aca40', type=str,default="0xde405c0")
 args = parser.parse_args()
 
-bpf_prog = bpf_prog.replace("_ADDR", str(args.addr_r))
 bpf_prog = bpf_prog.replace("target_TID", str(args.tid))
 
 try:
@@ -183,8 +174,6 @@ events={}
 b.attach_uprobe(name=args.lib, sym=args.sym_e, fn_name="trace_start", pid=args.pid)
 b.attach_uretprobe(name=args.lib, sym=args.sym_r, fn_name="trace_end", pid=args.pid)
 
-# b.attach_uprobe(name=args.lib, addr=int(args.addr_e,16), fn_name="trace_start", pid=args.pid)
-# b.attach_uretprobe(name=args.lib, addr=int(args.addr_r,16), fn_name="trace_end", pid=args.pid)
 
 b["perf_output"].open_perf_buffer(print_event)
 
