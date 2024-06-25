@@ -1,0 +1,10 @@
+Events collected during tracing:
+Func Address: 55383595960456
+  Func Name: options.sym
+  Total Lock Time: 1588881 ns
+  Lock Count: 111
+  TIDs: {251413}
+  Stack Traces:
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'__wt_cond_wait [mongod]'<br>b'__log_file_server [mongod]'<br>b'start_thread [libc.so.6]'<br>
+      Count: 111
+      Time: 1588881 ns

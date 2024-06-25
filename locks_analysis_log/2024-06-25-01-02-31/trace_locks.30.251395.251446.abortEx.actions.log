@@ -1,0 +1,5 @@
+/virtual/main.c:52:21: error: unexpected type name 'u64': expected expression
+    u64 func_addr = u64 mutex_addr = PT_REGS_PARM1(ctx); 
+                    ^
+1 error generated.
+Failed to compile BPF program: Failed to compile BPF module <text>

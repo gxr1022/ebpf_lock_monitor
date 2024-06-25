@@ -1,0 +1,210 @@
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_log_wrlsn [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+LOCK_ADDR: 0xde405c0
+    b'pthread_mutex_lock [libc.so.6]'
+    b'__wt_cond_auto_wait_signal [mongod]'
+    b'__wt_cond_auto_wait [mongod]'
+    b'__log_wrlsn_server [mongod]'
+    b'start_thread [libc.so.6]'
+Events collected during tracing:
+Func Address: 233047488
+  Func Name: options.sym
+  Total Lock Time: 416162 ns
+  Lock Count: 33
+  TIDs: {251414}
+  Stack Traces:
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'__wt_cond_auto_wait_signal [mongod]'<br>b'__wt_cond_auto_wait [mongod]'<br>b'__log_wrlsn_server [mongod]'<br>b'start_thread [libc.so.6]'<br>
+      Count: 32
+      Time: 403778 ns
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'__wt_log_wrlsn [mongod]'<br>b'__log_wrlsn_server [mongod]'<br>b'start_thread [libc.so.6]'<br>
+      Count: 1
+      Time: 12384 ns

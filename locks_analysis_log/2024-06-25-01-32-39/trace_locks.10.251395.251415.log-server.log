@@ -1,0 +1,19 @@
+Events collected during tracing:
+Func Address: 55383595960712
+  Func Name: options.sym
+  Total Lock Time: 2725562 ns
+  Lock Count: 220
+  TIDs: {251415}
+  Stack Traces:
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'__wt_cond_auto_wait_signal [mongod]'<br>b'__log_server [mongod]'<br>b'start_thread [libc.so.6]'<br>
+      Count: 220
+      Time: 2725562 ns
+Func Address: 55383592780048
+  Func Name: options.sym
+  Total Lock Time: 2935542 ns
+  Lock Count: 220
+  TIDs: {251415}
+  Stack Traces:
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'__wt_spin_lock_track [mongod]'<br>b'__wti_log_slot_switch [mongod]'<br>b'__wt_log_force_write [mongod]'<br>b'__log_server [mongod]'<br>b'start_thread [libc.so.6]'<br>
+      Count: 220
+      Time: 2935542 ns

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/gxr/mongodb-run/ebpf_monitor/src/trace_locks.py", line 183, in <module>
+    b.attach_uprobe(name=args.lib, sym=args.sym_e, fn_name="trace_start", pid=args.pid)
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 1380, in attach_uprobe
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 978, in _check_path_symbol
+Exception: could not determine address of symbol pthread_mutex_lock in /lib/x86_64-linux-gnu/libc.so.6

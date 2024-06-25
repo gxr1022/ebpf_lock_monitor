@@ -1,0 +1,19 @@
+Events collected during tracing:
+Func Address: 233047488
+  Func Name: options.sym
+  Total Lock Time: 1908440 ns
+  Lock Count: 171
+  TIDs: {251443}
+  Stack Traces:
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'std::mutex::lock() [mongod]'<br>b'mongo::SpinLock::lock() [mongod]'<br>b'mongo::Client::lock() [mongod]'<br>b'std::unique_lock<mongo::Client>::lock() [mongod]'<br>b'std::unique_lock<mongo::Client>::unique_lock(mongo::Client&) [mongod]'<br>b'auto mongo::service_context_detail::makeLockHandleForObjectLock<mongo::Client>(mongo::Client*) [mongod]'<br>b'mongo::service_context_detail::ObjectLock<mongo::Client, mongo::Client>::ObjectLock(mongo::Client*) [mongod]'<br>b'mongo::ClientLock::ClientLock(mongo::Client*) [mongod]'<br>b'mongo::ServiceContext::makeOperationContext(mongo::Client*) [mongod]'<br>b'mongo::Client::makeOperationContext() [mongod]'<br>b'mongo::(anonymous namespace)::ClientCursorMonitor::run() [mongod]'<br>
+      Count: 9
+      Time: 163187 ns
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'std::mutex::lock() [mongod]'<br>b'std::unique_lock<std::mutex>::lock() [mongod]'<br>b'std::unique_lock<std::mutex>::unique_lock(std::mutex&) [mongod]'<br>b'mongo::Partitioned<absl::lts_20230802::node_hash_map<long long, mongo::ClientCursor*, absl::lts_20230802::hash_internal::Hash<long long>, std::equal_to<long long>, std::allocator<std::pair<long long const, mongo::ClientCursor*> > >, mongo::Partitioner<long long> >::OnePartition::OnePartition(mongo::Partitioned<absl::lts_20230802::node_hash_map<long long, mongo::ClientCursor*, absl::lts_20230802::hash_internal::Hash<long long>, std::equal_to<long long>, std::allocator<std::pair<long long const, mongo::ClientCursor*> > >, mongo::Partitioner<long long> >&, unsigned long) [mongod]'<br>b'mongo::Partitioned<absl::lts_20230802::node_hash_map<long long, mongo::ClientCursor*, absl::lts_20230802::hash_internal::Hash<long long>, std::equal_to<long long>, std::allocator<std::pair<long long const, mongo::ClientCursor*> > >, mongo::Partitioner<long long> >::lockOnePartitionById(unsigned long) [mongod]'<br>b'mongo::CursorManager::timeoutCursors(mongo::OperationContext*, mongo::Date_t) [mongod]'<br>b'mongo::(anonymous namespace)::ClientCursorMonitor::run() [mongod]'<br>
+      Count: 144
+      Time: 1546485 ns
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'std::mutex::lock() [mongod]'<br>b'mongo::SpinLock::lock() [mongod]'<br>b'mongo::Client::lock() [mongod]'<br>b'std::lock_guard<mongo::Client>::lock_guard(mongo::Client&) [mongod]'<br>b'mongo::ServiceContext::_delistOperation(mongo::OperationContext*) [mongod]'<br>b'mongo::ServiceContext::OperationContextDeleter::operator()(mongo::OperationContext*) const [mongod]'<br>b'std::unique_ptr<mongo::OperationContext, mongo::ServiceContext::OperationContextDeleter>::~unique_ptr() [mongod]'<br>b'mongo::(anonymous namespace)::ClientCursorMonitor::run() [mongod]'<br>
+      Count: 9
+      Time: 99820 ns
+    Trace: b'pthread_mutex_lock [libc.so.6]'<br>b'std::mutex::lock() [mongod]'<br>b'std::unique_lock<std::mutex>::lock() [mongod]'<br>b'std::unique_lock<std::mutex>::unique_lock(std::mutex&) [mongod]'<br>b'mongo::transport::AsioNetworkingBaton::detachImpl() [mongod]'<br>b'mongo::Baton::detach() [mongod]'<br>b'mongo::ServiceContext::OperationContextDeleter::operator()(mongo::OperationContext*) const [mongod]'<br>b'std::unique_ptr<mongo::OperationContext, mongo::ServiceContext::OperationContextDeleter>::~unique_ptr() [mongod]'<br>b'mongo::(anonymous namespace)::ClientCursorMonitor::run() [mongod]'<br>
+      Count: 9
+      Time: 98948 ns
