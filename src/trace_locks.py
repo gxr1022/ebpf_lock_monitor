@@ -27,45 +27,53 @@ BPF_HASH(lock_hash_table, u64, struct data_t, 102400);
 
 void trace_start(struct pt_regs *ctx)
 {
-    u64 func_addr = _ADDR; 
+    u64 func_addr = PT_REGS_PARM1(ctx);; 
     struct data_t data = {};
     struct data_t *data_ptr;
     data_ptr=lock_hash_table.lookup(&func_addr);
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
     u32 current_tid = bpf_get_current_pid_tgid();
-    bpf_trace_printk("Trace function: TID=%u, func_addr=0x%llx\\n", current_tid, (u64)func_addr); // Debugging
-    if(data_ptr)
-    {
-        data_ptr->time_s=bpf_ktime_get_ns();
-        data_ptr->lock_count += 1;
-        data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID|BPF_F_USER_STACK);
-        bpf_trace_printk("Lock count: %d \\n", data_ptr->lock_count); // Debugging
+    if (current_tid == target_TID) {
+        bpf_trace_printk("Trace function: TID=%u, func_addr=0x%llx\\n", current_tid, (u64)func_addr); // Debugging
+        if(data_ptr)
+        {
+            data_ptr->time_s=bpf_ktime_get_ns();
+            data_ptr->lock_count += 1;
+            data_ptr->stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID|BPF_F_USER_STACK);
+            bpf_trace_printk("Lock count: %d \\n", data_ptr->lock_count); // Debugging
+        }
+        else{
+            data.tid=bpf_get_current_pid_tgid();
+            data.time_s=bpf_ktime_get_ns();
+            bpf_get_current_comm(&data.comm, sizeof(data.comm));   
+            data.func_addr=func_addr;
+            data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID|BPF_F_USER_STACK);
+            data.lock_count = 1;
+            lock_hash_table.insert(&func_addr,&data);
+        }
     }
-    else{
-        data.tid=bpf_get_current_pid_tgid();
-        data.time_s=bpf_ktime_get_ns();
-        bpf_get_current_comm(&data.comm, sizeof(data.comm));   
-        data.func_addr=func_addr;
-        data.stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID|BPF_F_USER_STACK);
-        data.lock_count = 1;
-        lock_hash_table.insert(&func_addr,&data);
-    }
+    
     
 }
 
 void trace_end(struct pt_regs* ctx) {
-    u64 func_addr = _ADDR; 
+    u64 func_addr = PT_REGS_PARM1(ctx); 
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
     u32 current_tid = bpf_get_current_pid_tgid();
-    struct data_t *data;
-    data = lock_hash_table.lookup(&func_addr);
-    if (data) {
-        bpf_trace_printk("Return function: TID=%u, func_addr=0x%llx\\n", current_tid, (u64)func_addr); // Debugging
-        data->time_e = bpf_ktime_get_ns();
-        if(data->time_e <= data->time_s)
-            return;
-        data->time_delta = data->time_e - data->time_s;
-        data->lock_accum_time += data->time_delta;
-        perf_output.perf_submit(ctx, data, sizeof(struct data_t));
+    if (current_tid == target_TID) {
+        struct data_t *data;
+        data = lock_hash_table.lookup(&func_addr);
+        if (data) {
+            bpf_trace_printk("Return function: TID=%u, func_addr=0x%llx\\n", current_tid, (u64)func_addr); // Debugging
+            data->time_e = bpf_ktime_get_ns();
+            if(data->time_e <= data->time_s)
+                return;
+            data->time_delta = data->time_e - data->time_s;
+            data->lock_accum_time += data->time_delta;
+            perf_output.perf_submit(ctx, data, sizeof(struct data_t));
+        }
     }
+    
 }
 
 """
@@ -74,14 +82,12 @@ void trace_end(struct pt_regs* ctx) {
 def get_stack(stack_id):
     if stack_id_err(stack_id):
         return "[Missed Stack]"
-    print(f"Stack ID: {stack_id}")
     stack = list(b.get_table("stack_traces").walk(stack_id))
     # print("Stack addresses:", [hex(addr) for addr in stack])  
     stack_str = ""
     for addr in stack:
         func_name = b.sym(addr, args.pid, True) #Translate a memory address into a kernel function name
-        print(f"Address: {hex(addr)}, Function name: {func_name}")
-        stack_str += str(func_name) + "<br>"
+        stack_str += "\n"+"    "+str(func_name)
     return stack_str
 
 def stack_id_err(stack_id):
@@ -93,10 +99,10 @@ def print_event(cpu, data, size):
         event = b["perf_output"].event(data)
         # print("%-18.9d %-16s %-6d %-15d %-6d" % (event.func_addr, event.comm, event.tid,event.lock_accum_time, event.time_delta))
         
-        print("LOCK_ADDR: 0x{:x}".format(event.func_addr))
+        # print("LOCK_ADDR: 0x{:x}".format(event.func_addr))
         stack = b["stack_traces"].walk(event.stack_id)
-        for addr in stack:
-            print("    {}".format(b.sym(addr, args.pid, True)))
+        # for addr in stack:
+        #     print("    {}".format(b.sym(addr, args.pid, True)))
 
         trace = get_stack(event.stack_id)
         key = event.func_addr
@@ -127,7 +133,7 @@ def print_event(cpu, data, size):
                 'tid': {event.tid},
                 'comm': event.comm,
                 'lock_count': 1,
-                'func_name': "options.sym",
+                'func_name': "pthread_mutex_lock/unlock",
                 'stack_traces': {trace: {'count': 1, 'time': event.time_delta}}
             }
             events[event_dict['func_addr']] = event_dict
@@ -142,15 +148,17 @@ def print_func_info(events):
         print(f"  TIDs: {event_data['tid']}")        
         print("  Stack Traces:")
         for trace, trace_info in event_data['stack_traces'].items():
-            print(f"    Trace: {trace}")
             print(f"      Count: {trace_info['count']}")
             print(f"      Time: {trace_info['time']} ns")
+            print(f"    Trace: {trace}")
+            
 
 
 parser = argparse.ArgumentParser(description="Trace functions in MongoDB")
 parser.add_argument("-t","--time", help="Time in seconds to monitor locks in kernel. Default value is 180 seconds",
                     type=int, default=30)
 parser.add_argument("-p", "--pid", type=int, help="PID of the target process",default=-1)
+parser.add_argument("-s", "--tid", type=int, help="TID of the target process",default=-1)
 parser.add_argument("-l", "--lib",  help="Library name containing symbol to trace, e.g. /usr/bin/mongod", type=str, default="/lib/x86_64-linux-gnu/libc.so.6")
 parser.add_argument("-e", "--sym_e", help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
 parser.add_argument("-r", "--sym_r",  help="Symbol to trace, e.g. pthread_mutex_init", type=str, default="pthread_mutex_lock")
@@ -160,6 +168,8 @@ parser.add_argument('-ar', '--addr_r', help='Address to trace, e.g. 00000000076a
 args = parser.parse_args()
 
 bpf_prog = bpf_prog.replace("_ADDR", str(args.addr_r))
+bpf_prog = bpf_prog.replace("target_TID", str(args.tid))
+
 try:
     b = BPF(text=bpf_prog)
 except Exception as e:
