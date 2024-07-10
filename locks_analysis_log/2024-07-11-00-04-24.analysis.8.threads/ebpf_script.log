@@ -1,0 +1,10 @@
+Tasks to be tracked: ['mongod']
+Output path: /home/gxr/mongodb-run/ebpf_monitor/locks_analysis_log/2024-07-11-00-04-24.analysis.8.threads
+Traceback (most recent call last):
+  File "/home/gxr/mongodb-run/ebpf_monitor/src/mongo_lock_count_analysis_tmp.py", line 322, in <module>
+    attach(b)
+  File "/home/gxr/mongodb-run/ebpf_monitor/src/mongo_lock_count_analysis_tmp.py", line 221, in attach
+    bpf.attach_kprobe("do_futex", "trace_futex")
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 851, in attach_kprobe
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 507, in load_func
+Exception: Unknown program b''

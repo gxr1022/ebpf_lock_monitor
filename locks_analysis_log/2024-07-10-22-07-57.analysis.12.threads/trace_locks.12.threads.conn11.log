@@ -1,0 +1,8 @@
+Task to be tracked is  conn11
+Traceback (most recent call last):
+  File "/home/gxr/mongodb-run/ebpf_monitor/src/mongo_lock_count_analysis.py", line 337, in <module>
+    (task, pid, cpu, flags, ts, msg) = b.trace_fields()
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 1510, in trace_fields
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 1544, in trace_readline
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 1495, in trace_open
+OSError: [Errno 16] Device or resource busy: '/sys/kernel/debug/tracing/trace_pipe'

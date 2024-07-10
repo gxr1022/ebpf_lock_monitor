@@ -1,0 +1,10 @@
+Tasks to be tracked: ['mongod']
+Output path: /home/gxr/mongodb-run/ebpf_monitor/locks_analysis_log/2024-07-10-23-59-20.analysis.80.threads
+Traceback (most recent call last):
+  File "/home/gxr/mongodb-run/ebpf_monitor/src/mongo_lock_count_analysis_tmp.py", line 316, in <module>
+    attach(b)
+  File "/home/gxr/mongodb-run/ebpf_monitor/src/mongo_lock_count_analysis_tmp.py", line 217, in attach
+    bpf.attach_uprobe(name="pthread", sym="pthread_mutex_init", fn_name="probe_mutex_init")
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 1380, in attach_uprobe
+  File "/usr/lib/python3/dist-packages/bcc-0.30.0+1d8daaa3-py3.10.egg/bcc/__init__.py", line 978, in _check_path_symbol
+Exception: could not determine address of symbol pthread_mutex_init in pthread

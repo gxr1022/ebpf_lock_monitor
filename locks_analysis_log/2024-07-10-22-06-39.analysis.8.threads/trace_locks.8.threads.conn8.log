@@ -1,0 +1,422 @@
+Task to be tracked is  conn8
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+conn8 65060 
+
+
+
+
+Init of all locks
+
+
+
+init stack for mutex 51307f990488 (#1)
+		b'[unknown]' (77e74d6975c0)
+		b'[unknown]' (57fd2a2de36e)
+		b'[unknown]' (57fd2a19e266)
+		b'[unknown]' (57fd2a2c2f57)
+		b'[unknown]' (57fd2a2c3070)
+		b'[unknown]' (57fd2a2c3240)
+		b'[unknown]' (57fd2a27c1e4)
+		b'[unknown]' (57fd2a281204)
+		b'[unknown]' (57fd2a281853)
+		b'[unknown]' (57fd2a27d556)
+		b'[unknown]' (57fd2a27f60e)
+		b'[unknown]' (57fd2a281348)
+		b'[unknown]' (57fd2a281853)
+		b'[unknown]' (57fd2a29a631)
+		b'[unknown]' (57fd2a29af53)
+		b'[unknown]' (57fd2a0cc0bc)
+		b'[unknown]' (57fd2d2a331e)
+		b'[unknown]' (57fd2b007dde)
+		b'[unknown]' (57fd2b008c72)
+		b'[unknown]' (57fd2b00a315)
+		b'[unknown]' (57fd2aa5e47f)
+		b'[unknown]' (57fd2aa5e7e5)
+		b'[unknown]' (57fd2aa5eca5)
+		b'[unknown]' (57fd2aa603ec)
+		b'[unknown]' (57fd2aa6108a)
+		b'[unknown]' (57fd2aa65176)
+		b'[unknown]' (57fd2a76b1c9)
+		b'[unknown]' (57fd2a776d18)
+		b'[unknown]' (57fd2a77746b)
+		b'[unknown]' (57fd2a776d70)
+		b'[unknown]' (57fd2f1d054e)
+		b'[unknown]' (57fd2831f9ac)
+		b'[unknown]' (57fd28322125)
+		b'[unknown]' (57fd283253a0)
+		b'[unknown]' (57fd28326325)
+		b'[unknown]' (57fd283257be)
+		b'[unknown]' (57fd2832586f)
+		b'[unknown]' (57fd28321ad5)
+		b'[unknown]' (57fd28321bc3)
+		b'[unknown]' (57fd2832a105)
+		b'[unknown]' (57fd28320eb9)
+		b'[unknown]' (57fd28320f5b)
+		b'[unknown]' (57fd2832ce5e)
+		b'[unknown]' (57fd2832d9e5)
+		b'[unknown]' (57fd2832e066)
+		b'[unknown]' (57fd2832edf5)
+		b'[unknown]' (57fd28310f38)
+		b'[unknown]' (57fd2ee9db8d)
+		b'[unknown]' (57fd2ee9e171)
+		b'[unknown]' (57fd2ee9e1e4)
+		b'[unknown]' (57fd2ee9e273)
+		b'[unknown]' (57fd2ee9e2d7)
+		b'[unknown]' (57fd2ee9e81e)
+		b'[unknown]' (57fd2ee9ea0e)
+		b'[unknown]' (57fd2ee9eaad)
+		b'[unknown]' (57fd2ee9eb3b)
+		b'[unknown]' (57fd2ee9f6ca)
+		b'[unknown]' (57fd2ee9f78b)
+		b'[unknown]' (57fd2eea097d)
+		b'[unknown]' (57fd281c1dd2)
+		b'[unknown]' (57fd2eea43d9)
+		b'[unknown]' (57fd2eea53d5)
+		b'[unknown]' (57fd2eea4380)
+		b'[unknown]' (57fd2eea5529)
+		b'[unknown]' (57fd281c1dd2)
+		b'[unknown]' (57fd2f2a391a)
+		b'[unknown]' (57fd2f2a0893)
+		b'[unknown]' (57fd2f2a199a)
+		b'[unknown]' (57fd2895eafc)
+		b'[unknown]' (57fd2f2a6592)
+		b'[unknown]' (57fd2f2a7112)
+		b'[unknown]' (57fd2895eafc)
+		b'[unknown]' (57fd2f2a64db)
+		b'[unknown]' (77e74d694ac3)
+
+init stack for mutex 51307f89e348 (#2)
+		b'[unknown]' (77e74d6975c0)
+		b'[unknown]' (57fd2a419788)
+		b'[unknown]' (57fd2a4183f6)
+		b'[unknown]' (57fd2a419d3e)
+		b'[unknown]' (57fd2a36d28b)
+		b'[unknown]' (57fd2a36f48d)
+		b'[unknown]' (57fd2a1cd0b9)
+		b'[unknown]' (57fd2a09bda9)
+		b'[unknown]' (57fd2a10d4a4)
+		b'[unknown]' (57fd2a10c54b)
+		b'[unknown]' (57fd2d54a330)
+		b'[unknown]' (57fd2d2ba3e9)
+		b'[unknown]' (57fd2d2bc735)
+		b'[unknown]' (57fd2aa5f3f8)
+		b'[unknown]' (57fd2aa60794)
+		b'[unknown]' (57fd2aa60a6a)
+		b'[unknown]' (57fd2aa61429)
+		b'[unknown]' (57fd2aa65176)
+		b'[unknown]' (57fd2a76b1c9)
+		b'[unknown]' (57fd2a776d18)
+		b'[unknown]' (57fd2a77746b)
+		b'[unknown]' (57fd2a776d70)
+		b'[unknown]' (57fd2f1d054e)
+		b'[unknown]' (57fd2831f9ac)
+		b'[unknown]' (57fd28322125)
+		b'[unknown]' (57fd283253a0)
+		b'[unknown]' (57fd28326325)
+		b'[unknown]' (57fd283257be)
+		b'[unknown]' (57fd2832586f)
+		b'[unknown]' (57fd28321ad5)
+		b'[unknown]' (57fd28321bc3)
+		b'[unknown]' (57fd2832a105)
+		b'[unknown]' (57fd28320eb9)
+		b'[unknown]' (57fd28320f5b)
+		b'[unknown]' (57fd2832ce5e)
+		b'[unknown]' (57fd2832d9e5)
+		b'[unknown]' (57fd2832e066)
+		b'[unknown]' (57fd2832edf5)
+		b'[unknown]' (57fd28310f38)
+		b'[unknown]' (57fd2ee9db8d)
+		b'[unknown]' (57fd2ee9e171)
+		b'[unknown]' (57fd2ee9e1e4)
+		b'[unknown]' (57fd2ee9e273)
+		b'[unknown]' (57fd2ee9e2d7)
+		b'[unknown]' (57fd2ee9e81e)
+		b'[unknown]' (57fd2ee9ea0e)
+		b'[unknown]' (57fd2ee9eaad)
+		b'[unknown]' (57fd2ee9eb3b)
+		b'[unknown]' (57fd2ee9f6ca)
+		b'[unknown]' (57fd2ee9f78b)
+		b'[unknown]' (57fd2eea097d)
+		b'[unknown]' (57fd281c1dd2)
+		b'[unknown]' (57fd2eea43d9)
+		b'[unknown]' (57fd2eea53d5)
+		b'[unknown]' (57fd2eea4380)
+		b'[unknown]' (57fd2eea5529)
+		b'[unknown]' (57fd281c1dd2)
+		b'[unknown]' (57fd2f2a391a)
+		b'[unknown]' (57fd2f2a0893)
+		b'[unknown]' (57fd2f2a199a)
+		b'[unknown]' (57fd2895eafc)
+		b'[unknown]' (57fd2f2a6592)
+		b'[unknown]' (57fd2f2a7112)
+		b'[unknown]' (57fd2895eafc)
+		b'[unknown]' (57fd2f2a64db)
+		b'[unknown]' (77e74d694ac3)
+
+init stack for mutex 51307f990508 (#3)
+		b'[unknown]' (77e74d6975c0)
+		b'[unknown]' (57fd2a2de342)
+		b'[unknown]' (57fd2a39349a)
+		b'[unknown]' (57fd2a3919e7)
+		b'[unknown]' (57fd2a19f9ed)
+		b'[unknown]' (57fd2a2c36ec)
+		b'[unknown]' (57fd2a27c1e4)
+		b'[unknown]' (57fd2a281204)
+		b'[unknown]' (57fd2a281853)
+		b'[unknown]' (57fd2a27d556)
+		b'[unknown]' (57fd2a27f60e)
+		b'[unknown]' (57fd2a281348)
+		b'[unknown]' (57fd2a281853)
+		b'[unknown]' (57fd2a29a631)
+		b'[unknown]' (57fd2a29af53)
+		b'[unknown]' (57fd2a0cc0bc)
+		b'[unknown]' (57fd2d2a331e)
+		b'[unknown]' (57fd2b007dde)
+		b'[unknown]' (57fd2b008c72)
+		b'[unknown]' (57fd2b00a315)
+		b'[unknown]' (57fd2aa5e47f)
+		b'[unknown]' (57fd2aa5e7e5)
+		b'[unknown]' (57fd2aa5eca5)
+		b'[unknown]' (57fd2aa603ec)
+		b'[unknown]' (57fd2aa6108a)
+		b'[unknown]' (57fd2aa65176)
+		b'[unknown]' (57fd2a76b1c9)
+		b'[unknown]' (57fd2a776d18)
+		b'[unknown]' (57fd2a77746b)
+		b'[unknown]' (57fd2a776d70)
+		b'[unknown]' (57fd2f1d054e)
+		b'[unknown]' (57fd2831f9ac)
+		b'[unknown]' (57fd28322125)
+		b'[unknown]' (57fd283253a0)
+		b'[unknown]' (57fd28326325)
+		b'[unknown]' (57fd283257be)
+		b'[unknown]' (57fd2832586f)
+		b'[unknown]' (57fd28321ad5)
+		b'[unknown]' (57fd28321bc3)
+		b'[unknown]' (57fd2832a105)
+		b'[unknown]' (57fd28320eb9)
+		b'[unknown]' (57fd28320f5b)
+		b'[unknown]' (57fd2832ce5e)
+		b'[unknown]' (57fd2832d9e5)
+		b'[unknown]' (57fd2832e066)
+		b'[unknown]' (57fd2832edf5)
+		b'[unknown]' (57fd28310f38)
+		b'[unknown]' (57fd2ee9db8d)
+		b'[unknown]' (57fd2ee9e171)
+		b'[unknown]' (57fd2ee9e1e4)
+		b'[unknown]' (57fd2ee9e273)
+		b'[unknown]' (57fd2ee9e2d7)
+		b'[unknown]' (57fd2ee9e81e)
+		b'[unknown]' (57fd2ee9ea0e)
+		b'[unknown]' (57fd2ee9eaad)
+		b'[unknown]' (57fd2ee9eb3b)
+		b'[unknown]' (57fd2ee9f6ca)
+		b'[unknown]' (57fd2ee9f78b)
+		b'[unknown]' (57fd2eea097d)
+		b'[unknown]' (57fd281c1dd2)
+		b'[unknown]' (57fd2eea43d9)
+		b'[unknown]' (57fd2eea53d5)
+		b'[unknown]' (57fd2eea4380)
+		b'[unknown]' (57fd2eea5529)
+		b'[unknown]' (57fd281c1dd2)
+		b'[unknown]' (57fd2f2a391a)
+		b'[unknown]' (57fd2f2a0893)
+		b'[unknown]' (57fd2f2a199a)
+		b'[unknown]' (57fd2895eafc)
+		b'[unknown]' (57fd2f2a6592)
+		b'[unknown]' (57fd2f2a7112)
+		b'[unknown]' (57fd2895eafc)
+		b'[unknown]' (57fd2f2a64db)
+		b'[unknown]' (77e74d694ac3)
+
+init stack for mutex 513079554ae8 (#4)
+		b'[unknown]' (77e74d6975c0)
+		b'[unknown]' (57fd2a19e33d)
+		b'[unknown]' (57fd2a2c2f57)
+		b'[unknown]' (57fd2a2c3070)
+		b'[unknown]' (57fd2a2c3240)
+		b'[unknown]' (57fd2a284b54)
+		b'[unknown]' (57fd2a284cee)
+		b'[unknown]' (57fd2a27cdd3)
+		b'[unknown]' (57fd2a27f60e)

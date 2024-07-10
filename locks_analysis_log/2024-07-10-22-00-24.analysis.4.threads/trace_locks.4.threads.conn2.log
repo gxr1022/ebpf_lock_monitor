@@ -1,0 +1,390 @@
+Task to be tracked is  conn2
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+conn2 62617 
+
+
+
+
+Init of all locks
+
+
+
+init stack for mutex 10b67f96e608 (#1)
+		b'[unknown]' (11037ac)
+		b'[unknown]' (1d4b13e)
+		b'[unknown]' (111fb0e)
+		b'[unknown]' (114072a)
+		b'[unknown]' (10ee656)
+		b'[unknown]' (10f3cad)
+		b'[unknown]' (10f419c)
+		b'[unknown]' (10f4eba)
+		b'[unknown]' (10f684a)
+		b'[unknown]' (d20366)
+		b'[unknown]' (d22f1f)
+		b'[unknown]' (188ae53)
+		b'[unknown]' (189f8cb)
+		b'[unknown]' (188bb77)
+		b'[unknown]' (bbbb83)
+		b'[unknown]' (cf4ee5)
+		b'[unknown]' (cf58ad)
+		b'[unknown]' (c5f397)
+		b'[unknown]' (7a5980629d90)
+
+init stack for mutex 10b6797f7740 (#2)
+		b'[unknown]' (107cbcf)
+		b'[unknown]' (112b773)
+		b'[unknown]' (112ed65)
+		b'[unknown]' (10fb498)
+		b'[unknown]' (10fbe31)
+		b'[unknown]' (10fbf7d)
+		b'[unknown]' (10f4a97)
+		b'[unknown]' (ee2c92)
+		b'[unknown]' (12c80c2)
+		b'[unknown]' (10b7665)
+		b'[unknown]' (edf1b6)
+		b'[unknown]' (c9f396)
+		b'[unknown]' (c9fa13)
+		b'[unknown]' (cb8f71)
+		b'[unknown]' (72322be4d546)
+		b'[unknown]' (72320c8fa54a)
+		b'[unknown]' (72320c7d76e5)
+		b'[unknown]' (72320c6b0b63)
+		b'[unknown]' (72320c8e0b98)
+		b'[unknown]' (72320c6a4b06)
+		b'[unknown]' (72320c5bb70b)
+		b'[unknown]' (72320c5b3118)
+		b'[unknown]' (72320c143f8a)
+		b'[unknown]' (18e6d43)
+		b'[unknown]' (199ebf1)
+		b'[unknown]' (18d6a34)
+		b'[unknown]' (18ad003)
+		b'[unknown]' (102b1bd)
+		b'[unknown]' (102c3ef)
+		b'[unknown]' (105fd66)
+		b'[unknown]' (10600fd)
+		b'[unknown]' (72322be4d546)
+		b'[unknown]' (72320c96560d)
+		b'[unknown]' (72320c37715e)
+		b'[unknown]' (18ad0dc)
+		b'[unknown]' (18ace03)
+		b'[unknown]' (102ad5b)
+		b'[unknown]' (102bdf4)
+		b'[unknown]' (eee33d)
+		b'[unknown]' (c0352d)
+		b'[unknown]' (1887eb2)
+		b'[unknown]' (188bce4)
+		b'[unknown]' (bbbb83)
+		b'[unknown]' (cf4ee5)
+		b'[unknown]' (cf58ad)
+		b'[unknown]' (c5f397)
+		b'[unknown]' (723234429d90)
+
+init stack for mutex 10b67f96e208 (#3)
+		b'[unknown]' (63a8b6a036a7)
+		b'[unknown]' (63a8b6a03cac)
+		b'[unknown]' (63a8b6a0ceca)
+		b'[unknown]' (63a8bdb2cbc6)
+		b'[unknown]' (63a8bdb24135)
+		b'[unknown]' (63a8bdb2610d)
+		b'[unknown]' (63a8bdb23c33)
+		b'[unknown]' (63a8bdb0fd1b)
+		b'[unknown]' (63a8bdb0faa6)
+		b'[unknown]' (63a8bdb0f843)
+		b'[unknown]' (63a8b6ad835b)
+		b'[unknown]' (63a8b991394c)
+		b'[unknown]' (63a8b9917826)
+		b'[unknown]' (63a8b9916d9f)
+		b'[unknown]' (63a8b9915edd)
+		b'[unknown]' (63a8b81f4403)
+		b'[unknown]' (63a8b81f297f)
+		b'[unknown]' (63a8b81f3af9)
+		b'[unknown]' (63a8b81f39ea)
+		b'[unknown]' (63a8b81f3743)
+		b'[unknown]' (63a8b81f377d)
+		b'[unknown]' (63a8b81f37ee)
+		b'[unknown]' (63a8b81f4168)
+		b'[unknown]' (63a8b81f412b)
+		b'[unknown]' (63a8b81f40d8)
+		b'[unknown]' (63a8b81f40ac)
+		b'[unknown]' (63a8b81f4090)
+		b'[unknown]' (756359ce62b3)
+
+init stack for mutex 10b67f90a408 (#4)
+		b'[unknown]' (76a81dc975c0)
+		b'[unknown]' (10d5d9d)
+		b'[unknown]' (10f34f4)
+		b'[unknown]' (10f419c)
+		b'[unknown]' (10ca4a1)
+		b'[unknown]' (10cb635)
+		b'[unknown]' (10a7d56)
+		b'[unknown]' (10994cc)
+		b'[unknown]' (1099634)
+		b'[unknown]' (10b6064)
+		b'[unknown]' (10b617e)
+		b'[unknown]' (151a86f)
+		b'[unknown]' (76a816e99ef6)
+		b'[unknown]' (76a816e8a432)
+		b'[unknown]' (76a7f711aeae)
+		b'[unknown]' (76a7f70f04cb)
+		b'[unknown]' (76a7f7119837)
+		b'[unknown]' (18aed1c)
+		b'[unknown]' (18aed1c)
+		b'[unknown]' (1923d38)
+		b'[unknown]' (18aed1c)
+		b'[unknown]' (18aed1c)
+		b'[unknown]' (76a7f71a601a)
+		b'[unknown]' (76a7f71a9d4f)
+		b'[unknown]' (18ad0dc)
+		b'[unknown]' (18ace03)
+		b'[unknown]' (102ad5b)
+		b'[unknown]' (102bdf4)
+		b'[unknown]' (eee33d)
+		b'[unknown]' (c0352d)
+		b'[unknown]' (1887eb2)
+		b'[unknown]' (188bce4)
+		b'[unknown]' (bbbb83)
+		b'[unknown]' (cf4ee5)
+		b'[unknown]' (cf58ad)
+		b'[unknown]' (c5f397)
+		b'[unknown]' (76a81dc29d90)
+
+init stack for mutex 10b6797c79e8 (#5)
+		b'[unknown]' (75447fede31f)
+		b'[unknown]' (6107)
+
+init stack for mutex 10b67948e2e8 (#6)
+		b'[unknown]' (1061105)
+		b'[unknown]' (10fc0b2)
+		b'[unknown]' (1074544)
+		b'[unknown]' (10aa313)
+		b'[unknown]' (12a65f1)
+		b'[unknown]' (1375c35)
+		b'[unknown]' (1378343)
+		b'[unknown]' (121caab)
+		b'[unknown]' (121e22a)
+		b'[unknown]' (121f796)
+		b'[unknown]' (f5c5b2)
+		b'[unknown]' (193cdf6)
+		b'[unknown]' (72320c164ae7)
+		b'[unknown]' (72320c8f6b8c)
+		b'[unknown]' (72320c09b00d)
+		b'[unknown]' (199ebf1)
+		b'[unknown]' (18d6a34)
+		b'[unknown]' (18ad003)
+		b'[unknown]' (102b1bd)
+		b'[unknown]' (102c3ef)
+		b'[unknown]' (105fd66)
+		b'[unknown]' (10600fd)
+		b'[unknown]' (72322be4d546)
+		b'[unknown]' (72320c6fa359)
+		b'[unknown]' (18ad0dc)
+		b'[unknown]' (18ace03)
+		b'[unknown]' (102ad5b)
+		b'[unknown]' (102bdf4)
+		b'[unknown]' (eee33d)
+		b'[unknown]' (bbad5a)
+		b'[unknown]' (bbb0bb)
+		b'[unknown]' (bd209c)
+		b'[unknown]' (db9287)
+		b'[unknown]' (db9605)
+		b'[unknown]' (dc0ec2)
+		b'[unknown]' (dc12e7)
+		b'[unknown]' (1897b35)
+		b'[unknown]' (1897e60)
+		b'[unknown]' (189f8cb)
+		b'[unknown]' (188bb77)
+		b'[unknown]' (bbbb83)
+		b'[unknown]' (cf4ee5)
+		b'[unknown]' (cf58ad)
+		b'[unknown]' (c5f397)
+		b'[unknown]' (723234429d90)
+
+init stack for mutex 10b67ff179d8 (#7)
+		b'[unknown]' (7563598975c0)
+		b'[unknown]' (63a8b8c6c788)
+		b'[unknown]' (63a8b8c20488)
+		b'[unknown]' (63a8b8c2a64f)
+		b'[unknown]' (63a8b8c2b560)
+		b'[unknown]' (63a8b8c2b644)
+		b'[unknown]' (63a8b8a58753)
+		b'[unknown]' (63a8b8a57950)
+		b'[unknown]' (63a8b8c07f97)
+		b'[unknown]' (63a8b8c703e0)
+		b'[unknown]' (63a8b8c72941)
+		b'[unknown]' (63a8b8bc01d4)
+		b'[unknown]' (63a8b8bc23ec)
+		b'[unknown]' (63a8b8a200b9)
+		b'[unknown]' (63a8b88eeda9)
+		b'[unknown]' (63a8b89604a4)
+		b'[unknown]' (63a8b895f54b)
+		b'[unknown]' (63a8bbd9d330)
+		b'[unknown]' (63a8bbb0d3e9)
+		b'[unknown]' (63a8bbb0f735)
+		b'[unknown]' (63a8b92b23f8)
+		b'[unknown]' (63a8b92b3794)
+		b'[unknown]' (63a8b92b3a6a)
+		b'[unknown]' (63a8b92b4429)
+		b'[unknown]' (63a8b92b8176)
+		b'[unknown]' (63a8b8fbe1c9)
+		b'[unknown]' (63a8b8fc9d18)
+		b'[unknown]' (63a8b8fca46b)
+		b'[unknown]' (63a8b8fc9d70)
+		b'[unknown]' (63a8bda2354e)
+		b'[unknown]' (63a8b6b729ac)
+		b'[unknown]' (63a8b6b75125)
+		b'[unknown]' (63a8b6b783a0)
+		b'[unknown]' (63a8b6b79325)
+		b'[unknown]' (63a8b6b787be)
+		b'[unknown]' (63a8b6b7886f)
+		b'[unknown]' (63a8b6b74ad5)
+		b'[unknown]' (63a8b6b74bc3)
+		b'[unknown]' (63a8b6b7d105)
+		b'[unknown]' (63a8b6b73eb9)
+		b'[unknown]' (63a8b6b73f5b)
+		b'[unknown]' (63a8b6b7fe5e)
+		b'[unknown]' (63a8b6b809e5)
+		b'[unknown]' (63a8b6b81066)
+		b'[unknown]' (63a8b6b81df5)
+		b'[unknown]' (63a8b6b63f38)
+		b'[unknown]' (63a8bd6f0b8d)
+		b'[unknown]' (63a8bd6f1171)
+		b'[unknown]' (63a8bd6f11e4)
+		b'[unknown]' (63a8bd6f1273)
+		b'[unknown]' (63a8bd6f12d7)
+		b'[unknown]' (63a8bd6f181e)
+		b'[unknown]' (63a8bd6f1a0e)
+		b'[unknown]' (63a8bd6f1aad)
+		b'[unknown]' (63a8bd6f1b3b)
+		b'[unknown]' (63a8bd6f26ca)
+		b'[unknown]' (63a8bd6f278b)
+		b'[unknown]' (63a8bd6f397d)
+		b'[unknown]' (63a8b6a14dd2)
+		b'[unknown]' (63a8bd6f73d9)
+		b'[unknown]' (63a8bd6f83d5)
+		b'[unknown]' (63a8bd6f7380)
+		b'[unknown]' (63a8bd6f8529)
+		b'[unknown]' (63a8b6a14dd2)
+		b'[unknown]' (63a8bdaf691a)
+		b'[unknown]' (63a8bdaf3893)
+		b'[unknown]' (63a8bdaf499a)
+		b'[unknown]' (63a8b71b1afc)
+		b'[unknown]' (63a8bdaf9592)
+		b'[unknown]' (63a8bdafa112)
+		b'[unknown]' (63a8b71b1afc)
+		b'[unknown]' (63a8bdaf94db)
+		b'[unknown]' (756359894ac3)
+
+init stack for mutex 10b67f96e488 (#8)
+		b'[unknown]' (63a8b6a036a7)
+		b'[unknown]' (63a8b6a03cac)
+		b'[unknown]' (63a8b6a0ceca)
+		b'[unknown]' (63a8bdb2cbc6)

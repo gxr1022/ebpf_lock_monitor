@@ -330,7 +330,6 @@ tracing = b["tracing"]
 # signal.signal(signal.SIGINT, print_init_data)
 
 
-
 start_time = datetime.datetime.now()
 while True:
     try:

@@ -1,0 +1,5 @@
+Task to be tracked is  mongod
+Traceback (most recent call last):
+  File "/home/gxr/mongodb-run/ebpf_monitor/src/mongo_lock_count_analysis.py", line 343, in <module>
+    if time_elapsed.seconds > int(perf_time):
+ValueError: invalid literal for int() with base 10: '/home/gxr/mongodb-run/ebpf_monitor/locks_analysis_log/2024-07-10-23-55-44.analysis.80.threads'
