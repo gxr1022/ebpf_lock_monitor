@@ -231,86 +231,118 @@ def print_stack(stacks, stack_id, pid):
         print_frame(addr,pid)
 
 def print_init_data():
-    pids = []
-    for items in lists:
-        if items[2] not in pids:
-            pids.append(items[2])
-    mutex_ids = {}
-    next_mutex_id = 1
+    output_file = f"{output_path}/trace_locks.per_thread.log"
+    with open(output_file, 'w') as f:
+        pids = []
+        for items in lists:
+            if items[2] not in pids:
+                pids.append(items[2])
+        mutex_ids = {}
+        next_mutex_id = 1
 
-    print("\n\n\nInit of all locks\n\n\n")
+        print("\n\n\nInit of all locks\n\n\n")
 
-    for k, v in init_stacks.items():
-        if v.pid in pids:
-            mutex_id = "#%d" % next_mutex_id
-            next_mutex_id += 1
-            mutex_ids[k.value] = mutex_id
-            print("init stack for mutex %x (%s)" % (k.value, mutex_id))
-            print_stack( stacks, v.stack_id ,v.pid)
-            print("")
-
-    print("\n\n\nPer thread lock analysis\n\n\n")
-
-    grouper = lambda k_v: k_v[0].tid
-    sorted_by_thread = sorted(locks.items(), key=grouper)
-    locks_by_thread = itertools.groupby(sorted_by_thread, grouper)
-
-    for tid, items in locks_by_thread:
-        if tid in pids:
-            print("thread %d" % tid)
-            for k, v in sorted(items, key=lambda k_v: -k_v[1].wait_time_ns):
-                if k.mtx in mutex_ids:
-                    mutex_descr = mutex_ids[k.mtx]
-                    print("\tFound in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
-                          (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
-                else:
-                
-                    mutex_descr = b.ksym(k.mtx)
-                    print("\tNot found in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
-                          (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
-                print_stack(stacks, k.lock_stack_id, tid)
+        for k, v in init_stacks.items():
+            if v.pid in pids:
+                mutex_id = "#%d" % next_mutex_id
+                next_mutex_id += 1
+                mutex_ids[k.value] = mutex_id
+                print("init stack for mutex %x (%s)" % (k.value, mutex_id))
+                print_stack( stacks, v.stack_id ,v.pid)
                 print("")
 
-    # The historm includes all phthread_mutex_lock operations in linux, not only task_to_track
-    mutex_wait_hist.print_log2_hist(val_type="wait time (us)")
-    mutex_lock_hist.print_log2_hist(val_type="hold time (us)")
+        print("\n\n\nPer thread lock analysis\n\n\n")
 
-    print("\n\n\nOverall per lock analysis\n\n\n")
+        grouper = lambda k_v: k_v[0].tid
+        sorted_by_thread = sorted(locks.items(), key=grouper)
+        locks_by_thread = itertools.groupby(sorted_by_thread, grouper)
 
-    mutex_analysis = {}
-    sorted_by_thread = sorted(locks.items(), key=grouper)
-    locks_by_thread = itertools.groupby(sorted_by_thread, grouper)
-    for tid, items in locks_by_thread:
-        if tid in pids:
-            for k, v in sorted(items, key=lambda k_v: -k_v[1].wait_time_ns):
-                if k.mtx in mutex_analysis:
-                    mutex_analysis[k.mtx][0] = mutex_analysis[k.mtx][0] + v.wait_time_ns / 1000.0
-                    mutex_analysis[k.mtx][1] = mutex_analysis[k.mtx][1] + v.lock_time_ns / 1000.0
-                    mutex_analysis[k.mtx][2] = mutex_analysis[k.mtx][2] + v.enter_count
-                else:
-                    mutex_analysis[k.mtx] = [v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count]
+        mutex_analysis_per_thread={}
+        total_times_per_thread={}
+        for tid, items in locks_by_thread:
+            
+            if tid in pids:
+                print("thread %d" % tid)
+                if tid not in mutex_analysis_per_thread:
+                    mutex_analysis_per_thread[tid] ={}
+                for k, v in sorted(items, key=lambda k_v: -k_v[1].wait_time_ns):
+                    if k.mtx in mutex_analysis_per_thread[tid]:
+                        mutex_analysis_per_thread[tid][k.mtx][0] += v.wait_time_ns
+                        mutex_analysis_per_thread[tid][k.mtx][1] += v.lock_time_ns
+                        mutex_analysis_per_thread[tid][k.mtx][2] += v.enter_count
+                    else:
+                        mutex_analysis_per_thread[tid][k.mtx] = [v.wait_time_ns, v.lock_time_ns, v.enter_count]
 
-    sorted_mutex_analysis = sorted(mutex_analysis.items(), key=lambda item: item[1][0], reverse=True)
-    for k in mutex_analysis:
-        v = mutex_analysis[k]
-        mutex_descr = mutex_ids[k] if k in mutex_ids else 0
-        print("\tmutex %x (%s) ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
-              (k, mutex_descr, v[0], v[1], v[2]))
+                    if k.mtx in mutex_ids:
+                        mutex_descr = mutex_ids[k.mtx]
+                        print("\tFound in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
+                              (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
+                    else:
+                    
+                        mutex_descr = b.ksym(k.mtx)
+                        print("\tNot found in mutex_ids. mutex (%s) %x ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
+                              (mutex_descr, k.mtx, v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count))
+                    print_stack(stacks, k.lock_stack_id, tid)
+                    print("")
 
-    print("\n\n\nContention analysis\n\n\n")
+        for tid, mutex_times in mutex_analysis_per_thread.items():
+            if tid not in total_times_per_thread:
+                total_times_per_thread[tid] = [0, 0, 0]  # 初始化总等待时间、持有时间和进入次数
+            print(f"\n\\nAccumulated times per mutex for thread {tid}:\n")
+            for mtx, times in mutex_times.items():
+                wait_time, hold_time, enter_count = times
+                total_times_per_thread[tid][0] += wait_time
+                total_times_per_thread[tid][1] += hold_time
+                total_times_per_thread[tid][2] += enter_count
+                mutex_descr = mutex_ids[mtx] if mtx in mutex_ids else "unknown"
+                print(f"Mutex {mtx:x} ({mutex_descr}) ::: accumulated wait time {wait_time / 1000.0:.2f}us ::: accumulated hold time {hold_time / 1000.0:.2f}us ::: total enter count {enter_count}")
 
-    for k in tracing:
-        mutex_descr = mutex_ids[k.value] if k.value in mutex_ids else 0
-        print("Mutex %x (%s) Count=%d \n" % (k.value, mutex_descr, tracing[k].count))
+        # The historm includes all phthread_mutex_lock operations in linux, not only task_to_track
+        mutex_wait_hist.print_log2_hist(val_type="wait time (us)")
+        mutex_lock_hist.print_log2_hist(val_type="hold time (us)")
+
+        print("\n\n\nTotal lock time per thread:")
+        for tid, times in total_times_per_thread.items():
+            wait_time, hold_time, enter_count = times
+            print(f"Thread {tid} ::: total wait time {wait_time / 1000.0:.2f}us ::: total hold time {hold_time / 1000.0:.2f}us ::: total enter count {enter_count}")
+
+        print("\n\n\nOverall per lock analysis\n\n\n")
+
+        mutex_analysis = {}
+        sorted_by_thread = sorted(locks.items(), key=grouper)
+        locks_by_thread = itertools.groupby(sorted_by_thread, grouper)
+        for tid, items in locks_by_thread:
+            if tid in pids:
+                for k, v in sorted(items, key=lambda k_v: -k_v[1].wait_time_ns):
+                    if k.mtx in mutex_analysis:
+                        mutex_analysis[k.mtx][0] = mutex_analysis[k.mtx][0] + v.wait_time_ns / 1000.0
+                        mutex_analysis[k.mtx][1] = mutex_analysis[k.mtx][1] + v.lock_time_ns / 1000.0
+                        mutex_analysis[k.mtx][2] = mutex_analysis[k.mtx][2] + v.enter_count
+                    else:
+                        mutex_analysis[k.mtx] = [v.wait_time_ns / 1000.0, v.lock_time_ns / 1000.0, v.enter_count]
+
+        sorted_mutex_analysis = sorted(mutex_analysis.items(), key=lambda item: item[1][0], reverse=True)
+        for k in mutex_analysis:
+            v = mutex_analysis[k]
+            mutex_descr = mutex_ids[k] if k in mutex_ids else 0
+            print("\tmutex %x (%s) ::: wait time %.2fus ::: hold time %.2fus ::: enter count %d" %
+                (k, mutex_descr, v[0], v[1], v[2]))
+
+        print("\n\n\nContention analysis\n\n\n")
+
+        for k in tracing:
+            mutex_descr = mutex_ids[k.value] if k.value in mutex_ids else 0
+            print("Mutex %x (%s) Count=%d \n" % (k.value, mutex_descr, tracing[k].count))
     
     sys.exit(0)
 
 
-task_to_track = sys.argv[1]
-perf_time = sys.argv[2]
-print("Task to be tracked is ", task_to_track)
+tasks_to_track = sys.argv[1:-2]  
+perf_time = sys.argv[-2]         
+output_path = sys.argv[-1] 
 lists = []
 
+print(tasks_to_track)
 try:
     b = BPF(text=prog)
 except Exception as e:
@@ -326,21 +358,17 @@ mutex_lock_hist = b["mutex_lock_hist"]
 mutex_wait_hist = b["mutex_wait_hist"]
 tracing = b["tracing"]
 
-# signal.signal(signal.SIGTERM, print_init_data)
-# signal.signal(signal.SIGINT, print_init_data)
-
-
 start_time = datetime.datetime.now()
 while True:
     try:
         (task, pid, cpu, flags, ts, msg) = b.trace_fields()
     except ValueError:
         continue
-    if task_to_track in task.decode('utf-8', 'replace'):
-        print(task_to_track,pid,"\n")
-        lists.append([ts, task, pid])
+    for task_to_track in tasks_to_track:
+        if task_to_track in task.decode('utf-8', 'replace'):
+            print(task_to_track,pid,"\n")
+            lists.append([ts, task, pid])
     time_elapsed = datetime.datetime.now() - start_time
     if time_elapsed.seconds > int(perf_time):
         break
-
 print_init_data()
