@@ -22,5 +22,5 @@ if [ ! -z "$pids" ]; then
     sudo kill -9 $pids
 fi
 
-output_file=${OUTPUT_PATH}/trace_locks.${thread_num}.threads.log
-sudo python3 $cmd_path "${filtered_comm_array[@]}" "$perf_time" "$OUTPUT_PATH" 2>&1 | tee -a ${output_file}
+# output_file=${OUTPUT_PATH}/trace_locks.${thread_num}.threads.log
+sudo python3 $cmd_path "${filtered_comm_array[@]}" "$perf_time" "$OUTPUT_PATH"
