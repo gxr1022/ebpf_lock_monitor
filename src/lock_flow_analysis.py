@@ -2,6 +2,8 @@ import sys
 import itertools
 from time import sleep
 from bcc import BPF
+import datetime
+import os
 import signal
 import ctypes
 
@@ -11,9 +13,9 @@ prog = """
 #include <linux/ktime.h>
 
 struct mutex_use_t {
-	u32 pid;
-	int stack_id;
-	u64 mtx;
+    u32 pid;
+    int stack_id;
+    u64 mtx;
 };
 
 BPF_HASH(lock_stacks, u64, struct mutex_use_t);
@@ -61,58 +63,65 @@ def attach(bpf):
 def print_to_file(print_str, f):
     f.write(print_str)
 
-def print_frame(addr, f):
-    symbol = b.sym(addr, int(target_pid), True)
-    print_to_file("\t\t%16s (%x)" % (symbol, addr), f)
+def print_frame(addr, pid, f):
+    symbol = b.sym(addr, pid, True)
+    print_to_file("\t\t%16s (%x)\n" % (symbol, addr), f)
 
-def print_stack(stacks, stack_id, f):
+def print_stack(stacks, stack_id, pid,f):
     for addr in stacks.walk(stack_id):
-        print_frame( addr, f)
+        print_frame(addr,pid,f)
 
-def print_init_data(signal, frame):
-	global output_file
-	global output_file_no
-	if output_to_stdout:
-		print("Dumping data to stdout\n")
-	else:
-		print("Dumping data to file %s\n" % (output_file + str(output_file_no)))
+def print_init_data():
+    global output_file
+    global output_file_no
+    if output_to_stdout:
+        print("Dumping data to stdout\n")
+    else:
+        print("Dumping data to file %s\n" % (output_file + str(output_file_no)))
 
-	if output_to_stdout:
-		f = open(output_file, "w")
-	else:
-		f = open(str(output_file + str(output_file_no)), "w")
+    if output_to_stdout:
+        f = open(output_file, "w")
+    else:
+        f = open(os.path.join(output_file, str(output_file_no)), "w")
 
-	if not output_to_stdout:
-		output_file_no = output_file_no + 1
+    if not output_to_stdout:
+        output_file_no = output_file_no + 1
 
-	pids = []
-	for items in lists:
-		if items[2] not in pids:
-			pids.append(items[2])
-	sorted_by_pid = sorted(lock_stacks.items(), key = lambda lock_stacks: (lock_stacks[1].pid))
-	locks_by_pid = itertools.groupby(sorted_by_pid, lambda lock_stacks: (lock_stacks[1].pid))
+    pids = []
+    for items in lists:
+        if items[2] not in pids:
+            pids.append(items[2])
+    print(pids,"\n")
+    sorted_by_pid = sorted(lock_stacks.items(), key = lambda lock_stacks: (lock_stacks[1].pid))
+    # print(sorted_by_pid,"\n")
+    locks_by_pid = itertools.groupby(sorted_by_pid, lambda lock_stacks: (lock_stacks[1].pid))
+    # print(locks_by_pid,"\n")
+    for k, v in locks_by_pid:
+        print_to_file("For pid %d\n" % (k), f)
+        for i in sorted(v, key = lambda v: v[0].value):
+            if(i[1].pid in pids):
+                print_to_file("At time %d, for mutex %d\n" % (i[0].value, i[1].mtx), f)
+                #print("At time %d, for mutex %d\n" % (i[0].value, i[1].mtx))
+                # syms = b.get_user_functions(pid=k)
+                # print(i[1].pid,"\n")
+                print_stack(stacks, i[1].stack_id,i[1].pid, f)
+                print_to_file("\n", f)
 
-	for k, v in locks_by_pid:
-		print_to_file("For pid %d\n" % (k), f)
-		for i in sorted(v, key = lambda v: v[0].value):
-			print_to_file("At time %d, for mutex %d\n" % (i[0].value, i[1].mtx), f)
-			#print("At time %d, for mutex %d\n" % (i[0].value, i[1].mtx))
-			# syms = b.get_user_functions(pid=k)
-			print_stack(stacks, i[1].stack_id, f)
-			print_to_file("\n", f)
+    sys.exit(0)
 
-	sys.exit(0)
 
-task_to_track = sys.argv[1]
-target_pid= sys.argv[2]
-# PID = sys.argv[1]
+# target_pid= sys.argv[2]
+tasks_to_track = sys.argv[1:-2]  
+perf_time = sys.argv[-2]         
+output_path = sys.argv[-1]
+
 output_to_stdout = 0
 
 if len(sys.argv) == 4:
-	output_file = str(sys.argv[2]) + "."
+    output_file = str(output_path)
 else:
-	output_to_stdout = 1
-	output_file = "/dev/stdout"
+    output_to_stdout = 1
+    output_file = "/dev/stdout"
 
 output_file_no = 1
 lists = []
@@ -128,16 +137,17 @@ attach(b)
 lock_stacks = b["lock_stacks"]
 stacks = b["stacks"]
 
-#signal.signal(signal.SIGTERM, print_init_data)
-signal.signal(signal.SIGINT, print_init_data)
-
+start_time = datetime.datetime.now()
 while True:
     try:
         (task, pid, cpu, flags, ts, msg) = b.trace_fields()
-		# print(f"Task: {task}, PID: {pid}, CPU: {cpu}, Flags: {flags}, Timestamp: {ts}, Message: {msg}")
     except ValueError:
         continue
-    if task_to_track in task.decode('utf-8', 'replace'):
-	    lists.append([ts, task, pid])
-		
-
+    for task_to_track in tasks_to_track:
+        if task_to_track in task.decode('utf-8', 'replace'):
+            print(task_to_track,pid,"\n")
+            lists.append([ts, task, pid])
+    time_elapsed = datetime.datetime.now() - start_time
+    if time_elapsed.seconds > int(perf_time):
+        break
+print_init_data()

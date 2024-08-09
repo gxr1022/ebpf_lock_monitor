@@ -4,7 +4,7 @@ perf_time=$1
 process_id=$2
 PREFIX_PATH="/home/gxr/mongodb-run/ebpf_monitor"
 current=`date "+%Y-%m-%d-%H-%M-%S"`
-cmd_path="$PREFIX_PATH/src/bcc_trace_locks.py"
+cmd_path="$PREFIX_PATH/src/bcc_trace_kernel_locks.py"
 
 tid_output=$(ps -T -p $process_id) 
 

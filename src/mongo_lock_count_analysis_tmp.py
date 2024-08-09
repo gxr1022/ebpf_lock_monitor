@@ -285,7 +285,7 @@ def print_init_data():
 
         for tid, mutex_times in mutex_analysis_per_thread.items():
             if tid not in total_times_per_thread:
-                total_times_per_thread[tid] = [0, 0, 0]  # 初始化总等待时间、持有时间和进入次数
+                total_times_per_thread[tid] = [0, 0, 0]  
             # f.write(f"\nAccumulated times per mutex for thread {tid}:\n")
             for mtx, times in mutex_times.items():
                 wait_time, hold_time, enter_count = times
