@@ -2,10 +2,11 @@
 # set -x
 thread_num=$1
 process_id=$2
+num_of_ops=$3
 
 PREFIX_PATH="/home/gxr/mongodb-run/ebpf_monitor"
 current=`date "+%Y-%m-%d-%H-%M-%S"`
-OUTPUT_PATH=${PREFIX_PATH}/lock_flow_log/${current}.analysis.${thread_num}.threads
+OUTPUT_PATH=${PREFIX_PATH}/lock_flow_log/${current}.analysis.${thread_num}.threads.${num_of_ops}.ops
 mkdir -p $OUTPUT_PATH
 
 cmd_path="$PREFIX_PATH/src/lock_flow_analysis_ctrl_signal.py"

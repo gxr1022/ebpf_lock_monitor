@@ -84,8 +84,8 @@ def print_init_data():
     else:
         f = open(os.path.join(output_file, str(output_file_no)), "w")
 
-    if not output_to_stdout:
-        output_file_no = output_file_no + 1
+    # if not output_to_stdout:
+    output_file_no = output_file_no + 1
 
     pids = []
     for items in lists:
@@ -117,11 +117,11 @@ output_path = sys.argv[-1]
 
 output_to_stdout = 0
 
-if len(sys.argv) == 4:
-    output_file = str(output_path)
-else:
-    output_to_stdout = 1
-    output_file = "/dev/stdout"
+# if len(sys.argv) == 4:
+output_file = str(output_path)
+# else:
+#     output_to_stdout = 1
+#     output_file = "/dev/stdout"
 
 output_file_no = 1
 lists = []
@@ -145,7 +145,7 @@ while True:
         continue
     for task_to_track in tasks_to_track:
         if task_to_track in task.decode('utf-8', 'replace'):
-            print(task_to_track,pid,"\n")
+            # print(task_to_track,pid,"\n")
             lists.append([ts, task, pid])
     time_elapsed = datetime.datetime.now() - start_time
     if time_elapsed.seconds > int(perf_time):

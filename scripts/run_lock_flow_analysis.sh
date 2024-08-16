@@ -14,7 +14,7 @@ cmd_path="$PREFIX_PATH/src/lock_flow_analysis.py"
 tid_output=$(ps -T -p $process_id) 
 comm_array=($(echo "$tid_output" | awk 'NR>1 {print $5}'))
 filtered_comm_array=($(printf "%s\n" "${comm_array[@]}" | grep 'conn'))
-echo "${filtered_comm_array[@]}"
+# echo "${filtered_comm_array[@]}"
 
 pids=$(sudo lsof /sys/kernel/debug/tracing/trace_pipe | awk 'NR>1 {print $2}')
 if [ ! -z "$pids" ]; then

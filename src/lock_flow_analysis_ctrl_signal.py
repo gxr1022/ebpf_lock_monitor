@@ -113,12 +113,13 @@ def print_init_data(signal, frame):
                 # print(i[1].pid,"\n")
                 print_stack(stacks, i[1].stack_id,i[1].pid, f)
                 print_to_file("\n", f)
-    stop_flag = True
+    # stop_flag = True
     sys.exit(0)
 
 # target_pid= sys.argv[2]
 tasks_to_track = sys.argv[1:-1]         
 output_path = sys.argv[-1]
+
 
 print(tasks_to_track,"\n")
 print(output_path,"\n")
@@ -147,7 +148,7 @@ attach(b)
 lock_stacks = b["lock_stacks"]
 stacks = b["stacks"]
 
-signal.signal(signal.SIGUSR1, print_init_data)
+signal.signal(signal.SIGINT, print_init_data)
 # start_time = datetime.datetime.now()
 while True:
     try:
@@ -163,3 +164,4 @@ while True:
     #     break
 
 # print_init_data()
+print("Program exiting gracefully.")
