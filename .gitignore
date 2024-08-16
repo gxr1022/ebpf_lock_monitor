@@ -1,3 +1,6 @@
 lock_flow_log/*
 data/input*/*
 locks_analysis_log/*
+data/input*/*
+lock_flow_log/*
+locks_analysis_log/*
