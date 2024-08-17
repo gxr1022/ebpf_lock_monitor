@@ -18,8 +18,8 @@ struct mutex_use_t {
     u64 mtx;
 };
 
-BPF_HASH(lock_stacks, u64, struct mutex_use_t);
-BPF_STACK_TRACE(stacks, 4096);
+BPF_HASH(lock_stacks, u64, struct mutex_use_t,262144);
+BPF_STACK_TRACE(stacks, 262144);
 
 int probe_mutex_lock(struct pt_regs *ctx)
 {

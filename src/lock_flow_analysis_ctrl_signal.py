@@ -18,8 +18,8 @@ struct mutex_use_t {
     u64 mtx;
 };
 
-BPF_HASH(lock_stacks, u64, struct mutex_use_t);
-BPF_STACK_TRACE(stacks, 4096);
+BPF_HASH(lock_stacks, u64, struct mutex_use_t,1048576);
+BPF_STACK_TRACE(stacks, 1048576);
 
 int probe_mutex_lock(struct pt_regs *ctx)
 {
@@ -58,7 +58,7 @@ def attach(bpf):
     bpf.attach_uprobe(name="/lib/x86_64-linux-gnu/libc.so.6", sym="pthread_mutex_lock", fn_name="probe_mutex_lock")
     bpf.attach_uprobe(name="/lib/x86_64-linux-gnu/libc.so.6", sym="pthread_mutex_unlock", fn_name="probe_mutex_unlock")
 
-
+#262144
 
 def print_to_file(print_str, f):
     f.write(print_str)
@@ -95,26 +95,24 @@ def print_init_data(signal, frame):
             pids.append(items[2])
     print_to_file(str(pids) + "\n",f)
     sorted_by_pid = sorted(lock_stacks.items(), key = lambda lock_stacks: (lock_stacks[1].pid))
-    # print_to_file(str(sorted_by_pid)+"\n",f)
     locks_by_pid = itertools.groupby(sorted_by_pid, lambda lock_stacks: (lock_stacks[1].pid))
     # print_to_file(str(locks_by_pid)+"\n",f)
-    print("All unique PIDs:")
+    # print_to_file(str(sorted_by_pid)+"\n",f)
+    # print("All unique PIDs:")
     # for k, v in locks_by_pid:
     #     print_to_file("For pid %d\n" % (k), f)
     
     for k, v in locks_by_pid:
         print_to_file("For pid %d\n" % (k), f)
-        # print(k,"\n")
+        print(k,"\n")
         for i in sorted(v, key = lambda v: v[0].value):
             if(i[1].pid in pids):
                 print_to_file("At time %d, for mutex %d\n" % (i[0].value, i[1].mtx), f)
-                #print("At time %d, for mutex %d\n" % (i[0].value, i[1].mtx))
-                # syms = b.get_user_functions(pid=k)
-                # print(i[1].pid,"\n")
                 print_stack(stacks, i[1].stack_id,i[1].pid, f)
                 print_to_file("\n", f)
     # stop_flag = True
     sys.exit(0)
+    
 
 # target_pid= sys.argv[2]
 tasks_to_track = sys.argv[1:-1]         
@@ -128,11 +126,11 @@ stop_flag = False
 
 output_to_stdout = 0
 
-if len(sys.argv) == 3:
-    output_file = str(output_path)
-else:
-    output_to_stdout = 1
-    output_file = "/dev/stdout"
+# if len(sys.argv) == 3:
+output_file = str(output_path)
+# else:
+#     output_to_stdout = 1
+#     output_file = "/dev/stdout"
 
 output_file_no = 1
 lists = []
