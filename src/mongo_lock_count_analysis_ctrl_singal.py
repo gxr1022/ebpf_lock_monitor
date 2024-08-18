@@ -231,7 +231,7 @@ def print_stack(stacks, stack_id, pid,f):
     for addr in stacks.walk(stack_id):
         print_frame(addr,pid,f)
 
-def print_init_data():
+def print_init_data(signal, frame):
     output_file = f"{output_path}/trace_locks.per_thread.log"
     with open(output_file, 'w') as f:
         pids = []
@@ -356,7 +356,8 @@ mutex_lock_hist = b["mutex_lock_hist"]
 mutex_wait_hist = b["mutex_wait_hist"]
 tracing = b["tracing"]
 
-start_time = datetime.datetime.now()
+signal.signal(signal.SIGINT, print_init_data)
+# start_time = datetime.datetime.now()
 while True:
     try:
         (task, pid, cpu, flags, ts, msg) = b.trace_fields()
@@ -366,7 +367,7 @@ while True:
         if task_to_track in task.decode('utf-8', 'replace'):
             print(task_to_track,pid,"\n")
             lists.append([ts, task, pid])
-    time_elapsed = datetime.datetime.now() - start_time
-    if time_elapsed.seconds > int(perf_time):
-        break
-print_init_data()
+    # time_elapsed = datetime.datetime.now() - start_time
+    # if time_elapsed.seconds > int(perf_time):
+    #     break
+# print_init_data()
