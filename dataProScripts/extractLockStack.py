@@ -2,6 +2,8 @@ import re
 import os
 from datetime import datetime
 
+input_path = '/home/gxr/mongodb-run/ebpf_monitor/data/input_ops'
+output_path = '/home/gxr/mongodb-run/ebpf_monitor/data/output_ops'
 # Function to clean each line of the stack trace while preserving leading spaces
 def clean_stack_line(line):
     leading_whitespace = re.match(r"\s*", line).group(0)
@@ -54,9 +56,6 @@ def clean_lock_file(input_file_path, output_file_path):
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
         output_file.write(cleaned_content_str)
 
-
-input_path = '/home/gxr/mongodb-run/ebpf_monitor/data/input1'
-output_path = '/home/gxr/mongodb-run/ebpf_monitor/data/output1'
 
 # current_datetime = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 # new_input_path = os.path.join(input_path, current_datetime)
