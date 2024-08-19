@@ -23547,9 +23547,7 @@ At time 459028090639742, for mutex 56668864266440
 		std::mutex::unlock()
 		std::unique_lock<std::mutex>::unlock()
 		std::unique_lock<std::mutex>::~unique_lock()
-		mongo::Lock::GlobalLock::
-		
-		(mongo::OperationContext*, mongo::LockMode, mongo::Date_t, mongo::Lock::InterruptBehavior, mongo::Lock::GlobalLockSkipOptions)
+		mongo::Lock::GlobalLock::GlobalLock(mongo::OperationContext*, mongo::LockMode, mongo::Date_t, mongo::Lock::InterruptBehavior, mongo::Lock::GlobalLockSkipOptions)
 		mongo::Lock::DBLock::DBLock(mongo::OperationContext*, mongo::DatabaseName const&, mongo::LockMode, mongo::Date_t, mongo::Lock::GlobalLockSkipOptions, boost::optional<mongo::LockMode>)
 		decltype (::new ((void*)(0)) mongo::Lock::DBLock((declval<mongo::OperationContext*&>)(), (declval<mongo::DatabaseName const&>)(), (declval<mongo::LockMode const&>)(), (declval<mongo::Date_t const&>)(), (declval<mongo::Lock::GlobalLockSkipOptions&>)())) std::construct_at<mongo::Lock::DBLock, mongo::OperationContext*&, mongo::DatabaseName const&, mongo::LockMode const&, mongo::Date_t const&, mongo::Lock::GlobalLockSkipOptions&>(mongo::Lock::DBLock*, mongo::OperationContext*&, mongo::DatabaseName const&, mongo::LockMode const&, mongo::Date_t const&, mongo::Lock::GlobalLockSkipOptions&)
 

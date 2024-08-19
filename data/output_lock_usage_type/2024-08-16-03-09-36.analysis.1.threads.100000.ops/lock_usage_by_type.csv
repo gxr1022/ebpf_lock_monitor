@@ -1,6 +1,6 @@
 Lock Type,Lock Count,Unlock Count
 ClientLock,51,50
 DBLock,1313,606
-GlobalLock,1009,404
+GlobalLock,1010,404
 CollectionLock,606,201
 WriteOpsExec,1880,1895
